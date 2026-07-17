@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberTrail Dashboard</title>
+  <link rel="stylesheet" href="css/dashboard_style.css">
+</head>
+<body>
+  <div class="dashboard-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Interactive cybersecurity learning</p>
+        <h1>CyberTrail</h1>
+        <p class="hero-text">
+          Explore realistic online safety stories where every choice can lead to a safer or riskier outcome.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#scenarios">Explore scenarios</a>
+          <a class="secondary-btn" href="#why-this-matters">Why this matters</a>
+          <a class="secondary-btn" href="#why-cybertrail">Why CyberTrail</a>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <p class="hero-pill" id="scenario-count">Loading scenarios…</p>
+        <p class="hero-pill hero-pill--subtle" id="age-group-summary">Choose your age group to personalise the experience.</p>
+        <button type="button" class="secondary-btn age-reopen-btn" id="age-group-trigger">Change age group</button>
+        <h2>What you’ll practice</h2>
+        <ul>
+          <li>Recognise phishing and social engineering</li>
+          <li>Build safer password habits</li>
+          <li>Understand how one weak decision can spread across accounts</li>
+          <li>Learn through branching outcomes and digital forensics</li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <section id="why-this-matters" class="info-section">
+        <div class="section-heading">
+          <h2>Why this matters</h2>
+          <p>Cybersecurity is not only about technology. It is about helping everyday people understand how phishing, social engineering, and credential theft can target them directly in ordinary online life.</p>
+        </div>
+        <div class="info-grid">
+          <article class="info-card">
+            <h3>People are often the target</h3>
+            <p>Many successful attacks focus on individuals rather than systems, using tricks and pressure to exploit weak habits.</p>
+          </article>
+          <article class="info-card">
+            <h3>Safer habits protect more than one account</h3>
+            <p>When people use better online habits, they reduce the risk of losing money, privacy, identity, and access to important services.</p>
+          </article>
+          <article class="info-card">
+            <h3>Education makes a real difference</h3>
+            <p>Learning practical cyber safety helps people build long-lasting habits that contribute to a safer digital community for everyone.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="why-cybertrail" class="dashboard-section">
+        <div class="section-heading">
+          <h2>What makes CyberTrail stand out?</h2>
+          <p>These are the features that make each case feel interactive, practical, and memorable.</p>
+        </div>
+        <div class="info-grid">
+          <article class="info-card">
+            <h3>Interactive simulations</h3>
+            <p>Users make decisions throughout each scenario and experience the consequences in a safe, guided environment.</p>
+          </article>
+          <article class="info-card">
+            <h3>Branching stories</h3>
+            <p>Different choices lead to different outcomes, helping learners see how small decisions can matter.</p>
+          </article>
+          <article class="info-card">
+            <h3>Digital forensics</h3>
+            <p>Each story includes an investigation section where learners examine evidence and uncover how an attack occurred.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="scenarios" class="dashboard-section">
+        <div class="section-heading">
+          <h2>Choose a scenario</h2>
+          <p>Every case helps you build safer habits in a safe, interactive environment.</p>
+        </div>
+        <div id="dashboard" class="dashboard-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="age-group-modal" class="modal is-hidden" aria-hidden="true">
+    <div class="modal-card">
+      <p class="eyebrow">Quick start</p>
+      <h2>Which age group best describes you?</h2>
+      <p class="modal-copy">This helps tailor the examples and tone of the scenarios so they feel more relevant to your experience.</p>
+      <div class="age-options">
+        <button class="age-option" data-age-group="student">Student</button>
+        <button class="age-option" data-age-group="working-adult">Working adult</button>
+        <button class="age-option" data-age-group="older-adult">Older adult / retired</button>
+      </div>
+      <p class="modal-help">You can change this later if you want to explore a different perspective.</p>
+    </div>
+  </div>
+
+  <script src="data/password_student.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
