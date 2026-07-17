@@ -165,13 +165,6 @@ header {
     border:2px solid transparent;
 }
 
-.continue-button{
-    text-align:center;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#3178c6;
-}
 .choice-button:hover{
     background:#23384d;
     border-color:#4db8ff;
@@ -190,12 +183,26 @@ header {
     align-self:center;
     background:#3178c6;
     text-align:center;
+    justify-content:center;
 }
 
 .continue-button:hover{
     background:#4298ff;
 }
 
+.retry-button{
+    width:120px;
+    display:flex;
+    background:#3178c6;
+    text-align:left;
+    align-self:left;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+
+.retry-button:hover{
+    background:#4298ff;
+}
 #content {
   background: #0f172a;
   color: #e2e8f0;
