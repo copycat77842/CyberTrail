@@ -37,7 +37,7 @@ function scrollDown() {
     });
 }
 
-async function typeText(text, isTimestamp = false) {
+async function typeText(text, isTimestamp = false, container = textBox) {
 
     return new Promise(resolve => {
 
@@ -54,7 +54,7 @@ async function typeText(text, isTimestamp = false) {
         cursor.textContent = "|";
 
         line.appendChild(cursor);
-        textBox.appendChild(line);
+        container.appendChild(line);
 
         let i = 0;
         const speed = 35;
@@ -148,10 +148,10 @@ async function typeHeading(text, container = textBox) {
     });
 }
 
-async function playLines(lines) {
+async function playLines(lines, container = textBox) {
     if (!lines) return;
     for (let i = 0; i < lines.length; i++) {
-        await typeText(lines[i]);
+        await typeText(lines[i], false, container);
 
         // User pressed Skip while this line was typing
         if (skipRequested) {
@@ -161,9 +161,9 @@ async function playLines(lines) {
                 line.className = "story-line";
                 line.style.whiteSpace = "pre-wrap";
                 line.textContent = lines[i];
-                textBox.appendChild(line);
+                container.appendChild(line);
             }
-            textBox.scrollTop = textBox.scrollHeight;
+            container.scrollTop = container.scrollHeight;
             return;
         }
         await wait(700);
@@ -393,11 +393,14 @@ async function askInvestigationQuestion(clue) {
                     result.textContent = "[ INCORRECT ]";
                     wrapper.appendChild(result);
 
-                    await playLines(option.investigatorResponse);
-                    await playLines(option.explanation);
+                    const feedback = document.createElement("div");
+                    wrapper.appendChild(feedback);
+
+                    await playLines(option.investigatorResponse, feedback);
+                    await playLines(option.explanation, feedback);
 
                     const retry = document.createElement("button");
-                    retry.className = "choice-button";
+                    retry.className = "choice-button retry-button";
                     retry.textContent = "Try Again";
                     retry.onclick = () => {
                         wrapper.remove();
