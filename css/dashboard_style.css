@@ -1,0 +1,269 @@
+:root {
+  --bg: #0b0f14;
+  --panel: #111826;
+  --panel-alt: #0f1722;
+  --border: #1f2a3a;
+  --accent: #00c2ff;
+  --accent-strong: #0099cc;
+  --accent-soft: #7fe4ff;
+  --heading: #8ef4ff;
+  --heading-alt: #6ddcff;
+  --text: #d0f0ff;
+  --muted: #8fb3c9;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-padding-top: 15px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b0f14 0%, #0f1722 100%);
+  color: var(--text);
+  font-family: monospace;
+  line-height: 1.5;
+}
+
+.dashboard-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+  align-items: start;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--accent-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.8rem;
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: 2.2rem;
+  color: var(--heading);
+  text-shadow: 0 0 10px rgba(0, 194, 255, 0.18);
+}
+
+.hero-text,
+.section-heading p,
+.info-card p,
+.scenario-card p,
+.modal-copy,
+.modal-help {
+  color: var(--muted);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.primary-btn,
+.secondary-btn {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin: 4px 4px 0 0;
+  border: 1px solid transparent;
+}
+
+.primary-btn {
+  background: var(--accent);
+  color: #03131d;
+  font-weight: bold;
+}
+
+.secondary-btn,
+.age-reopen-btn {
+  background: #1f2a3a;
+  color: var(--text);
+  border-color: #2e4058;
+}
+
+.primary-btn:hover {
+  background: var(--accent-strong);
+}
+
+.secondary-btn:hover,
+.age-reopen-btn:hover {
+  background: #243447;
+}
+
+.hero-panel {
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.hero-panel h2 {
+  margin: 14px 0 8px;
+  font-size: 1.1rem;
+  color: var(--heading-alt);
+}
+
+.hero-panel ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.hero-pill {
+  display: inline-block;
+  background: #14344a;
+  color: var(--accent-soft);
+  padding: 6px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.hero-pill--subtle {
+  background: #1b2b3d;
+  color: var(--text);
+}
+
+.age-reopen-btn {
+  margin: 4px 0 12px 0;
+  padding: 8px 12px;
+}
+
+.info-section,
+.dashboard-section {
+  margin-top: 24px;
+}
+
+.section-heading {
+  margin-bottom: 14px;
+}
+
+.section-heading h2 {
+  margin: 10px 0 8px;
+  color: var(--heading-alt);
+  letter-spacing: 0.02em;
+}
+
+.info-grid,
+.dashboard-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.info-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.dashboard-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.info-card,
+.scenario-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.info-card h3,
+.scenario-card h3 {
+  margin-top: 0;
+  color: var(--heading);
+}
+
+.card-top {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.card-badge {
+  background: #14344a;
+  color: var(--accent-soft);
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+.card-badge.secondary {
+  background: #1b2b3d;
+  color: #9bd9ff;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 8, 15, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.modal.is-hidden {
+  display: none;
+}
+
+.modal-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  width: min(100%, 480px);
+}
+
+.age-options {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.age-option {
+  background: var(--panel-alt);
+  border: 1px solid #2e4058;
+  color: var(--text);
+  padding: 10px 12px;
+  text-align: left;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.age-option:hover {
+  background: #14344a;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .info-grid,
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
