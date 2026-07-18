@@ -1,13 +1,33 @@
 const params = new URLSearchParams(window.location.search);
 const scenarioId = params.get("id");
 
-const scenario = scenarios.find(s => s.id === scenarioId);
-
 const textBox = document.getElementById("text");
 const controlsBox = document.getElementById("controls");
 
+let scenario = null;
 let skipRequested = false;
 let scenarioRunning = true;
+
+async function init() {
+    if (!scenarioId) {
+        textBox.textContent = "No scenario was specified.";
+        return;
+    }
+
+    try {
+        await loadScenarioById(scenarioId);
+    } catch (err) {
+        console.error(err);
+        textBox.textContent = "Scenario not found.";
+        return;
+    }
+
+    const scenarios = Array.isArray(window.scenarios) ? window.scenarios : [];
+    scenario = scenarios.find(s => s.id === scenarioId);
+
+    await start();
+}
+
 async function start() {
     scenarioRunning = true;
     showControls();
@@ -27,7 +47,6 @@ async function start() {
     await wait(1000);
 
     showChoices(scenario.choice);
-
 }
 
 function scrollDown() {
@@ -163,7 +182,8 @@ async function playLines(lines, container = textBox) {
                 line.textContent = lines[i];
                 container.appendChild(line);
             }
-            container.scrollTop = container.scrollHeight;
+            scrollDown();
+            skipRequested = false;
             return;
         }
         await wait(700);
@@ -201,10 +221,7 @@ function showChoices(scene) {
 
     textBox.appendChild(wrapper);
 
-    textBox.scrollTo({
-        top: textBox.scrollHeight,
-        behavior: "smooth"
-    });
+    scrollDown();
 
 }
 
@@ -251,13 +268,13 @@ async function showStoryTimeline(events) {
 
 
         await wait(700);
+        await continuePrompt();
     }
 }
 
 async function continuePrompt() {
 
     return new Promise(resolve => {
-
         const wrapper = document.createElement("div");
         wrapper.className = "choice-container";
 
@@ -267,6 +284,7 @@ async function continuePrompt() {
 
         btn.onclick = () => {
             skipRequested = false;
+            scrollDown();
             wrapper.remove();
             resolve();
         };
@@ -274,10 +292,7 @@ async function continuePrompt() {
         wrapper.appendChild(btn);
         textBox.appendChild(wrapper);
 
-        textBox.scrollTo({
-            top: textBox.scrollHeight,
-            behavior: "smooth"
-        });
+        scrollDown();
 
     });
 
@@ -413,10 +428,7 @@ async function askInvestigationQuestion(clue) {
         });
         textBox.appendChild(wrapper);
 
-        wrapper.scrollIntoView({
-            behavior: "smooth",
-            block: "end"
-        });
+        scrollDown();
 
     });
 
@@ -448,10 +460,7 @@ async function showCaseFile(clue) {
     box.appendChild(evidence);
 
     textBox.appendChild(box);
-    box.scrollIntoView({
-        behavior:"smooth",
-        block:"end"
-    });
+    scrollDown();
     await wait(1000);
     await typeText(clue.question);
     await wait(500);
@@ -549,6 +558,7 @@ async function typeTimelineLine(text, container) {
         function typeNext(){
             if(skipRequested){
                 p.textContent = text;
+                scrollDown();
                 resolve();
                 return;
             }
@@ -647,4 +657,4 @@ function wait(ms) {
     setTimeout(res, ms);
   });
 }
-start();
+init();
