@@ -2,7 +2,7 @@ const olderAdultPasswordCase = {
   id: "password_olderadult",
   meta: {
     title: "Password Breach",
-    description: "How one reused password can put your pension, your bank account, and the people you care about at risk.",
+    description: "Can you choose a secure password and stop one data breach from spreading to your important accounts and the people who trust you?",
     difficulty: "Medium",
     ageGroup: "older-adult"
   },
@@ -19,10 +19,11 @@ const olderAdultPasswordCase = {
     "It's slower going than you'd like, but you get through it.",
     "Then a field appears: Create a password for your account.",
     "You think for a moment.",
-    "You have a password you've used for years, which you use for your email, for online banking, for the shopping website your adult child set up for you.",
+    "You have a password you've used for years, which you use for several websites you visit regularly.",
     "It's easy to remember, which matters more to you than anything else right now.",
     "A note beneath the field suggests using a different password than ones you've used elsewhere.",
     "You're not entirely sure why that would matter. It's a strong password. Nobody could guess it.",
+    "After all, if nobody can guess it, how could someone possibly get it?",
     "You decide to just get this over with."
   ],
   choice: {
@@ -34,7 +35,7 @@ const olderAdultPasswordCase = {
           {
             type: "text", // feedback
             text: [
-              "You type in the password you always use - the same one for your email, your banking, and now, your pension account.",
+              "You type in the password you always use - the same one you've used for several accounts over the years.",
               "It feels familiar under your fingers. You don't even have to think about it.",
               "The note about using a different password is still there on the screen.",
               "You're not quite sure what difference it would really make, and you're eager to finish before lunch.",
@@ -78,31 +79,47 @@ const olderAdultPasswordCase = {
           {
             type: "text", // attack
             text: [
-              "Late one evening, while you're watching television, automated systems on the other side of the world begin working through the stolen list.",
-              "Thousands of email addresses, each paired with a password, tested one after another against banks, email providers, and government services.",
-              "Your email is tried first. The password matches.",
-              "Once inside, whoever is on the other end doesn't need to guess anything else.",
-              "They search your inbox and find an email from the pension office: \"Your account has been created successfully.\"",
-              "They try the same password there.",
-              "It matches again.",
-              "Then they search further and find an old email confirming your online banking was set up with the very same details.",
-              "Three accounts. One password. Nothing forced open - every door was simply unlocked with a key that already existed."
+              "Late one evening, automated systems on the other side of the world begin working through a stolen database from an old shopping website breach.",
+              "Thousands of email addresses and passwords are tested automatically against popular services.",
+              "The attackers are not looking for you specifically.",
+              "They are simply checking whether old stolen passwords still work somewhere else.",
+              "Your email address is tested first.",
+              "The old password works.",
+              "Once inside your email, the attacker begins looking through your messages.",
+              "They find the welcome email from the pension office and learn that you created an account there.",
+              "They try the same password.",
+              "It works again.",
+              "Later, while searching through your inbox, they find an old banking notification confirming that you use online banking.",
+              "The same password is tested there too.",
+              "It works again.",
+              "Three important accounts.",
+              "One password.",
+              "One forgotten breach from years ago."
             ]
           },
           {
             type: "text", // aftermath
             text: [
-              "You notice something is wrong three days later, when you try to log into your email and your password doesn't work.",
-              "You assume you've simply mistyped it and try again slowly. It still doesn't work.",
-              "A little confused, you call your adult child.",
-              "They help you get back into your email that evening - but while they're looking through it with you, they notice something odd: several sent emails you don't remember writing, asking your closest friends and family for gift cards \"urgently, before the shops close.\"",
-              "Your face goes pale.",
-              "You call the pension office the next morning and learn your bank details on file were changed two days ago.",
-              "Thankfully, a payment hadn't gone out yet, and they're able to freeze the account before anything is paid to the wrong place.",
-              "Your bank is more difficult. Several transactions have already gone through - small enough, at first, not to be immediately flagged.",
-              "Over the following two weeks, you and your adult child spend hours on the phone with your bank, your email provider, and the pension office, proving again and again that the accounts are really yours.",
-              "One of your oldest friends had already sent a gift card before anyone realized what was happening.",
-              "It takes almost a month to feel like things are properly back to normal."
+              "You notice something is wrong three days later when you receive a message from the pension office asking you to confirm recent changes to your account.",
+              "You stop and read it carefully.",
+              "You do not remember making any changes.",
+              "A little worried, you try to log in and check what happened.",
+              "Your password no longer works.",
+              "You try again, but the result is the same.",
+              "You call your adult child, who helps you contact the pension office immediately.",
+              "The support team explains that someone accessed your account and attempted to change important details.",
+              "They had tried to update the payment information linked to your pension.",
+              "Thankfully, the suspicious change was detected before any money was sent to the wrong place.",
+              "While helping you secure your account, your adult child notices something else unusual.",
+              "Several messages have been sent from your email account that you do not remember writing.",
+              "They were sent to close friends and family asking for gift cards because of an 'urgent situation'.",
+              "Your stomach drops when you realise those messages came from your own email address.",
+              "One of your friends had almost sent money before they called to check if the message was real.",
+              "The attacker was not only trying to access your pension account.",
+              "They were using the trust people had in you to target the people around you as well.",
+              "Over the next few weeks, you work with the pension office, your email provider, and your bank to secure your accounts.",
+              "You change every important password and make sure no account is relying on the same password anymore.",
+              "It takes time and effort, but you are relieved that the pension payments were protected and the damage was stopped."
             ]
           },
           {
@@ -212,9 +229,9 @@ const olderAdultPasswordCase = {
                 {
                   title: "Case File #3 - Reaching Your Friends and Family",
                   evidence: [
-                    "Several messages asking for gift cards were sent from your email to people in your contacts list",
-                    "The messages were sent within an hour of the first email login",
-                    "None of the recipients received any request through any other method"
+                    "Suspicious banking activity appeared shortly after the email account was accessed",
+                    "Messages were sent from your email account to your contacts",
+                    "The attacker successfully accessed multiple accounts using the same password"
                   ],
                   question: "Why would someone use your email to message your friends and family instead of just taking money directly?",
                   options: [
@@ -271,54 +288,89 @@ const olderAdultPasswordCase = {
                   ]
                 },
                 {
-                  time: "The original breach",
+                  time: "Tuesday, 10:30 AM - Pension account created",
+                  story: [
+                    "After receiving a letter from the pension office, you create your online pension account.",
+                    "You choose the same password you have used for several other websites because it is familiar and easy to remember.",
+                    "The account is successfully created and becomes part of your regular routine."
+                  ]
+                },
+                {
+                  time: "Three months later - The original breach",
                   story: [
                     "The shopping website suffers a data breach. Your email and password are among the stolen data.",
                     "It's mentioned briefly in the news. You don't connect it to yourself at the time."
                   ]
                 },
                 {
-                  time: "Two months later",
+                  time: "Two weeks later - Monday, 11:09 PM",
                   story: [
-                    "The stolen data is sold on and eventually tested automatically against email providers, banks, and government services, including yours."
+                    "The stolen data is obtained by criminals who specialise in testing leaked credentials.",
+                    "Automated systems begin checking whether the stolen passwords work on other websites."
                   ]
                 },
                 {
-                  time: "11:20 PM",
+                  time: "Monday, 11:20 PM",
                   story: [
-                    "Your email account is tested and logged into successfully."
+                    "Your email account is tested using the leaked password.",
+                    "The login succeeds on the first attempt.",
+                    "The attacker gains access to your inbox without needing to contact you."
                   ]
                 },
                 {
-                  time: "11:31 PM",
+                  time: "Monday, 11:31 PM",
                   story: [
-                    "Your pension account's welcome email is found in your inbox.",
-                    "The same password is tried there. It works."
+                    "The attacker searches through your emails and finds the welcome message from the pension office.",
+                    "The same password is tested against your pension account.",
+                    "The login succeeds."
                   ]
                 },
                 {
-                  time: "Shortly after",
+                  time: "Monday, 11:38 PM",
                   story: [
-                    "Messages asking for gift cards are sent to people in your contacts list from your own email address.",
-                    "Separately, the same password is tried against your online banking, using an old confirmation email as a guide. It also works."
+                    "The attacker begins looking for ways to benefit from the accounts they now control.",
+                    "They attempt to change the payment details connected to your pension account.",
+                    "They also send messages from your email account asking contacts for gift cards because of an urgent situation."
+                  ]
+                },
+                {
+                  time: "Tuesday, 8:45 AM",
+                  story: [
+                    "A friend receives the message from your email account and becomes suspicious.",
+                    "They contact you directly before purchasing any gift cards.",
+                    "The attempted scam begins to unravel."
+                  ]
+                },
+                {
+                  time: "Tuesday, 9:10 AM",
+                  story: [
+                    "The pension office detects unusual account activity and contacts you about the attempted changes.",
+                    "You discover that someone accessed your account and begin the recovery process with your adult child."
                   ]
                 },
                 {
                   time: "Investigation conclusion",
                   story: [
-                    "One password, reused across your email, your pension account, and your bank, turned an old and half-forgotten breach into a crisis that reached your finances, your government benefits, and the people closest to you - all within about an hour.",
-                    "None of it required breaking into anything. It only required one password that already worked everywhere."
+                    "One password, reused across your email, your pension account, and your bank, turned an old and forgotten breach into a crisis.",
+                    "The attack did not depend on breaking into systems.",
+                    "It depended on one exposed password being trusted in too many places."
                   ]
                 }
               ],
+              finalWords: [
+                "The investigator closes the report and looks between you and your adult child.",
+                "\"This case is a good example of why password reuse is so dangerous.\"",
+                "\"The attackers did not break into your pension account or your bank account.\"",
+                "\"They simply found a password that was already exposed and tried it somewhere else.\"",
+                "\"Because that same password protected your email, your pension account, and your banking account, one small breach became a much bigger problem.\"",
+                "\"Your email account deserves special protection because it is often the key to recovering everything else.\"",
+                "\"Using a different password for each important account means that if one password is stolen, the damage can stop there.\"",
+                "\"Security is not about making attacks impossible.\"",
+                "\"It is about making sure one mistake does not put your entire digital life at risk.\""
+              ],
               lesson: [
-                "The investigator turns to face you and your adult child directly.",
-                "\"I want to leave you with the most important thing from all of this.\"",
-                "\"Your email account isn't just one account among many - it's the key that can open almost everything else you use.\"",
-                "\"When one password protects your email and your bank and your pension account, one old breach anywhere can reach all three at once - and even the people who trust you.\"",
-                "\"Using a different password for each important account, and writing them down somewhere safe rather than trying to remember them all, would have stopped this at the very first step.\"",
-                "\"So would turning on extra verification steps where they're offered - even a correct password wouldn't have been enough on its own.\"",
-                "\"None of this happened because you did anything foolish. It happened because a habit that feels perfectly reasonable - using one password you can actually remember - quietly carries more risk than it seems to.\""
+                  "Reusing passwords allows attackers to move from one account to another.",
+                  "Protect your email, banking, and important services with unique passwords."
               ]
             }
           }
@@ -373,26 +425,39 @@ const olderAdultPasswordCase = {
           {
             type: "text", // attack
             text: [
-              "Late one evening, automated systems begin working through the stolen list, testing thousands of email addresses against banks, email providers, and government services.",
-              "Your email is tried first. The old password matches - you never did get around to changing that one.",
-              "Whoever is on the other end searches your inbox and finds the pension office's welcome email.",
-              "They try the same old password there.",
+              "Late one evening, automated systems begin working through a stolen database from an old shopping website breach.",
+              "Thousands of email addresses and passwords are tested automatically against popular services.",
+              "The attackers are not looking for you specifically.",
+              "They are simply checking whether old stolen passwords still work somewhere else.",
+              "Your email address is tested.",
+              "The old password works.",
+              "Once inside your email, the attacker begins looking through your messages.",
+              "They find the welcome email from the pension office and discover that you have an account there.",
+              "They try the same password.",
               "It fails.",
-              "They try again, slightly differently. It fails again.",
-              "There's no trail to follow, no clue in the message itself as to what the new password might be - only your notebook by the phone knows that, and it isn't connected to anything online.",
-              "After a few attempts, the automated system gives up and moves on to the next name on its list."
+              "They try your online banking as well, using information found in your inbox.",
+              "That fails too.",
+              "The attacker has found the accounts, but knowing where the doors are does not help when the keys are different.",
+              "After a few attempts, the automated system moves on to the next name on the list.",
+              "Your email account was exposed, but the damage stops there."
             ]
           },
           {
             type: "text", // aftermath
             text: [
-              "A few days later, you go to check your email and find your password doesn't work.",
-              "You call your adult child, a little worried, and they help you reset it that evening - a bit of a hassle, but nothing more.",
-              "While you have them on the phone, you mention it, and they check your pension account together with you, just to be safe.",
-              "Everything looks exactly as it should. Your payments are on schedule. Nothing has been changed.",
-              "A week later, an email arrives from the pension office: \"We blocked a suspicious login attempt on your account and wanted to let you know.\"",
-              "You read it with your adult child over the phone, both a little relieved.",
-              "\"That different password,\" they say, \"that's probably exactly why it didn't work.\""
+              "A few days later, you receive a security alert from your email provider.",
+              "It says that your account was accessed from an unfamiliar device.",
+              "Your heart sinks as you realise someone else may have been inside your email.",
+              "You call your adult child, who helps you secure the account and change your password.",
+              "Together, you check your important accounts - the pension website, your bank, and other services connected to your email.",
+              "The pension account is unchanged.",
+              "Your payments are still safe.",
+              "Your banking account has no suspicious transactions.",
+              "You notice that the attacker had found your pension and banking information, but they could not get any further because those accounts had different passwords.",
+              "There are no messages sent to your friends asking for gift cards.",
+              "Nobody you care about was targeted using your identity.",
+              "It is stressful, and you spend time securing your accounts, but the situation is contained.",
+              "A single decision made while creating that pension account prevented what could have become a much bigger problem."
             ]
           },
           {
@@ -548,62 +613,86 @@ const olderAdultPasswordCase = {
                 }
               ],
               timelineIntro: [
-                "The investigator lays out the same picture as any other case - email, pension account, and the messages that, in other cases, sometimes reach a person's contacts.",
-                "\"This time, the line stops after a single step,\" they explain.",
-                "\"Let's walk through exactly where.\""
+                "The investigator places three reports on the screen - your email account, your pension account, and your bank.",
+                "\"This case is interesting because the attacker did get through one door,\" they explain.",
+                "\"The important part is what happened after that.\"",
+                "\"Let's look at where the attack stopped.\""
               ],
               timeline: [
                 {
-                  time: "Some years earlier",
+                  time: "Several years earlier - Old shopping account created",
                   story: [
-                    "You create an account on a shopping website, using the password you used to use for nearly everything.",
-                    "You use the site once or twice, then largely forget about it."
+                    "You create an account on a shopping website and use a password you later reuse on many other services.",
+                    "Over time, that account becomes something you rarely think about."
                   ]
                 },
                 {
-                  time: "The original breach",
+                  time: "Several months earlier - Tuesday, 10:30 AM",
                   story: [
-                    "The shopping website suffers a data breach. Your email and old password are among the stolen data.",
-                    "It's mentioned briefly in the news. You don't connect it to yourself at the time."
+                    "You create your online pension account using the official letter provided by the pension office.",
+                    "With help from your adult child, you choose a new password that has never been used on another website.",
+                    "The password is written down safely so you can access it when needed."
                   ]
                 },
                 {
-                  time: "In between",
+                  time: "A few weeks later - Tuesday, 9:15 AM",
                   story: [
-                    "When setting up your pension account, you and your adult child chose a different password just for that one account, written down safely in your notebook.",
-                    "It wasn't in response to anything in particular - it just seemed sensible at the time."
+                    "The shopping website suffers a data breach.",
+                    "Attackers steal customer information, including your email address and the old password used on that website.",
+                    "Your pension account password is not included because it was different."
                   ]
                 },
                 {
-                  time: "Two months later",
+                  time: "Two months later - Monday, 11:00 PM",
                   story: [
-                    "The stolen data is sold on and tested automatically against email providers, banks, and government services, yours included."
+                    "Cybercriminals obtain the stolen database and begin testing the leaked credentials against other websites.",
+                    "They are looking for accounts where people reused the same password."
                   ]
                 },
                 {
-                  time: "The attempt",
+                  time: "Monday, 11:20 PM - Email account accessed",
                   story: [
-                    "Your email login succeeds, since that password hadn't been changed.",
-                    "The pension office's welcome email is found and read.",
-                    "The same old password is tried on your pension account. It fails, twice, then the attempt stops."
+                    "Your old password successfully unlocks your email account.",
+                    "The attacker searches through your inbox and finds the pension office's welcome email."
+                  ]
+                },
+                {
+                  time: "Monday, 11:31 PM - Pension account attempt",
+                  story: [
+                    "The attacker tries the same leaked password on your pension account.",
+                    "The login fails because the pension account uses a different password."
+                  ]
+                },
+                {
+                  time: "Monday, 11:33 PM - Attack stops",
+                  story: [
+                    "The attacker cannot access your pension account.",
+                    "They cannot change your payment details.",
+                    "They cannot use your pension account to target your finances."
                   ]
                 },
                 {
                   time: "Investigation conclusion",
                   story: [
-                    "The breach reached your inbox. It never reached your pension account, your finances, or the people you care about.",
-                    "One different password was the entire difference between a serious, weeks-long ordeal and a single blocked attempt you almost didn't hear about."
+                    "The breach reached your email account, but it stopped there.",
+                    "The pension account remained protected because it had its own unique password.",
+                    "One small security decision prevented a much larger incident."
                   ]
                 }
               ],
-              lesson: [
+              finalWords: [
                 "The investigator closes their laptop and looks between you and your adult child.",
-                "\"I know this can feel like a lot of extra effort for something that might never happen.\"",
-                "\"But this is exactly what it's supposed to look like when it works - quiet, unremarkable, nothing to clean up afterward.\"",
-                "\"Your email account is still worth protecting especially carefully, since it's the key to almost everything else.\"",
-                "\"Writing different passwords down safely, the way you did, is a perfectly good way to manage this if a password manager feels unfamiliar.\"",
-                "\"And where it's offered, an extra verification step - a code sent to your phone, for instance - adds one more layer that's well worth having.\"",
-                "\"You'll likely never know how many attempts like this get quietly stopped over the years. That's really the whole point of doing this.\""
+                "\"This case is actually a good example of what security should look like.\"",
+                "\"The goal is not to make sure nothing ever goes wrong. Sometimes things do go wrong.\"",
+                "\"The goal is to make sure one problem does not become every problem.\"",
+                "\"Your email account was compromised, but your pension, your bank, and the people around you were protected because those accounts did not share the same password.\"",
+                "\"A different password for each important account creates barriers. If one password is stolen, attackers still have to stop at the next door.\"",
+                "\"Writing passwords down safely, using a password manager, and enabling extra verification steps are all ways to make those barriers stronger.\"",
+                "\"The best security habits are often small ones that you never notice working.\""
+              ],
+              lesson: [
+                "Unique passwords stop one compromised account from spreading into others.",
+                "Good security is about limiting damage when something goes wrong."
               ]
             }
           }
