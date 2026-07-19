@@ -71,11 +71,13 @@ function renderDashboard(ageGroup) {
     const description = meta.description || "A practical cybersecurity case study waiting to be explored.";
     const difficulty = meta.difficulty || "Interactive";
     const time = meta.time || "10-15 minutes";
+    const ageGroupLabel = getAgeGroupLabel(meta.ageGroup || ageGroup);
 
     card.innerHTML = `
       <div class="card-top">
         <span class="card-badge">${difficulty}</span>
         <span class="card-badge secondary">${time}</span>
+        <span class="card-badge tertiary">${ageGroupLabel}</span>
       </div>
       <h3>${title}</h3>
       <p>${description}</p>
