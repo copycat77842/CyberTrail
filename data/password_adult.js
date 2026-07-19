@@ -249,7 +249,7 @@ const adultPasswordCase = {
                       explanation: [
                         "\"Your work account's password reset process sends a link to your personal email if requested.\"",
                         "\"Once the attacker controlled your email, they could request a reset for almost any account tied to it - without ever needing to guess a single other password.\"",
-                        "\"This is exactly why one compromised email account is often far more dangerous than any single other account.\""
+                        "\"This is exactly why it is important to use unique passwords - especially for important accounts.\""
                       ]
                     },
                     {
@@ -275,61 +275,92 @@ const adultPasswordCase = {
               ],
               timeline: [
                 {
-                  time: "Years earlier",
+                  time: "Three years earlier - Saturday, 3:26 PM",
                   story: [
-                    "You create an account at an online retailer for a single purchase, using your everyday password.",
-                    "You forget about it almost immediately."
+                    "You create an account on a small online retailer while making a one-time purchase.",
+                    "You use your usual password because it is easy to remember.",
+                    "Over time, you forget about the account."
                   ]
                 },
                 {
-                  time: "The original breach",
+                  time: "Tuesday, 8:14 PM",
                   story: [
-                    "The retailer suffers a data breach. Your email and password are among millions exposed.",
-                    "It barely makes the news. You never hear about it."
+                    "You create your new online banking account after a long day at work.",
+                    "During signup, you choose the same password you already use for your email and several other accounts.",
+                    "The account setup completes successfully.",
+                    "For the next few weeks, everything works normally."
+                  ]
+                },              
+                {
+                  time: "Two months later - Friday, 11:42 PM",
+                  story: [
+                    "The retailer suffers a data breach.",
+                    "Attackers steal a database containing customer information, including email addresses and passwords.",
+                    "Your old password is included in the leaked data.",
+                    "Nobody contacts you, and the breach receives little attention."
                   ]
                 },
                 {
-                  time: "Weeks later",
+                  time: "Three weeks later - Monday, 2:00 AM",
                   story: [
-                    "The leaked data is bundled and sold on to other criminal groups.",
-                    "Automated tools begin testing the leaked email-password pairs against major email and banking providers."
+                    "Cybercriminals obtain the leaked database.",
+                    "Automated tools begin testing stolen email and password combinations against popular websites.",
+                    "Thousands of accounts are tested every minute.",
+                    "The attackers are not searching for you specifically - they are looking for reused passwords that still work."
                   ]
                 },
                 {
-                  time: "2:47 AM",
+                  time: "Monday, 2:47 AM",
                   story: [
-                    "Your email account is tested and logged into successfully."
+                    "The attackers test your leaked credentials against your email account.",
+                    "The password works immediately.",
+                    "Your inbox is now accessible."
                   ]
                 },
                 {
-                  time: "2:56 AM",
+                  time: "Monday, 2:56 AM",
                   story: [
-                    "Your bank's welcome email is found in your inbox.",
-                    "The same password is tried on your bank account. It works."
+                    "The attacker searches your emails and finds your banking welcome message.",
+                    "They try the same password on your banking account.",
+                    "The login succeeds.",
+                    "Two important accounts are now controlled using the same password."
                   ]
                 },
                 {
-                  time: "3:10 AM",
+                  time: "Monday, 3:10 AM",
                   story: [
-                    "A password reset is requested for your workplace account, using your now-compromised email to receive the link."
+                    "The attacker requests a password reset for your workplace account.",
+                    "The recovery link is sent to your compromised email.",
+                    "They now have a path into another part of your digital life."
+                  ]
+                },
+                {
+                  time: "Monday morning, 8:30 AM",
+                  story: [
+                    "You wake up and begin your normal routine.",
+                    "You do not know that your accounts have already been accessed.",
+                    "The attack has already spread further than you realise."
                   ]
                 },
                 {
                   time: "Investigation conclusion",
                   story: [
-                    "One password, reused across your email, your bank, and effectively your workplace, turned a single old, forgotten leak into three separate crises in under half an hour.",
-                    "None of it required breaking into anything. It only required one password that already worked everywhere."
+                    "The investigator reviews the evidence.",
+                    "The attacker never cracked your password.",
+                    "They simply reused a password that had already been exposed somewhere else.",
+                    "One reused password turned a small forgotten breach into a banking, email, and workplace crisis."
                   ]
                 }
               ],
+              finalWords: [
+                "The investigator closes the report.",
+                "\"Nothing in this attack relied on sophisticated hacking.\"",
+                "\"One reused password gave the attacker access to your email, your bank, and almost your workplace.\"",
+                "\"Unique passwords stop attacks like this before they have a chance to spread.\""
+              ],
               lesson: [
-                "The investigator closes the report and leans back.",
-                "\"Here's the part I want you to really take with you.\"",
-                "\"Your email account isn't just one account among many. It's the master key to almost everything else you own online.\"",
-                "\"If one password protects your email and your bank and your work login, then one old, forgotten breach can compromise all three at once.\"",
-                "\"A password manager and unique passwords for every important account would have stopped this at the very first step.\"",
-                "\"So would two-factor authentication - even a correct password wouldn't have been enough on its own.\"",
-                "\"This wasn't about being careless. It's just how convenient habits quietly turn into risk over time.\""
+                "One reused password can unlock every account that shares it.",
+                "Use a different password for every important account."
               ]
             }
           }
@@ -566,58 +597,91 @@ const adultPasswordCase = {
                 "\"This is what it looks like when the chain never gets a chance to start,\" they say.",
                 "\"Let's walk through it.\""
               ],
-              timeline: [
+              timeline: [              
                 {
-                  time: "Years earlier",
+                  time: "Three years earlier — Saturday, 3:26 PM",
                   story: [
-                    "You create an account at an online retailer for a single purchase, using an old password you used to reuse everywhere.",
-                    "You forget about it almost immediately."
+                    "You create an account on a small online retailer while making a one-time purchase.",
+                    "You use an older password that you no longer use for important accounts.",
+                    "Over time, you forget about the account."
                   ]
                 },
                 {
-                  time: "The original breach",
+                  time: "Tuesday, 8:14 PM",
                   story: [
-                    "The retailer suffers a data breach. Your email and old password are among millions exposed.",
-                    "It barely makes the news. You never hear about it."
+                    "You create your new online banking account after a long day at work.",
+                    "Instead of reusing an old password, you create a unique password using your password manager.",
+                    "The account setup completes successfully."
                   ]
                 },
                 {
-                  time: "In between",
+                  time: "Two months later - Friday, 11:42 PM",
                   story: [
-                    "At some point before any of this, you'd already started using unique passwords and a password manager for your important accounts, including your email.",
-                    "It wasn't in direct response to anything - you just decided it was worth doing."
+                    "The retailer suffers a data breach.",
+                    "Attackers steal customer information, including your old email address and password.",
+                    "However, the leaked password is not used anywhere important anymore."
                   ]
                 },
                 {
-                  time: "Weeks later",
+                  time: "Three weeks later — Monday, 2:00 AM",
                   story: [
-                    "The leaked data is sold on and tested automatically against email and banking providers, yours included."
+                    "Cybercriminals obtain the leaked database.",
+                    "Automated tools begin testing stolen credentials against popular websites.",
+                    "The attackers search for accounts where old passwords still work."
                   ]
                 },
                 {
-                  time: "The attempt",
+                  time: "Monday, 2:47 AM",
                   story: [
-                    "Your email login fails - the leaked password no longer matches.",
-                    "Your bank login fails - it was never the same password to begin with.",
-                    "The attempt stops there. There's nothing left to try."
+                    "The attackers test the leaked password against your email account.",
+                    "The login fails.",
+                    "Your email account uses a different password."
+                  ]
+                },
+                {
+                  time: "Monday, 2:48 AM",
+                  story: [
+                    "The attackers test the same leaked password against your banking account.",
+                    "The login fails again.",
+                    "The password was never used for your bank."
+                  ]
+                },
+                {
+                  time: "Monday, 2:49 AM",
+                  story: [
+                    "The automated system moves on to the next target.",
+                    "There is no inbox to search.",
+                    "There are no password reset emails to exploit.",
+                    "The attack chain ends immediately."
+                  ]
+                },
+                {
+                  time: "Monday, 8:30 AM",
+                  story: [
+                    "Your bank sends a notification about a failed suspicious login attempt.",
+                    "You check your account and confirm everything is secure.",
+                    "The attack happened, but it never became a crisis."
                   ]
                 },
                 {
                   time: "Investigation conclusion",
                   story: [
-                    "The breach reached you. It just never reached anything that mattered.",
-                    "One unique password was the entire difference between a three-week ordeal and a single blocked login you almost didn't hear about."
+                    "The investigator reviews the evidence.",
+                    "The breach was real.",
+                    "The attack was real.",
+                    "But the damage stopped because every important account had its own password.",
+                    "A single security habit prevented the entire chain reaction."
                   ]
                 }
               ],
-              lesson: [
+              finalWords: [
                 "The investigator closes the laptop.",
-                "\"I want to leave you with the same thing I tell everyone in your position, because it's easy to feel like this was overkill.\"",
-                "\"It wasn't. This is what it's supposed to look like when it works.\"",
-                "\"Your email account is the master key to almost everything else you own online - protect that one especially.\"",
-                "\"A password manager makes using a unique password for everything nearly effortless once it's set up.\"",
-                "\"Add two-factor authentication on top, and even a leaked password on its own usually isn't enough to get in.\"",
-                "\"You'll probably never know how many attempts like this get quietly blocked over the years. That's kind of the point.\""
+                "\"The attacker reached you, but couldn't get any further.\"",
+                "\"Because your important accounts all had different passwords, the chain stopped immediately.\"",
+                "\"That's exactly what good security is supposed to do.\""
+              ],
+              lesson: [
+                "One unique password stopped a chain reaction before it even began.",
               ]
             }
           }
