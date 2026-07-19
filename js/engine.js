@@ -364,7 +364,8 @@ async function showInvestigation(data) {
     }
 
     // Final lesson
-    await playLines(data.lesson);
+    await playLines(data.finalWords);
+    await showLesson(data.lesson);
 }
 
 async function askInvestigationQuestion(clue) {
@@ -590,16 +591,7 @@ async function showLesson(text) {
 
   textBox.appendChild(box);
 
-  let i = 0;
-
-  const interval = setInterval(() => {
-
-    box.innerHTML += text[i];
-    i++;
-
-    if (i >= text.length) clearInterval(interval);
-
-  }, 25);
+  await playLines(text, box);
 }
 
 
