@@ -73,11 +73,51 @@ header {
 }
 
 .lesson-box {
-  margin-top: 20px;
-  padding: 10px 10px 0px 10px;
-  border-left: 3px solid #00c2ff;
-  color: #7fffd4;
-  font-weight: bold;
+    margin-top: 35px;
+    padding: 25px;
+    background: #101c2b;
+    border: 1px solid #00c2ff;
+    border-left: 5px solid #00ff99;
+    border-radius: 12px;
+
+    color: #dffcff;
+    font-weight: normal;
+    line-height: 1.8;
+
+    box-shadow:
+        0 0 20px rgba(0,194,255,0.15);
+
+    animation: lessonReveal 0.6s ease forwards;
+}
+
+.lesson-box::before {
+    content: "SECURITY LESSON";
+    display: block;
+
+    color: #00ff99;
+    font-size: 14px;
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 15px;
+}
+
+.lesson-box.story-line {
+    margin-bottom: 0;
+}
+
+
+@keyframes lessonReveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .timeline-item {
