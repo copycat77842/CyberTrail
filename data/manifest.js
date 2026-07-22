@@ -8,5 +8,8 @@
 window.CYBERTRAIL_SCENARIO_SOURCES = [
   { id: "password_student", caseId: "password", ageGroup: "student", src: "data/password_student.js" },
   { id: "password_adult", caseId: "password", ageGroup: "working-adult", src: "data/password_adult.js" },
-  { id: "password_olderadult", caseId: "password", ageGroup: "older-adult", src: "data/password_olderadult.js" }
+  { id: "password_olderadult", caseId: "password", ageGroup: "older-adult", src: "data/password_olderadult.js" },
+  { id: "phishing_student", caseId: "phishing", ageGroup: "student", src: "data/phishing_student.js" },
+  { id: "phishing_adult", caseId: "phishing", ageGroup: "working-adult", src: "data/phishing_adult.js" },
+  { id: "phishing_olderadult", caseId: "phishing", ageGroup: "older-adult", src: "data/phishing_olderadult.js" }
 ];
