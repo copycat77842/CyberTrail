@@ -49,6 +49,80 @@ async function start() {
     showChoices(scenario.choice);
 }
 
+async function handleChoice(option, wrapper) {
+
+    wrapper.innerHTML = `
+        <div class="selected-choice">
+            You chose:
+            <strong>${option.text}</strong>
+        </div>
+    `;
+    
+    skipRequested = false;
+    const outcome = option.outcome;
+
+    if (!outcome || !Array.isArray(outcome)) {
+        await typeText("Error: missing outcome data.");
+        return;
+    }
+
+    for (const section of outcome) {
+
+        // Normal text sections
+        if (section.type === "text") {
+            await playSection(section.text);
+        } 
+        
+        // Timeline section
+        else if (section.type === "timeline") {
+            await showStoryTimeline(section.events);
+        }
+        
+        // Investigation sections
+        else if (section.type === "investigation") {
+
+            await showInvestigation(section.data);
+
+        }
+
+    }
+
+    scenarioRunning = false;
+    showControls();
+
+}
+
+async function showInvestigation(data) {
+
+    await typeHeading("FOLLOWING THE CYBER TRAIL");
+    await wait(500);
+
+    // Investigation introduction
+    await playSection(data.intro);
+
+    // Case files
+    for (const clue of data.clues) {
+        await showCaseFile(clue);
+    }
+
+    // Timeline reconstruction
+    if (data.timelineIntro) {
+        await playSection(data.timelineIntro);
+    }
+
+    if (data.timeline) {
+        await showInvestigationTimeline(data.timeline);
+    }
+
+    // Final lesson
+    await typeHeading("CASE CONCLUSION");
+    await playLines(data.finalWords);
+    await continuePrompt();
+    await showInvestigatorAdvice(data.investigatorAdvice);
+
+    await showLesson(data.lesson);
+}
+
 function scrollDown() {
     window.scrollTo({
         top: document.body.scrollHeight - window.innerHeight + 90,
@@ -164,6 +238,7 @@ async function typeHeading(text, container = textBox) {
         }
 
         typeNext();
+        scrollDown();
     });
 }
 
@@ -298,76 +373,6 @@ async function continuePrompt() {
 
 }
 
-async function handleChoice(option, wrapper) {
-
-    wrapper.innerHTML = `
-        <div class="selected-choice">
-            You chose:
-            <strong>${option.text}</strong>
-        </div>
-    `;
-    
-    skipRequested = false;
-    const outcome = option.outcome;
-
-    if (!outcome || !Array.isArray(outcome)) {
-        await typeText("Error: missing outcome data.");
-        return;
-    }
-
-    for (const section of outcome) {
-
-        // Normal text sections
-        if (section.type === "text") {
-            await playSection(section.text);
-        } 
-        
-        // Timeline section
-        else if (section.type === "timeline") {
-            await showStoryTimeline(section.events);
-        }
-        
-        // Investigation sections
-        else if (section.type === "investigation") {
-
-            await showInvestigation(section.data);
-
-        }
-
-    }
-
-    scenarioRunning = false;
-    showControls();
-
-}
-
-async function showInvestigation(data) {
-
-    await typeHeading("FOLLOWING THE CYBER TRAIL");
-    await wait(500);
-
-    // Investigation introduction
-    await playSection(data.intro);
-
-    // Case files
-    for (const clue of data.clues) {
-        await showCaseFile(clue);
-    }
-
-    // Timeline reconstruction
-    if (data.timelineIntro) {
-        await playSection(data.timelineIntro);
-    }
-
-    if (data.timeline) {
-        await showInvestigationTimeline(data.timeline);
-    }
-
-    // Final lesson
-    await playLines(data.finalWords);
-    await showLesson(data.lesson);
-}
-
 async function askInvestigationQuestion(clue) {
 
     return new Promise(resolve => {
@@ -490,6 +495,7 @@ async function showInvestigationTimeline(events) {
             event.story,
             story
         );
+        await continuePrompt();
         // don't add arrow after last event
         if(i !== events.length - 1){
             const arrow=document.createElement("div");
@@ -573,7 +579,6 @@ async function typeTimelineLine(text, container) {
                 document.createTextNode(char),
                 cursor
             );
-            scrollDown();
             let delay = speed;
             if(char === "." || char === "!" || char === "?"){
                 delay = 300;
@@ -581,9 +586,133 @@ async function typeTimelineLine(text, container) {
             setTimeout(typeNext, delay);
         }
         typeNext();
+        scrollDown();
     });
 }
+async function showInvestigatorAdvice(adviceData) {
+    await typeHeading("INVESTIGATOR SECURITY ADVICE");
+    await wait(700);
+    // Intro
+    if (adviceData.intro) {
+        await playLines(adviceData.intro);
+    }
+    // Individual advice cards directly in textBox
+    for (const item of adviceData.advice) {
+        const card = document.createElement("div");
+        card.className = "advice-item";
+        // SVG icon
+        const icon = document.createElement("div");
+        icon.className = "advice-icon";
+        icon.innerHTML = `
+            <svg 
+                width="30" 
+                height="30" 
+                viewBox="0 0 24 24"
+                fill="none"
+            >
+                <circle 
+                    cx="12" 
+                    cy="12" 
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="2"
+                />
 
+                <polyline
+                    points="7,12 10.5,15.5 17,8.5"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        `;
+        const content = document.createElement("div");
+        content.className = "advice-content";
+        const title = document.createElement("div");
+        title.className = "advice-title";
+        const text = document.createElement("div");
+        text.className = "advice-text";
+        content.appendChild(title);
+        content.appendChild(text);
+        card.appendChild(icon);
+        card.appendChild(content);
+        textBox.appendChild(card);
+        // Type text into the card
+        await typeAdviceTitle(item.title, title);
+        await wait(300);
+        await typeText(
+            item.text,
+            false,
+            text
+        );
+        await wait(800);
+        scrollDown();
+        await continuePrompt();
+    }
+}
+async function typeAdviceTitle(text, container) {
+
+    return new Promise(resolve => {
+
+        const title = document.createElement("div");
+        title.className = "advice-title";
+
+        const cursor = document.createElement("span");
+        cursor.className = "cursor";
+        cursor.textContent = "|";
+
+        title.appendChild(cursor);
+        container.appendChild(title);
+
+        let i = 0;
+        const speed = 35;
+
+        function finish() {
+            title.textContent = text;
+            scrollDown();
+            resolve();
+        }
+
+        function typeNext() {
+
+            if (skipRequested) {
+                finish();
+                return;
+            }
+
+            if (i >= text.length) {
+                cursor.remove();
+                scrollDown();
+                resolve();
+                return;
+            }
+
+            const char = text[i++];
+
+            title.insertBefore(
+                document.createTextNode(char),
+                cursor
+            );
+
+            let delay = speed;
+
+            if (
+                char === "." ||
+                char === "!" ||
+                char === "?"
+            ) {
+                delay = 300;
+            }
+
+            setTimeout(typeNext, delay);
+        }
+
+        typeNext();
+    });
+
+}
 async function showLesson(text) {
 
   const box = document.createElement("div");
