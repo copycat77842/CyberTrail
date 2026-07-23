@@ -3,7 +3,7 @@ const olderAdultPasswordCase = {
   meta: {
     title: "Password Breach",
     description: "Can you choose a secure password and stop one data breach from spreading to your important accounts and the people who trust you?",
-    difficulty: "Medium",
+    difficulty: "Easy",
     ageGroup: "older-adult"
   },
   intro: [
@@ -14,7 +14,7 @@ const olderAdultPasswordCase = {
     "You find the letter from the pension office, with the website address printed at the top, and open your laptop."
   ],
   setup: [
-    "The website looks official enough - the same crest from the letter, the same formal blue and white.",
+    "The website looks official enough: the same crest from the letter, the same formal blue and white.",
     "You type in your name, your date of birth, your reference number from the letter.",
     "It's slower going than you'd like, but you get through it.",
     "Then a field appears: Create a password for your account.",
@@ -35,7 +35,7 @@ const olderAdultPasswordCase = {
           {
             type: "text", // feedback
             text: [
-              "You type in the password you always use - the same one you've used for several accounts over the years.",
+              "You type in the password you always use, the same one you've used for several accounts over the years.",
               "It feels familiar under your fingers. You don't even have to think about it.",
               "The note about using a different password is still there on the screen.",
               "You're not quite sure what difference it would really make, and you're eager to finish before lunch.",
@@ -50,7 +50,7 @@ const olderAdultPasswordCase = {
               "Over the following weeks, checking the pension website becomes a small part of your routine.",
               "Once a fortnight or so, you log in to check that your payment has come through.",
               "Your adult child is proud of you for getting comfortable with it.",
-              "You use the same email and the same password for nearly everything you do online - it's simply easier to keep track of that way."
+              "You use the same email and the same password for nearly everything you do online. It's simply easier to keep track of that way."
             ]
           },
           {
@@ -59,7 +59,7 @@ const olderAdultPasswordCase = {
               {
                 time: "One month later",
                 story: [
-                  "Your adult child mentions something over dinner - a news story about a shopping website being hacked, millions of accounts affected.",
+                  "Your adult child mentions something over dinner: a news story about a shopping website being hacked, millions of accounts affected.",
                   "\"Isn't that the one you use?\" they ask.",
                   "You think about it. You do have an account there, though you can't remember the last time you used it.",
                   "\"I'm sure it's fine,\" you say. \"I haven't used that in ages.\"",
@@ -70,7 +70,7 @@ const olderAdultPasswordCase = {
                 time: "Two months later",
                 story: [
                   "The shopping website's breach, the one from dinner conversation weeks ago, quietly resurfaces.",
-                  "The stolen information - including your email address and that familiar password - ends up for sale on a website you'll never see, to people you'll never meet.",
+                  "The stolen information, including your email address and that familiar password, ends up for sale on a website you'll never see, to people you'll never meet.",
                   "Nothing about your day changes. You have no way of knowing any of this has happened."
                 ]
               }
@@ -154,18 +154,6 @@ const olderAdultPasswordCase = {
                       ]
                     },
                     {
-                      text: "The password had already been exposed in an unrelated breach years ago.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator pulls up the shopping website's old breach report.",
-                        "\"This is exactly it.\""
-                      ],
-                      explanation: [
-                        "\"That old shopping account was breached some time ago, and your email and password were part of the data that was stolen.\"",
-                        "\"Because you used that same password for your email account too, the old leak became a working key to your inbox.\""
-                      ]
-                    },
-                    {
                       text: "Your email provider's own systems were broken into.",
                       correct: false,
                       investigatorResponse: [
@@ -175,6 +163,18 @@ const olderAdultPasswordCase = {
                       explanation: [
                         "\"There's no record of any breach on your email provider's own systems.\"",
                         "\"This was specific to your account, not a wider problem with the provider.\""
+                      ]
+                    },
+                    {
+                      text: "The password had already been exposed in an unrelated breach years ago.",
+                      correct: true,
+                      investigatorResponse: [
+                        "The investigator pulls up the shopping website's old breach report.",
+                        "\"This is exactly it.\""
+                      ],
+                      explanation: [
+                        "\"That old shopping account was breached some time ago, and your email and password were part of the data that was stolen.\"",
+                        "\"Because you used that same password for your email account too, the old leak became a working key to your inbox.\""
                       ]
                     }
                   ]
@@ -196,7 +196,7 @@ const olderAdultPasswordCase = {
                         "\"Exactly right.\""
                       ],
                       explanation: [
-                        "\"Once someone is inside an email account, they can see everything that's come through it - including a welcome email that names the exact website and account.\"",
+                        "\"Once someone is inside an email account, they can see everything that's come through it, including a welcome email that names the exact website and account.\"",
                         "\"From there, trying the same password takes seconds, since it's the same password you'd already shown works.\""
                       ]
                     },
@@ -236,7 +236,7 @@ const olderAdultPasswordCase = {
                   question: "Why would someone use your email to message your friends and family instead of just taking money directly?",
                   options: [
                     {
-                      text: "It was a mistake - the messages weren't actually meant to be sent.",
+                      text: "It was a mistake, and the messages weren't actually meant to be sent.",
                       correct: false,
                       investigatorResponse: [
                         "The investigator points to the pattern of the messages.",
@@ -255,7 +255,7 @@ const olderAdultPasswordCase = {
                         "\"That's exactly the reasoning behind it.\""
                       ],
                       explanation: [
-                        "\"A message that comes from your actual, familiar email address bypasses a lot of natural suspicion - it looks and feels like it's really from you.\"",
+                        "\"A message that comes from your actual, familiar email address bypasses a lot of natural suspicion. It looks and feels like it's really from you.\"",
                         "\"This is one of the reasons a compromised email account is dangerous to more than just its owner. It can be used to reach and deceive the people who trust that owner most.\""
                       ]
                     },
@@ -275,7 +275,7 @@ const olderAdultPasswordCase = {
                 }
               ],
               timelineIntro: [
-                "The investigator lays three incident reports side by side on the screen - your email, your pension account, and your bank - along with the timeline of messages sent to your contacts.",
+                "The investigator lays three incident reports side by side on the screen: your email, your pension account, and your bank, along with the timeline of messages sent to your contacts.",
                 "\"On their own, these can look like four separate problems,\" they explain.",
                 "\"Let's line up exactly when each one happened.\""
               ],
@@ -348,14 +348,6 @@ const olderAdultPasswordCase = {
                     "You discover that someone accessed your account and begin the recovery process with your adult child."
                   ]
                 },
-                {
-                  time: "Investigation conclusion",
-                  story: [
-                    "One password, reused across your email, your pension account, and your bank, turned an old and forgotten breach into a crisis.",
-                    "The attack did not depend on breaking into systems.",
-                    "It depended on one exposed password being trusted in too many places."
-                  ]
-                }
               ],
               finalWords: [
                 "The investigator closes the report and looks between you and your adult child.",
@@ -368,6 +360,34 @@ const olderAdultPasswordCase = {
                 "\"Security is not about making attacks impossible.\"",
                 "\"It is about making sure one mistake does not put your entire digital life at risk.\""
               ],
+              investigatorAdvice: {
+                intro: [
+                  "The investigator leaves you and your adult child with a few habits that would have made this attack much harder to carry out.",
+                  "\"Security doesn't have to be complicated,\" they explain. \"It's usually a handful of small habits that make the biggest difference.\""
+                ],
+                advice: [
+                  {
+                    title: "Use a different password for every important account",
+                    text: "Your email, banking, government services, and pension account should each have their own unique password. If one account is ever breached, attackers won't automatically gain access to the others."
+                  },
+                  {
+                    title: "Protect your email more than anything else",
+                    text: "Your email is often the key to resetting passwords for your other accounts. Treat it as one of your most valuable online accounts and give it its own strong, unique password."
+                  },
+                  {
+                    title: "Consider using a password manager",
+                    text: "Password managers create and remember long, unique passwords for every website, so you only need to remember one master password. They remove the temptation to reuse passwords."
+                  },
+                  {
+                    title: "Turn on two-factor authentication (2FA)",
+                    text: "Whenever it's available, enable two-factor authentication. Even if someone learns your password, they'll still need the second verification step before they can access your account."
+                  },
+                  {
+                    title: "Act quickly if you hear about a data breach",
+                    text: "If a company announces that your account may have been involved in a breach, change that password immediately. If you've reused it anywhere else, change those passwords too."
+                  }
+                ]
+              },
               lesson: [
                   "Reusing passwords allows attackers to move from one account to another.",
                   "Protect your email, banking, and important services with unique passwords."
@@ -384,7 +404,7 @@ const olderAdultPasswordCase = {
             text: [
               "You read the note under the password field again: \"For your security, please use a different password than ones you've used elsewhere.\"",
               "You're not entirely sure why it matters, but you decide to trust it, just this once.",
-              "You call your adult child, who helps you come up with a new password over the phone - something memorable to you, but different from anything you've used before.",
+              "You call your adult child, who helps you come up with a new password over the phone, something memorable to you, but different from anything you've used before.",
               "You write it down carefully in the small notebook you keep by the phone, alongside your other important numbers.",
               "It takes a few extra minutes, but you finish, and the screen shows a green tick.",
               "\"Account created successfully.\""
@@ -405,7 +425,7 @@ const olderAdultPasswordCase = {
               {
                 time: "One month later",
                 story: [
-                  "Your adult child mentions a news story over dinner - a shopping website being hacked, millions of accounts affected.",
+                  "Your adult child mentions a news story over dinner: a shopping website being hacked, millions of accounts affected.",
                   "\"Isn't that the one you use?\" they ask.",
                   "You think about it. You do have an account there, though barely used.",
                   "\"I do,\" you say, \"but that's not the password I used for the pension thing, at least.\"",
@@ -416,7 +436,7 @@ const olderAdultPasswordCase = {
                 time: "Two months later",
                 story: [
                   "The shopping website's breach quietly resurfaces, exactly as your adult child mentioned.",
-                  "The stolen information - your email address and your old, familiar password - is bundled up and sold on to people you'll never meet.",
+                  "The stolen information, your email address and your old, familiar password, is bundled up and sold on to people you'll never meet.",
                   "Nothing about your day changes."
                 ]
               }
@@ -449,7 +469,7 @@ const olderAdultPasswordCase = {
               "It says that your account was accessed from an unfamiliar device.",
               "Your heart sinks as you realise someone else may have been inside your email.",
               "You call your adult child, who helps you secure the account and change your password.",
-              "Together, you check your important accounts - the pension website, your bank, and other services connected to your email.",
+              "Together, you check your important accounts: the pension website, your bank, and other services connected to your email.",
               "The pension account is unchanged.",
               "Your payments are still safe.",
               "Your banking account has no suspicious transactions.",
@@ -466,7 +486,7 @@ const olderAdultPasswordCase = {
               intro: [
                 "Curious after that email, your adult child helps you request a callback from the pension office to understand exactly what happened.",
                 "A digital forensics investigator joins the call, sharing a short report on their screen.",
-                "\"Good news first - nothing was taken, and nothing needs to be undone,\" the investigator says.",
+                "\"Good news first: nothing was taken, and nothing needs to be undone,\" the investigator says.",
                 "\"Let's still walk through why, because it's worth understanding.\""
               ],
               clues: [
@@ -480,18 +500,6 @@ const olderAdultPasswordCase = {
                   question: "The attacker had a password you'd genuinely used before. Why didn't it open this account?",
                   options: [
                     {
-                      text: "The pension website's system randomly blocked the attempt.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator checks the system logs.",
-                        "\"Nothing random about it at all.\""
-                      ],
-                      explanation: [
-                        "\"The system blocked the attempt because the password given simply didn't match what was on file.\"",
-                        "\"A login either matches the stored password or it doesn't - there's no element of chance involved.\""
-                      ]
-                    },
-                    {
                       text: "That password belonged to a different account and was never used here.",
                       correct: true,
                       investigatorResponse: [
@@ -504,6 +512,18 @@ const olderAdultPasswordCase = {
                       ]
                     },
                     {
+                      text: "The pension website's system randomly blocked the attempt.",
+                      correct: false,
+                      investigatorResponse: [
+                        "The investigator checks the system logs.",
+                        "\"Nothing random about it at all.\""
+                      ],
+                      explanation: [
+                        "\"The system blocked the attempt because the password given simply didn't match what was on file.\"",
+                        "\"A login either matches the stored password or it doesn't. There's no element of chance involved.\""
+                      ]
+                    },
+                    {
                       text: "The pension website has a much stronger firewall than most websites.",
                       correct: false,
                       investigatorResponse: [
@@ -511,7 +531,7 @@ const olderAdultPasswordCase = {
                         "\"A firewall wouldn't really come into it here.\""
                       ],
                       explanation: [
-                        "\"This wasn't an attack on the website's technical defenses - it was simply someone trying a specific password.\"",
+                        "\"This wasn't an attack on the website's technical defenses. It was simply someone trying a specific password.\"",
                         "\"What stopped it was that the password itself was wrong, nothing more technical than that.\""
                       ]
                     }
@@ -527,15 +547,15 @@ const olderAdultPasswordCase = {
                   question: "They got into your email and found exactly where your pension account was. Why did the trail stop there?",
                   options: [
                     {
-                      text: "They didn't actually get into your email either.",
+                      text: "The attacker ran out of time before getting to your pension account.",
                       correct: false,
                       investigatorResponse: [
-                        "The investigator points to the email login record.",
-                        "\"They did, unfortunately. It's right here in the logs.\""
+                        "The investigator checks the timestamps.",
+                        "\"Actually, the pension login was attempted just eleven minutes later.\""
                       ],
                       explanation: [
-                        "\"Your email password hadn't been changed at the time, so that part of the attempt did succeed.\"",
-                        "\"The good news is that it stopped at the very next step, rather than spreading any further.\""
+                        "\"There was no meaningful delay. The attacker moved quickly, straight from your email to the pension website.\"",
+                        "\"The attempt failed for a different reason entirely: the password itself didn't match.\""
                       ]
                     },
                     {
@@ -574,18 +594,6 @@ const olderAdultPasswordCase = {
                   question: "Looking at the whole picture, what was the one decision that made the real difference here?",
                   options: [
                     {
-                      text: "Choosing a different password for the pension account, separate from your usual one.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator closes the report with a small nod.",
-                        "\"That's the whole story, really.\""
-                      ],
-                      explanation: [
-                        "\"That one decision is the entire reason this stayed a blocked login instead of becoming a much bigger problem.\"",
-                        "\"It's a small extra step that made a very large difference.\""
-                      ]
-                    },
-                    {
                       text: "Simply being lucky that nobody targeted you specifically.",
                       correct: false,
                       investigatorResponse: [
@@ -606,14 +614,26 @@ const olderAdultPasswordCase = {
                       ],
                       explanation: [
                         "\"The system simply logs any failed login attempt automatically, for every account.\"",
-                        "\"It wasn't about you being noticed - it was about the password not matching, plain and simple.\""
+                        "\"It wasn't about you being noticed. It was about the password not matching, plain and simple.\""
+                      ]
+                    },
+                    {
+                      text: "Choosing a different password for the pension account, separate from your usual one.",
+                      correct: true,
+                      investigatorResponse: [
+                        "The investigator closes the report with a small nod.",
+                        "\"That's the whole story, really.\""
+                      ],
+                      explanation: [
+                        "\"That one decision is the entire reason this stayed a blocked login instead of becoming a much bigger problem.\"",
+                        "\"It's a small extra step that made a very large difference.\""
                       ]
                     }
                   ]
                 }
               ],
               timelineIntro: [
-                "The investigator places three reports on the screen - your email account, your pension account, and your bank.",
+                "The investigator places three reports on the screen: your email account, your pension account, and your bank.",
                 "\"This case is interesting because the attacker did get through one door,\" they explain.",
                 "\"The important part is what happened after that.\"",
                 "\"Let's look at where the attack stopped.\""
@@ -671,28 +691,48 @@ const olderAdultPasswordCase = {
                     "They cannot use your pension account to target your finances."
                   ]
                 },
-                {
-                  time: "Investigation conclusion",
-                  story: [
-                    "The breach reached your email account, but it stopped there.",
-                    "The pension account remained protected because it had its own unique password.",
-                    "One small security decision prevented a much larger incident."
-                  ]
-                }
               ],
               finalWords: [
                 "The investigator closes their laptop and looks between you and your adult child.",
-                "\"This case is actually a good example of what security should look like.\"",
-                "\"The goal is not to make sure nothing ever goes wrong. Sometimes things do go wrong.\"",
-                "\"The goal is to make sure one problem does not become every problem.\"",
-                "\"Your email account was compromised, but your pension, your bank, and the people around you were protected because those accounts did not share the same password.\"",
-                "\"A different password for each important account creates barriers. If one password is stolen, attackers still have to stop at the next door.\"",
-                "\"Writing passwords down safely, using a password manager, and enabling extra verification steps are all ways to make those barriers stronger.\"",
-                "\"The best security habits are often small ones that you never notice working.\""
+                "\"This case is a good example of how security habits protect you before you even know you need them.\"",
+                "\"The attacker did manage to access one account, but they could not use it to reach everything else.\"",
+                "\"The reason was simple: your important accounts did not all depend on the same password.\"",
+                "\"Good security is not about stopping every attempt.\"",
+                "\"It is about making sure an attacker has as few opportunities as possible when something goes wrong.\""
               ],
+              investigatorAdvice: {
+                intro: [
+                  "Before ending the investigation, the investigator gives you a few ways to make your everyday online life even more secure.",
+                  "\"You already made one of the most important choices by using a different password.\"",
+                  "\"Here are some other habits that can make your protection even stronger.\""
+                ],
+                advice: [
+                  {
+                    title: "Keep using unique passwords for important accounts",
+                    text: "A different password for each account prevents one stolen password from becoming a key to everything else."
+                  },
+                  {
+                    title: "Enable two-factor authentication",
+                    text: "Two-factor authentication adds another layer of protection. Even if someone discovers your password, they still need an additional verification step to access your account."
+                  },
+                  {
+                    title: "Store passwords safely",
+                    text: "Writing passwords down can be helpful if done carefully, but a password manager is often a safer option because it can securely store and generate passwords for you."
+                  },
+                  {
+                    title: "Review your most important accounts regularly",
+                    text: "Check your email, banking, and other important services occasionally to make sure recovery details and security settings are still correct."
+                  },
+                  {
+                    title: "Think carefully before trusting unexpected messages",
+                    text: "Scammers often create urgency to make people act quickly. Take time to verify unusual requests, especially ones involving money or personal information."
+                  }
+                ]
+              },
+
               lesson: [
-                "Unique passwords stop one compromised account from spreading into others.",
-                "Good security is about limiting damage when something goes wrong."
+                "One strong security choice can stop a small problem from becoming a crisis.",
+                "Unique passwords, two-factor authentication, and careful habits create stronger protection online."
               ]
             }
           }
