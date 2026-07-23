@@ -7,7 +7,6 @@ const studentPhishingCase = {
     ageGroup: "student"
   },
   intro: [
-    "Phishing doesn't hack anything. It just asks nicely, and hopes you're too rushed to notice.",
     "It's a Thursday night, and you're finally sitting down to finish tomorrow's assignment.",
     "Your laptop is open to three tabs: the assignment brief, a half-written document, and your school's learning platform.",
     "Just as you start typing, a notification pops up in the corner of your screen.",
