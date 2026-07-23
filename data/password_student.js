@@ -55,7 +55,7 @@ const studentPasswordCase = {
           {
             type: "text", // feedback
             text: [
-              "You decide to use the password you've reused on a handful of other accounts over the years - most of which you barely think about anymore.",
+              "You decide to use the password you've reused on a handful of other accounts over the years, most of which you barely think about anymore.",
               "It is long, complicated, and difficult for someone to guess.",
               "A small warning appears in the back of your mind.",
               "\"What if something bad actually happens?\"",
@@ -165,7 +165,7 @@ const studentPasswordCase = {
               "You try again, more carefully this time.",
               "Incorrect password.",
               "The same reused password that let someone into your gaming account had let them into your email too.",
-              "And your email is the key to almost everything else - the thing every other account uses to reset a forgotten password.",
+              "And your email is the key to almost everything else. It's the thing every other account uses to reset a forgotten password.",
               "A feeling of panic starts to build.",
               "Someone else now controls more than just a game.",
               "After several stressful calls with support teams and answering security questions to prove who you are, you eventually recover both accounts over the next few days.",
@@ -199,8 +199,7 @@ const studentPasswordCase = {
                     "A successful login occurred while you were asleep",
                     "The correct email address was used",
                     "The correct password was entered on the first attempt",
-                    "The login came from an unfamiliar location",
-                    "The game's own servers show no signs of being broken into"
+                    "The login came from an unfamiliar location"
                   ],
                   question: "The attacker entered the correct password immediately. What does this suggest?",
                   options: [
@@ -266,6 +265,18 @@ const studentPasswordCase = {
                       ]
                     },
                     {
+                      text: "The password became weaker because it was old.",
+                      correct: false,
+                      investigatorResponse: [
+                        "The investigator smiles slightly.",
+                        "\"Passwords don't expire just because they have existed for a long time.\""
+                      ],
+                      explanation: [
+                        "\"An old password can still be secure if nobody else knows it.\"",
+                        "\"The danger comes when attackers discover it and can reuse it elsewhere.\""
+                      ]
+                    },
+                    {
                       text: "The same password was protecting multiple accounts.",
                       correct: true,
                       investigatorResponse: [
@@ -276,18 +287,6 @@ const studentPasswordCase = {
                         "\"A strong password is only useful if it stays private.\"",
                         "\"By using the same password across different websites, one breach could expose every account using that password.\"",
                         "\"The attacker didn't defeat your password. They found another place where it had already been exposed.\""
-                      ]
-                    },
-                    {
-                      text: "The password became weaker because it was old.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator smiles slightly.",
-                        "\"Passwords don't expire just because they have existed for a long time.\""
-                      ],
-                      explanation: [
-                        "\"An old password can still be secure if nobody else knows it.\"",
-                        "\"The danger comes when attackers discover it and can reuse it elsewhere.\""
                       ]
                     }
                   ]
@@ -310,7 +309,7 @@ const studentPasswordCase = {
                         "\"Now the entire chain begins to make sense.\""
                       ],
                       explanation: [
-                        "\"Only one of your old leaked accounts had this specific password attached to it - and that leak became public right before the attacks on your gaming account started.\"",
+                        "\"Only one of your old leaked accounts had this specific password attached to it, and that leak became public right before the attacks on your gaming account started.\"",
                         "\"That match, both in the password itself and the timing, is what confirms it as the source rather than the other two old accounts.\"",
                         "\"This is called credential stuffing: attackers take leaked username and password combinations from one breach and automatically test them on other websites.\""
                       ]
@@ -323,19 +322,19 @@ const studentPasswordCase = {
                         "\"Age alone doesn't tell us anything.\""
                       ],
                       explanation: [
-                        "\"An old account isn't automatically the guilty one - plenty of old accounts never get breached at all.\"",
+                        "\"An old account isn't automatically the guilty one. Plenty of old accounts never get breached at all.\"",
                         "\"What actually matters is whether the leaked password and the breach timing line up with the attack, and here they clearly do.\""
                       ]
                     },
                     {
-                      text: "The investigator can't really be sure - it's just the most likely guess.",
+                      text: "There's no real way to know for sure, so it's just an educated guess.",
                       correct: false,
                       investigatorResponse: [
                         "The investigator taps the matching timestamps on the screen.",
                         "\"It's not a guess. It's a match.\""
                       ],
                       explanation: [
-                        "\"Investigators don't rely on hunches - they rely on evidence that lines up.\"",
+                        "\"Investigators don't rely on hunches. They rely on evidence that lines up.\"",
                         "\"An exact password match combined with a breach date that fits the timeline isn't a coincidence. It's proof.\""
                       ]
                     }
@@ -411,25 +410,42 @@ const studentPasswordCase = {
                     "You begin the process of recovering your accounts."
                   ]
                 },
-                {
-                  time: "Investigation conclusion",
-                  story: [
-                    "The attacker never broke your password.",
-                    "They simply reused a password that had already been exposed somewhere else.",
-                    "Because that one password protected two important accounts instead of one, a small forgotten breach became a much bigger problem."
-                  ]
-                }
               ],
               finalWords: [
-                "The investigator leaves you with one final piece of advice.",
-                "\"There is an important lesson from this case.\"",
-                "\"A strong password is not enough by itself.\"",
-                "\"If the same password protects multiple accounts, one small breach can spread from account to account - especially if it reaches your email, since that's what everything else uses to reset itself.\"",
-                "\"Use strong passwords.\"",
-                "\"But more importantly, make sure every important account has a unique password.\"",
+                "The investigator closes the case file and looks back over the evidence.",
+                "\"Your computer was never hacked.\"",
+                "\"Your password was never guessed.\"",
+                "\"The attacker simply found a password that was already exposed and tried it somewhere else.\"",
+                "\"One reused password turned a small forgotten breach into a much bigger problem.\"",
+                "\"Make sure every important account has a unique password.\"",
                 "\"Good cybersecurity is not about expecting attacks to never happen.\"",
-                "\"It is about making sure that when they do happen, they don't spread to your other accounts.\""
+                "\"It is about making sure that when they do happen, they don't spread across your entire digital life.\""
               ],
+              investigatorAdvice: {
+                intro: [
+                  "The investigator closes the case file.",
+                  "After reviewing what happened, they explain how a few simple habits could have prevented the attack.",
+                  "The investigator leaves you with some advice to make your online life more secure."
+                ],
+                advice: [
+                  {
+                    title: "Create unique passwords",
+                    text: "Never reuse the same password across different accounts. If one account is breached, a unique password prevents attackers from accessing your other accounts."
+                  },
+                  {
+                    title: "Protect your important accounts",
+                    text: "Your email account is especially important because it is often used to recover other accounts. Make sure your most important accounts have strong, unique passwords."
+                  },
+                  {
+                    title: "Use a password manager",
+                    text: "A password manager can create and safely store strong passwords, making it easier to use a different password for every account."
+                  },
+                  {
+                    title: "Enable extra security features",
+                    text: "Turn on two-factor authentication (2FA) when possible to add another layer of protection if your password is ever exposed."
+                  }
+                ]
+              },
               lesson: [
                   "One password should never protect your entire digital life."
               ]
@@ -444,7 +460,7 @@ const studentPasswordCase = {
             type: "text", // feedback
             text: [
               "You pause for a moment.",
-              "You think back to that school cybersecurity talk - strong passwords, and never reuse them.",
+              "You think back to that school cybersecurity talk: strong passwords, and never reuse them.",
               "You still don't completely understand what could go wrong, but you decide it is worth taking an extra minute.",
               "You create a long, unique password that you have never used before.",
               "It is slightly annoying having to remember another password, but you save it safely and continue.",
@@ -494,7 +510,7 @@ const studentPasswordCase = {
                   "The attackers are not searching for one specific person.",
                   "They are testing thousands of stolen credentials at the same time.",
                   "Only a small number of these attempts will succeed.",
-                  "But one careless mistake - reusing a password - can be enough to turn a random attack into an account takeover."
+                  "But one careless mistake, reusing a password, can be enough to turn a random attack into an account takeover."
                 ]
               }
             ]
@@ -602,6 +618,19 @@ const studentPasswordCase = {
                   question: "Why did the attackers fail even though they had your email address?",
                   options: [
                     {
+                      text: "The attackers gave up too quickly.",
+                      correct: false,
+                      investigatorResponse: [
+                        "The investigator shakes their head.",
+                        "\"They didn't give up. They simply didn't have what they needed.\""
+                      ],
+                      explanation: [
+                        "\"The attackers' scripts tried the exact password leaked from that old breach. Not a guess. The real thing.\"",
+                        "\"Because you never reused that password, it just didn't match, and the scripts moved straight on to easier targets.\"",
+                        "\"If you'd reused that same password on your gaming account, those same stolen credentials would have let them straight in.\""
+                      ]
+                    },
+                    {
                       text: "They did not know your password since you didn't reuse it.",
                       correct: true,
                       investigatorResponse: [
@@ -613,19 +642,6 @@ const studentPasswordCase = {
                         "\"Knowing an email address is usually not enough to access an account.\"",
                         "\"The missing piece was the password.\"",
                         "\"Because you used a unique password, they couldn't use your password in the leaked database to access your other accounts.\""
-                      ]
-                    },
-                    {
-                      text: "The attackers gave up too quickly.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator shakes their head.",
-                        "\"They didn't give up. They simply didn't have what they needed.\""
-                      ],
-                      explanation: [
-                        "\"The attackers' scripts tried the exact password leaked from that old breach - not a guess, the real thing.\"",
-                        "\"Because you never reused that password, it just didn't match, and the scripts moved straight on to easier targets.\"",
-                        "\"If you'd reused that same password on your gaming account, those same stolen credentials would have let them straight in.\""
                       ]
                     },
                     {
@@ -668,11 +684,11 @@ const studentPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks your account's security settings.",
-                        "\"Actually - no extra protections were switched on here.\""
+                        "\"Actually, no extra protections were switched on here.\""
                       ],
                       explanation: [
                         "\"You didn't have two-factor authentication enabled on this account.\"",
-                        "\"What stopped the attackers wasn't an extra layer of security - it was simply that the password itself never matched.\"",
+                        "\"What stopped the attackers wasn't an extra layer of security. It was simply that the password itself never matched.\"",
                         "\"That said, turning on two-factor authentication is still worth doing. It would protect you even in cases where a password does leak.\""
                       ]
                     },
@@ -750,18 +766,9 @@ const studentPasswordCase = {
                     "Your progress, items, and account information remain safe."
                   ]
                 },
-                {
-                  time: "Investigation conclusion",
-                  story: [
-                    "The attackers had your email address.",
-                    "They had a leaked password from another website.",
-                    "But they did not have the password for this account.",
-                    "Using a unique password stopped the breach from spreading."
-                  ]
-                }
               ],
               finalWords: [
-                "The investigator closes the report.",
+                "The investigator reviews the evidence one last time.",
                 "\"This case is a good example of something important.\"",
                 "\"Cybersecurity is not about making yourself impossible to target.\"",
                 "\"Everyone gets targeted eventually.\"",
@@ -772,6 +779,32 @@ const studentPasswordCase = {
                 "\"You never know what might happen next, but being cyber-secure means you're always prepared for whatever comes your way.\"",
                 "\"That is the power of good security habits.\""
               ],
+              investigatorAdvice: {
+                intro: [
+                  "The investigator closes the case file.",
+                  "\"Your decision prevented the attack from spreading.\"",
+                  "\"But cybersecurity is about building strong habits over time.\"",
+                  "The investigator leaves you with some advice to make your online life even more secure."
+                ],
+                advice: [
+                  {
+                    title: "Continue using unique passwords",
+                    text: "A unique password means that a breach somewhere else cannot automatically put your other accounts at risk."
+                  },
+                  {
+                    title: "Keep important accounts protected",
+                    text: "Accounts like email, school accounts, and banking services should always have their own strong passwords because they can provide access to other information."
+                  },
+                  {
+                    title: "Use a password manager",
+                    text: "Password managers make it easier to maintain strong security habits without needing to remember dozens of different passwords."
+                  },
+                  {
+                    title: "Add extra layers of security",
+                    text: "Two-factor authentication can protect your accounts even if someone discovers your password."
+                  }
+                ]
+              },
               lesson: [
                 "A unique password can stop an attack before it even begins.",
                 "One good security habit can make all the difference."
