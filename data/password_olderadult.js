@@ -277,6 +277,10 @@ const olderAdultPasswordCase = {
               timelineIntro: [
                 "The investigator lays three incident reports side by side on the screen: your email, your pension account, and your bank, along with the timeline of messages sent to your contacts.",
                 "\"On their own, these can look like four separate problems,\" they explain.",
+                "",
+                "\"This timeline does not just show what happened to you.\"",
+                "\"It also shows what the attacker did, one step at a time, to turn one leaked password into all of this.\"",
+                "",
                 "\"Let's line up exactly when each one happened.\""
               ],
               timeline: [
@@ -349,6 +353,15 @@ const olderAdultPasswordCase = {
                   ]
                 },
               ],
+              chainSummary: [
+                "Old Website Breached",
+                "Credentials Leaked",
+                "Credential Stuffing Attack",
+                "Email Account Compromised",
+                "Pension Account Compromised",
+                "Bank Account Compromised",
+                "Contacts Targeted With Scam Messages"
+              ],
               finalWords: [
                 "The investigator closes the report and looks between you and your adult child.",
                 "\"This case is a good example of why password reuse is so dangerous.\"",
@@ -386,6 +399,25 @@ const olderAdultPasswordCase = {
                     title: "Act quickly if you hear about a data breach",
                     text: "If a company announces that your account may have been involved in a breach, change that password immediately. If you've reused it anywhere else, change those passwords too."
                   }
+                ]
+              },
+              epilogue: {
+                time: "Six months later",
+                story: [
+                  "The week of phone calls, with the bank, the pension office, and your email provider, is not something you've forgotten.",
+                  "",
+                  "Your adult child helped you go through every account you could think of afterward.",
+                  "Old passwords were replaced.",
+                  "A small notebook by the phone now holds a different password for each important account, written down safely rather than kept in your head.",
+                  "",
+                  "You turned on two-factor authentication wherever it was offered, on your email, your bank, and your pension account especially.",
+                  "",
+                  "You also talk to your adult child differently now, about messages, about unexpected calls, about anything that feels slightly off.",
+                  "The friend who almost sent a gift card because of a message that looked like it came from you is more careful too.",
+                  "",
+                  "One reused password once put your finances, your pension, and the people who trust you at risk.",
+                  "It taught you that being careful online isn't about expecting the worst.",
+                  "It's about making sure that if something does go wrong, it doesn't get the chance to spread."
                 ]
               },
               lesson: [
@@ -636,6 +668,10 @@ const olderAdultPasswordCase = {
                 "The investigator places three reports on the screen: your email account, your pension account, and your bank.",
                 "\"This case is interesting because the attacker did get through one door,\" they explain.",
                 "\"The important part is what happened after that.\"",
+                "",
+                "\"This timeline does not just show what happened to you.\"",
+                "\"It also shows exactly where the attacker's plan ran out of doors to try.\"",
+                "",
                 "\"Let's look at where the attack stopped.\""
               ],
               timeline: [
@@ -684,13 +720,30 @@ const olderAdultPasswordCase = {
                   ]
                 },
                 {
-                  time: "Monday, 11:33 PM - Attack stops",
+                  time: "Monday, 11:34 PM - Bank account attempt",
                   story: [
-                    "The attacker cannot access your pension account.",
-                    "They cannot change your payment details.",
-                    "They cannot use your pension account to target your finances."
+                    "Still searching your inbox, the attacker also finds a message referencing your bank.",
+                    "They try the same leaked password there too.",
+                    "The login fails again, for the same reason."
                   ]
                 },
+                {
+                  time: "Monday, 11:35 PM - Attack stops",
+                  story: [
+                    "The attacker cannot access your pension account or your bank account.",
+                    "They cannot change your payment details.",
+                    "They cannot use either account to target your finances."
+                  ]
+                },
+              ],
+              chainSummary: [
+                "Old Website Breached",
+                "Credentials Leaked",
+                "Attackers Attempt Credential Stuffing",
+                "Email Account Compromised",
+                "Pension Password Does Not Match",
+                "Bank Password Does Not Match",
+                "Attack Stops"
               ],
               finalWords: [
                 "The investigator closes their laptop and looks between you and your adult child.",
@@ -727,6 +780,24 @@ const olderAdultPasswordCase = {
                     title: "Think carefully before trusting unexpected messages",
                     text: "Scammers often create urgency to make people act quickly. Take time to verify unusual requests, especially ones involving money or personal information."
                   }
+                ]
+              },
+              epilogue: {
+                time: "Five months later",
+                story: [
+                  "The shopping website breach that started all of this is long forgotten by everyone except you.",
+                  "",
+                  "Your pension account and your bank carried on exactly as normal.",
+                  "The different password you and your adult child chose, written down safely in the notebook by the phone, was the entire reason nothing more happened.",
+                  "",
+                  "Still, you changed your email password as soon as you found out, and you've kept a closer eye on it since.",
+                  "You and your adult child now sit down every so often to check your important accounts together.",
+                  "Where you can, you've turned on the extra verification step, a code sent to your phone, for the accounts that matter most.",
+                  "",
+                  "You've also started asking a few more questions before trusting an unexpected message, even one that looks like it's from someone you know.",
+                  "",
+                  "One reused password reached your inbox. It never reached your pension, or your bank, or the people you care about.",
+                  "That was never luck. It was one small decision, made before any of this began."
                 ]
               },
 
