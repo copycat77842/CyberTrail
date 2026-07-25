@@ -298,10 +298,10 @@ const studentPasswordCase = {
                     "Only one of those leaks contains a password that matches your gaming account's old password exactly",
                     "That leak's breach date lines up with when the credential-stuffing attempts against you began"
                   ],
-                  question: "You've reused passwords in more than one old account. How does the investigator pin down which breach actually caused this attack?",
+                  question: "Several old accounts were involved. Which evidence identifies the real source of the attack?",
                   options: [
                     {
-                      text: "By matching the exact leaked password and the timing of the breach.",
+                      text: "The breach containing the exact password match and matching attack timing.",
                       correct: true,
                       investigatorResponse: [
                         "The investigator places the final piece of evidence onto the board.",
@@ -350,6 +350,10 @@ const studentPasswordCase = {
                 "The investigator studies the evidence carefully.",
                 "\"Cyber attacks rarely happen because of one single mistake,\" they explain.",
                 "\"They are usually a chain of events where one weakness leads to another.\"",
+                "",
+                "\"This timeline does not just show what happened to you.\"",
+                "\"It reveals every step the attacker took to turn one mistake into a successful attack.\"",
+                "",
                 "The investigator begins arranging the evidence in chronological order.",
                 "\"Let's reconstruct exactly what happened.\""
               ],
@@ -411,6 +415,15 @@ const studentPasswordCase = {
                   ]
                 },
               ],
+              chainSummary:[
+                "Password reused",
+                "Old website breached",
+                "Credentials leaked",
+                "Credential stuffing attack",
+                "Gaming account compromised",
+                "Email account compromised",
+                "Attack spreads"
+              ],
               finalWords: [
                 "The investigator closes the case file and looks back over the evidence.",
                 "\"Your computer was never hacked.\"",
@@ -446,8 +459,32 @@ const studentPasswordCase = {
                   }
                 ]
               },
+              epilogue: {
+                time: "Six months later",
+                story: [
+                  "The attack feels like a distant memory, but you still remember the stress of losing access to your accounts.",
+                  "",
+                  "After the incident, you went through every account you could find.",
+                  "Old passwords were replaced.",
+                  "Important accounts were secured.",
+                  "Anything you no longer used was deleted.",
+                  "",
+                  "You started using a password manager to create and store unique passwords instead of relying on one password you could remember.",
+                  "You enabled two-factor authentication on your most important accounts, adding another layer of protection if a password is ever exposed.",
+                  "",
+                  "You also became more cautious when reading security warnings and news about breaches.",
+                  "Instead of thinking \"that probably won't happen to me,\" you now understand how quickly one leaked password can affect your entire digital life.",
+                  "",
+                  "The attack started with a single reused password.",
+                  "But the recovery taught you something important:",
+                  "",
+                  "Cybersecurity is not about being perfect.",
+                  "It is about building habits that stop one mistake from becoming a much bigger problem."
+                ]
+              },
               lesson: [
-                  "One password should never protect your entire digital life."
+                "A single reused password turned a small breach into a much bigger attack.",
+                "Small security choices made early can prevent major problems later."
               ]
             }
           }
@@ -518,104 +555,93 @@ const studentPasswordCase = {
           {
             type: "text", // attack
             text: [
-              "Your gaming account is one of the accounts tested by the attackers.",
-              "They enter the email address found in the leaked database.",
-              "Then they try the password that came with it.",
+              "The attackers' tools test the leaked password against your email account first.",
+              "It matches. They're in.",
+              "Searching through your inbox, they find a notification confirming your new gaming account.",
+              "They try the same password there.",
               "Login failed.",
-              "The system doesn't waste time on a second guess. It moves straight on to the next stolen email and password pair, and the next, and the next.",
-              "Your account was targeted.",
-              "But the password they had was useless here.",
-              "Because your password was unique, the breach from another website could not spread any further."
+              "Your gaming account uses something completely different, and the leaked password has nothing to open it with.",
+              "The system doesn't waste time. It moves on to the next name on a very long list."
             ]
           },
           {
             type: "text", // aftermath
             text: [
-              "You never notice anything unusual.",
-              "Your friends never receive suspicious messages.",
-              "Your items and progress remain exactly where you left them.",
-              "As far as you know, nothing happened.",
-              "However, months later, the game's security team detects the failed attack attempts and contacts you.",
-              "They want to show you something interesting.",
-              "Your account was attacked.",
-              "But it was protected."
+              "A few days later, you get an alert from your email provider: a sign-in from an unfamiliar device.",
+              "Your stomach drops for a second.",
+              "You change your email password right away and look through the account for anything unusual.",
+              "Nothing seems to have been sent or deleted, but it's unsettling not knowing exactly what someone else might have read.",
+              "You check your gaming account out of habit. Everything is exactly where you left it.",
+              "Your friends never receive any strange messages.",
+              "It's an uncomfortable few days, but the damage stops with your inbox."
             ]
           },
           {
             type: "investigation",
             data: {
               intro: [
-                "A few months later, you receive an unexpected notification from the game's security team.",
-                "Several suspicious login attempts were detected on your account.",
-                "At first, you are confused.",
-                "You don't remember doing anything unusual.",
-                "The security team confirms that nobody successfully accessed your account.",
-                "However, they offer to show you exactly what happened.",
-                "You join a meeting with one of the platform's digital forensics investigators.",
-                "The investigator opens a security report containing login records, attack attempts, and system logs.",
-                "\"This is an interesting case,\" they say.",
-                "\"Someone tried to get into your account.\"",
-                "\"But something stopped them.\"",
-                "\"Let's investigate why.\""
+                "A few days after securing your email, you're still unsettled by how easily someone got in.",
+                "Your email provider offers a callback with their security team to explain exactly what happened.",
+                "A digital forensics investigator joins the call, sharing a short report: one successful login to your email, and one failed attempt somewhere else.",
+                "\"Your email was accessed. Your gaming account wasn't,\" the investigator says.",
+                "\"Let's go through why that difference happened.\""
               ],
               clues: [
                 {
-                  title: "Case File #1 - The Suspicious Login Attempts",
+                  title: "Case File #1 - The Email Break-In",
                   evidence: [
-                    "Multiple login attempts detected",
-                    "Correct email address entered",
-                    "Incorrect password entered every time",
-                    "Attempts came from multiple unknown locations"
+                    "A successful login occurred on your email account from an unfamiliar device",
+                    "The correct password was entered on the first attempt",
+                    "That password matched one from an old, unrelated data breach"
                   ],
-                  question: "What does this evidence suggest?",
+                  question: "The attacker entered the correct password immediately. How did they get it?",
                   options: [
                     {
-                      text: "Someone was repeatedly trying to access your account.",
+                      text: "They already had it from an old, unrelated data breach.",
                       correct: true,
                       investigatorResponse: [
-                        "The investigator nods.",
-                        "\"Exactly.\"",
-                        "\"This was not a simple mistake.\""
+                        "The investigator pulls up the old breach report.",
+                        "\"That's exactly it.\""
                       ],
                       explanation: [
-                        "\"The login attempts came from automated systems rather than a person manually guessing.\"",
-                        "\"Attackers often test large numbers of accounts at the same time, hoping some credentials will work.\""
+                        "\"Your email password was exposed years ago in a breach that had nothing to do with your email provider.\"",
+                        "\"Because you'd used that same password for your email too, the old leak became a working key to your inbox.\""
                       ]
                     },
                     {
-                      text: "Someone forgot their password.",
+                      text: "They guessed it through trial and error.",
                       correct: false,
                       investigatorResponse: [
-                        "The investigator checks the locations of the attempts.",
-                        "\"That would usually look very different.\""
+                        "The investigator checks the login history.",
+                        "\"There's exactly one attempt on record, and it succeeded immediately.\""
                       ],
                       explanation: [
-                        "\"A forgotten password normally comes from one person, one device, and a small number of attempts.\"",
-                        "\"These attempts came from many locations, which suggests an automated attack.\""
+                        "\"Guessing a real password through trial and error takes many attempts and leaves a trail of failures.\"",
+                        "\"There's no such trail here.\""
                       ]
                     },
                     {
-                      text: "The game accidentally locked your account.",
+                      text: "Your email provider's own systems were broken into.",
                       correct: false,
                       investigatorResponse: [
-                        "The investigator reviews the security logs.",
-                        "\"The system behaved exactly as expected.\""
+                        "The investigator checks the provider's status page and incident history.",
+                        "\"Worth ruling out, but that's not what happened here.\""
                       ],
                       explanation: [
-                        "\"The game did not cause the problem.\"",
-                        "\"The security system detected someone attempting to log in and blocked the suspicious activity.\""
+                        "\"There's no record of any breach on your email provider's systems.\"",
+                        "\"This was specific to your account, not a wider problem with the provider.\""
                       ]
                     }
                   ]
                 },
                 {
-                  title: "Case File #2 - The Missing Password",
+                  title: "Case File #2 - The Trail That Went Cold",
                   evidence: [
-                    "Your email address appeared in an unrelated data breach",
-                    "Attackers obtained a list of leaked credentials",
-                    "Your password was not found in the leaked data"
+                    "The attacker found a notification about your gaming account inside your email",
+                    "The same leaked password was tried on your gaming account",
+                    "That login attempt failed"
                   ],
-                  question: "Why did the attackers fail even though they had your email address?",
+                  question: "The attacker found your gaming account. Why didn't that lead anywhere?",
                   options: [
                     {
                       text: "The attackers gave up too quickly.",
@@ -625,27 +651,25 @@ const studentPasswordCase = {
                         "\"They didn't give up. They simply didn't have what they needed.\""
                       ],
                       explanation: [
-                        "\"The attackers' scripts tried the exact password leaked from that old breach. Not a guess. The real thing.\"",
-                        "\"Because you never reused that password, it just didn't match, and the scripts moved straight on to easier targets.\"",
-                        "\"If you'd reused that same password on your gaming account, those same stolen credentials would have let them straight in.\""
+                        "\"The attackers' scripts tried the exact password that had just worked on your email. Not a guess. The real thing.\"",
+                        "\"Because you never reused that password on your gaming account, it just didn't match.\""
                       ]
                     },
                     {
-                      text: "They did not know your password since you didn't reuse it.",
+                      text: "Your gaming account had a completely different password, so finding it wasn't the same as unlocking it.",
                       correct: true,
                       investigatorResponse: [
-                        "The investigator highlights the leaked database.",
-                        "\"Exactly.\""
+                        "The investigator highlights the failed login.",
+                        "\"Exactly that.\""
                       ],
                       explanation: [
-                        "\"Your email address was known, but your password was not.\"",
-                        "\"Knowing an email address is usually not enough to access an account.\"",
-                        "\"The missing piece was the password.\"",
-                        "\"Because you used a unique password, they couldn't use your password in the leaked database to access your other accounts.\""
+                        "\"Once inside your email, the attacker could see your gaming account almost immediately.\"",
+                        "\"But seeing an account and unlocking it are two different problems.\"",
+                        "\"The password that worked on your email had nothing to do with the one protecting your gaming account.\""
                       ]
                     },
                     {
-                      text: "The attackers could not guess your password since it was long and complex.",
+                      text: "The attackers could not guess your gaming password since it was long and complex.",
                       correct: false,
                       investigatorResponse: [
                         "The investigator considers the answer.",
@@ -708,12 +732,23 @@ const studentPasswordCase = {
                 }
               ],
               timelineIntro: [
-                "The investigator places the security logs alongside the failed login records.",
-                "Each attempt tells part of the story.",
-                "\"The attack itself wasn't unusual,\" the investigator explains.",
-                "\"What matters is why it failed.\"",
-                "The investigator arranges the evidence into a timeline.",
-                "\"Let's reconstruct the attack and see what protected your account.\""
+                "The investigator places two sets of login records onto the screen.",
+                "One account was accessed.",
+                "One account was left untouched.",
+                "",
+                "At first, the difference is not obvious.",
+                "The same attacker.",
+                "The same stolen data.",
+                "The same automated tools.",
+                "",
+                "\"So why did one account get compromised while the other stayed safe?\" the investigator asks.",
+                "\"The answer is hidden in the choices made before the attack even began.\"",
+                "",
+                "\"This timeline does not just show what happened to you.\"",
+                "\"It also reveals what the attacker tried to do, and the exact moment where the attack was stopped.\"",
+                "",
+                "The investigator begins arranging the evidence in chronological order.",
+                "\"Let's reconstruct what happened from both sides.\""
               ],
               timeline: [
                 {
@@ -729,8 +764,8 @@ const studentPasswordCase = {
                   story: [
                     "A small website you created an account on years ago suffers a data breach.",
                     "Attackers steal a database containing usernames, email addresses, and passwords.",
-                    "Your email address is included in the stolen data.",
-                    "However, the password leaked from that website is not the same password protecting your gaming account."
+                    "Your email address, and the password you'd used on that old site, are both included in the stolen data.",
+                    "That same password also happens to be the one protecting your email account, though not your new gaming account."
                   ]
                 },
                 {
@@ -742,11 +777,18 @@ const studentPasswordCase = {
                   ]
                 },
                 {
+                  time: "Friday, 11:20 PM - Email compromised",
+                  story: [
+                    "The attackers test your leaked email address and password against your email provider.",
+                    "The password matches.",
+                    "The attacker is now inside your email."
+                  ]
+                },
+                {
                   time: "Friday, 11:36 PM - Attack attempt",
                   story: [
-                    "The attackers test your leaked email address and password against the gaming platform.",
-                    "The email address is correct.",
-                    "The leaked password is not.",
+                    "Searching your inbox, the attacker finds a notification confirming your new gaming account.",
+                    "They try the same password there.",
                     "The login attempt fails immediately."
                   ]
                 },
@@ -754,28 +796,33 @@ const studentPasswordCase = {
                   time: "Friday, 11:37 PM - Attack abandoned",
                   story: [
                     "The automated system moves on to the next account in the database.",
-                    "Your gaming account was targeted, but the stolen password was useless.",
+                    "Your gaming account was targeted, but the stolen password was useless there.",
                     "The attack cannot spread any further."
                   ]
                 },
                 {
-                  time: "Months later - Security notification",
+                  time: "Days later - Security notification",
                   story: [
-                    "The game's security team detects the failed login attempts and notifies you.",
-                    "You learn that someone tried to access your account, but they never got inside.",
-                    "Your progress, items, and account information remain safe."
+                    "Your email provider detects the unfamiliar login and alerts you.",
+                    "You secure your email and confirm your gaming account was never touched."
                   ]
                 },
+              ],
+              chainSummary: [
+                "Old Website Breached",
+                "Credentials Leaked",
+                "Attackers Attempt Credential Stuffing",
+                "Email Account Compromised",
+                "Gaming Password Does Not Match",
+                "Attack Stops",
+                "Damage Does Not Spread"
               ],
               finalWords: [
                 "The investigator reviews the evidence one last time.",
                 "\"This case is a good example of something important.\"",
-                "\"Cybersecurity is not about making yourself impossible to target.\"",
-                "\"Everyone gets targeted eventually.\"",
-                "\"The goal is to make sure an attack cannot turn into a disaster.\"",
-                "\"Your unique password meant that a breach somewhere else couldn't spread to your other accounts.\"",
-                "\"One account was attacked.\"",
-                "\"But the damage stopped there.\"",
+                "\"The attacker did get in, just not where it could do the most damage.\"",
+                "\"Your email was real access. Your gaming account never was.\"",
+                "\"The difference was one password, used in exactly one place.\"",
                 "\"You never know what might happen next, but being cyber-secure means you're always prepared for whatever comes your way.\"",
                 "\"That is the power of good security habits.\""
               ],
@@ -805,9 +852,31 @@ const studentPasswordCase = {
                   }
                 ]
               },
+              epilogue: {
+                time: "One year later",
+                story: [
+                  "The data breach from the old website is almost forgotten.",
+                  "Thousands of accounts were affected, but yours was not one of them.",
+                  "",
+                  "Your gaming account continued exactly as normal.",
+                  "The extra minute you spent creating a unique password prevented a much bigger problem.",
+                  "",
+                  "But for you, it changed the way you think about online security.",
+                  "Your gaming account was never compromised because the password protecting it was unique.",
+                  "One simple decision prevented one leaked password from becoming access to everything else.",
+                  "",
+                  "Since then, you have started improving your security habits even further.",
+                  "You use a password manager to create and store strong, unique passwords for your accounts.",
+                  "You enable two-factor authentication on important accounts, adding another layer of protection if a password is ever exposed.",
+                  "You also become more careful about suspicious messages, unexpected login alerts, and websites asking for your information.",
+                  "",
+                  "Cybersecurity is no longer something you only think about after something goes wrong.",
+                  "It has become part of your everyday routine."
+                ]
+              },
               lesson: [
-                "A unique password can stop an attack before it even begins.",
-                "One good security habit can make all the difference."
+                "A unique password protected your gaming account. It didn't protect your email, because that one wasn't unique.",
+                "One good habit stops damage from spreading, but only on the account it's actually used on."
               ]
             }
           }
