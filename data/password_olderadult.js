@@ -146,9 +146,7 @@ const olderAdultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks your phone records for that period.",
-                        "\"There's no call logged around that time at all.\""
-                      ],
-                      explanation: [
+                        "\"There's no call logged around that time at all.\"",                      
                         "\"This particular attack didn't involve any phone calls or direct contact with you.\"",
                         "\"It happened entirely in the background, without you ever being approached directly.\""
                       ]
@@ -158,9 +156,7 @@ const olderAdultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks the provider's security status for that week.",
-                        "\"Good instinct to check, but that's not what we're seeing.\""
-                      ],
-                      explanation: [
+                        "\"Good instinct to check, but that's not what we're seeing.\"",                      
                         "\"There's no record of any breach on your email provider's own systems.\"",
                         "\"This was specific to your account, not a wider problem with the provider.\""
                       ]
@@ -170,9 +166,7 @@ const olderAdultPasswordCase = {
                       correct: true,
                       investigatorResponse: [
                         "The investigator pulls up the shopping website's old breach report.",
-                        "\"This is exactly it.\""
-                      ],
-                      explanation: [
+                        "\"This is exactly it.\"",                      
                         "\"That old shopping account was breached some time ago, and your email and password were part of the data that was stolen.\"",
                         "\"Because you used that same password for your email account too, the old leak became a working key to your inbox.\""
                       ]
@@ -193,9 +187,7 @@ const olderAdultPasswordCase = {
                       correct: true,
                       investigatorResponse: [
                         "The investigator highlights the eleven-minute gap between the two logins.",
-                        "\"Exactly right.\""
-                      ],
-                      explanation: [
+                        "\"Exactly right.\"",                      
                         "\"Once someone is inside an email account, they can see everything that's come through it, including a welcome email that names the exact website and account.\"",
                         "\"From there, trying the same password takes seconds, since it's the same password you'd already shown works.\""
                       ]
@@ -205,9 +197,7 @@ const olderAdultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator shakes their head gently.",
-                        "\"They're completely separate organizations, with no shared access at all.\""
-                      ],
-                      explanation: [
+                        "\"They're completely separate organizations, with no shared access at all.\"",                      
                         "\"There's no official connection between a government pension service and a private email provider.\"",
                         "\"The only real connection here was the password you happened to use for both.\""
                       ]
@@ -217,9 +207,7 @@ const olderAdultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator reviews the pension office's security standards.",
-                        "\"Their standards are actually quite strong.\""
-                      ],
-                      explanation: [
+                        "\"Their standards are actually quite strong.\"",                      
                         "\"The pension website required a reasonably strong password, and that's what you gave it.\"",
                         "\"The issue wasn't the website's security. It's that the exact same password already existed somewhere else, already exposed.\""
                       ]
@@ -240,9 +228,7 @@ const olderAdultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator points to the pattern of the messages.",
-                        "\"This wasn't accidental. It's a very deliberate, very common approach.\""
-                      ],
-                      explanation: [
+                        "\"This wasn't accidental. It's a very deliberate, very common approach.\"",                      
                         "\"These messages follow a well-known pattern used specifically because it works.\"",
                         "\"They're written to feel urgent and personal, which makes people less likely to stop and question them.\""
                       ]
@@ -252,9 +238,7 @@ const olderAdultPasswordCase = {
                       correct: true,
                       investigatorResponse: [
                         "The investigator nods slowly.",
-                        "\"That's exactly the reasoning behind it.\""
-                      ],
-                      explanation: [
+                        "\"That's exactly the reasoning behind it.\"",                      
                         "\"A message that comes from your actual, familiar email address bypasses a lot of natural suspicion. It looks and feels like it's really from you.\"",
                         "\"This is one of the reasons a compromised email account is dangerous to more than just its owner. It can be used to reach and deceive the people who trust that owner most.\""
                       ]
@@ -264,9 +248,7 @@ const olderAdultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator reads out the actual message content.",
-                        "\"I'm afraid that's not what these messages say at all.\""
-                      ],
-                      explanation: [
+                        "\"I'm afraid that's not what these messages say at all.\"",                      
                         "\"The messages ask urgently for gift cards, with no mention of any account being compromised.\"",
                         "\"This was an attempt to take advantage of the trust your contacts have in you, not a warning.\""
                       ]
@@ -354,13 +336,14 @@ const olderAdultPasswordCase = {
                 },
               ],
               chainSummary: [
-                "Old Website Breached",
-                "Credentials Leaked",
-                "Credential Stuffing Attack",
-                "Email Account Compromised",
-                "Pension Account Compromised",
-                "Bank Account Compromised",
-                "Contacts Targeted With Scam Messages"
+                "Password reused",
+                "Old website breached",
+                "Credentials leaked",
+                "Credential stuffing attack",
+                "Email account compromised",
+                "Pension account compromised",
+                "Bank account compromised",
+                "Contacts targeted with scam messages"
               ],
               finalWords: [
                 "The investigator closes the report and looks between you and your adult child.",
@@ -536,9 +519,7 @@ const olderAdultPasswordCase = {
                       correct: true,
                       investigatorResponse: [
                         "The investigator pulls up your account creation record.",
-                        "\"That's exactly right.\""
-                      ],
-                      explanation: [
+                        "\"That's exactly right.\"",                      
                         "\"The password from the old shopping website breach was never the one protecting your pension account.\"",
                         "\"Because you and your adult child set up a different password just for this account, the leaked one simply had nothing to unlock.\""
                       ]
@@ -548,9 +529,7 @@ const olderAdultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks the system logs.",
-                        "\"Nothing random about it at all.\""
-                      ],
-                      explanation: [
+                        "\"Nothing random about it at all.\"",                      
                         "\"The system blocked the attempt because the password given simply didn't match what was on file.\"",
                         "\"A login either matches the stored password or it doesn't. There's no element of chance involved.\""
                       ]
@@ -560,9 +539,7 @@ const olderAdultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator smiles slightly.",
-                        "\"A firewall wouldn't really come into it here.\""
-                      ],
-                      explanation: [
+                        "\"A firewall wouldn't really come into it here.\"",                      
                         "\"This wasn't an attack on the website's technical defenses. It was simply someone trying a specific password.\"",
                         "\"What stopped it was that the password itself was wrong, nothing more technical than that.\""
                       ]
@@ -583,9 +560,7 @@ const olderAdultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks the timestamps.",
-                        "\"Actually, the pension login was attempted just eleven minutes later.\""
-                      ],
-                      explanation: [
+                        "\"Actually, the pension login was attempted just eleven minutes later.\"",                      
                         "\"There was no meaningful delay. The attacker moved quickly, straight from your email to the pension website.\"",
                         "\"The attempt failed for a different reason entirely: the password itself didn't match.\""
                       ]
@@ -595,9 +570,7 @@ const olderAdultPasswordCase = {
                       correct: true,
                       investigatorResponse: [
                         "The investigator nods.",
-                        "\"Exactly that.\""
-                      ],
-                      explanation: [
+                        "\"Exactly that.\"",                      
                         "\"Finding your account is only half the job for an attacker. They still need the correct password for that specific account.\"",
                         "\"Because it was different from your email password, knowing where to look didn't actually help them get in.\""
                       ]
@@ -607,9 +580,7 @@ const olderAdultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks your call history with the office.",
-                        "\"There's no record of any call around that time.\""
-                      ],
-                      explanation: [
+                        "\"There's no record of any call around that time.\"",                      
                         "\"No phone verification was involved in blocking this attempt.\"",
                         "\"It came down entirely to the password itself not matching.\""
                       ]
@@ -630,9 +601,7 @@ const olderAdultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator gestures at how many attempts the pension office blocks in an average week.",
-                        "\"Luck really isn't the right word here.\""
-                      ],
-                      explanation: [
+                        "\"Luck really isn't the right word here.\"",                      
                         "\"Attempts like this happen constantly, across thousands of accounts, yours included.\"",
                         "\"You were tried, just like everyone else on that list. It simply didn't work.\""
                       ]
@@ -642,9 +611,7 @@ const olderAdultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks the flagging criteria used.",
-                        "\"Nothing about you personally was involved in this.\""
-                      ],
-                      explanation: [
+                        "\"Nothing about you personally was involved in this.\"",                      
                         "\"The system simply logs any failed login attempt automatically, for every account.\"",
                         "\"It wasn't about you being noticed. It was about the password not matching, plain and simple.\""
                       ]
@@ -654,9 +621,7 @@ const olderAdultPasswordCase = {
                       correct: true,
                       investigatorResponse: [
                         "The investigator closes the report with a small nod.",
-                        "\"That's the whole story, really.\""
-                      ],
-                      explanation: [
+                        "\"That's the whole story, really.\"",                      
                         "\"That one decision is the entire reason this stayed a blocked login instead of becoming a much bigger problem.\"",
                         "\"It's a small extra step that made a very large difference.\""
                       ]
@@ -737,13 +702,14 @@ const olderAdultPasswordCase = {
                 },
               ],
               chainSummary: [
-                "Old Website Breached",
-                "Credentials Leaked",
-                "Attackers Attempt Credential Stuffing",
-                "Email Account Compromised",
-                "Pension Password Does Not Match",
-                "Bank Password Does Not Match",
-                "Attack Stops"
+                "Unique password chosen",
+                "Old website breached",
+                "Credentials leaked",
+                "Attackers attempt credential stuffing",
+                "Email account compromised",
+                "Pension password does not match",
+                "Bank password does not match",
+                "Attack stops"
               ],
               finalWords: [
                 "The investigator closes their laptop and looks between you and your adult child.",
