@@ -4,7 +4,8 @@ const olderAdultPasswordCase = {
     title: "Password Breach",
     description: "Can you choose a secure password and stop one data breach from spreading to your important accounts and the people who trust you?",
     difficulty: "Easy",
-    ageGroup: "older-adult"
+    ageGroup: "older-adult",
+    style: "Case Files"
   },
   intro: [
     "It's a quiet Tuesday morning, and you've just finished your coffee.",
