@@ -137,33 +137,27 @@ const adultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator points to the login count.",
-                        "\"There's exactly one login attempt on record, and it succeeded immediately.\""
-                      ],
-                      explanation: [
+                        "\"There's exactly one login attempt on record, and it succeeded immediately.\"",                  
                         "\"Guessing a password this long and complex through trial and error would take an impractical amount of time, and would leave a trail of failed attempts.\"",
                         "\"There's no such trail here.\""
-                      ]
+                      ],
                     },
                     {
                       text: "They already had it from an unrelated data breach.",
                       correct: true,
                       investigatorResponse: [
                         "The investigator pulls up the retailer's breach report.",
-                        "\"This is the piece that connects everything.\""
-                      ],
-                      explanation: [
+                        "\"This is the piece that connects everything.\"",                      
                         "\"Your password was exposed years ago in a completely unrelated breach at an online retailer.\"",
                         "\"Because you used the same password for your email, that old leak became a working key to your inbox.\""
-                      ]
+                      ],
                     },
                     {
                       text: "Your email provider's servers were compromised.",
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks the provider's status page and incident history.",
-                        "\"Worth ruling out, but that's not what happened here.\""
-                      ],
-                      explanation: [
+                        "\"Worth ruling out, but that's not what happened here.\"",                      
                         "\"There's no record of any breach on your email provider's systems around this time.\"",
                         "\"This was an account-level compromise, not a server-level one. The difference matters, because it means the fix is entirely in your hands.\""
                       ]
@@ -184,9 +178,7 @@ const adultPasswordCase = {
                       correct: true,
                       investigatorResponse: [
                         "The investigator highlights the nine-minute gap.",
-                        "\"That's exactly what happened.\""
-                      ],
-                      explanation: [
+                        "\"That's exactly what happened.\"",                      
                         "\"Once inside your email, the attacker could see who you bank with just by searching your inbox.\"",
                         "\"They tried the same password there, the one you'd already proven you reuse, and it worked immediately.\"",
                         "\"Your email wasn't just one account. It was a map to every other account you own.\""
@@ -197,9 +189,7 @@ const adultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator shakes their head.",
-                        "\"That's not how any of this works.\""
-                      ],
-                      explanation: [
+                        "\"That's not how any of this works.\"",                      
                         "\"Banks and email providers are completely separate companies with no shared access to your credentials.\"",
                         "\"The connection here wasn't a technical one. It was the fact that you used the same password for both.\""
                       ]
@@ -209,9 +199,7 @@ const adultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator reviews the bank's password policy.",
-                        "\"Actually, their requirements are quite strict.\""
-                      ],
-                      explanation: [
+                        "\"Actually, their requirements are quite strict.\"",                      
                         "\"The bank required a long, complex password, and that's exactly what you gave it.\"",
                         "\"The problem wasn't the strength of the password. It was that the exact same one already existed somewhere else, exposed.\""
                       ]
@@ -232,9 +220,7 @@ const adultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks your work account's login history.",
-                        "\"Actually, there's no direct login attempt on your work account at all.\""
-                      ],
-                      explanation: [
+                        "\"Actually, there's no direct login attempt on your work account at all.\"",                      
                         "\"Nobody ever tried logging into your work account directly.\"",
                         "\"Instead, the attacker used a completely different route: requesting a password reset through your compromised email.\"",
                         "\"They never needed your work password. They just needed to control where a new one got sent.\""
@@ -245,9 +231,7 @@ const adultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks with your IT department's own incident report.",
-                        "\"Their systems show no signs of intrusion.\""
-                      ],
-                      explanation: [
+                        "\"Their systems show no signs of intrusion.\"",                      
                         "\"Your company's network and internal systems were never touched.\"",
                         "\"The attacker didn't need to get past any corporate security. Your own email account gave them a much easier path in.\""
                       ]
@@ -257,9 +241,7 @@ const adultPasswordCase = {
                       correct: true,
                       investigatorResponse: [
                         "The investigator points to the reset email.",
-                        "\"There it is.\""
-                      ],
-                      explanation: [
+                        "\"There it is.\"",                      
                         "\"Your work account's password reset process sends a link to your personal email if requested.\"",
                         "\"Once the attacker controlled your email, they could request a reset for almost any account tied to it, without ever needing to guess a single other password.\"",
                         "\"This is exactly why it is important to use unique passwords, especially for important accounts.\""
@@ -349,13 +331,14 @@ const adultPasswordCase = {
                 },
               ],
               chainSummary: [
-                "Old Website Breached",
-                "Credentials Leaked",
-                "Credential Stuffing Attack",
-                "Email Account Compromised",
-                "Bank Account Compromised",
-                "Workplace Password Reset Requested",
-                "Attack Spreads"
+                "Password reused",
+                "Old website breached",
+                "Credentials leaked",
+                "Credential stuffing attack",
+                "Email account compromised",
+                "Bank account compromised",
+                "Workplace password reset requested",
+                "Attack spreads"
               ],
               finalWords: [
                 "The investigator closes the report and looks back over the timeline.",
@@ -519,9 +502,7 @@ const adultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks the system logs.",
-                        "\"Nothing random about it. The system did exactly what it's designed to do.\""
-                      ],
-                      explanation: [
+                        "\"Nothing random about it. The system did exactly what it's designed to do.\"",                      
                         "\"The login was rejected because the password itself was simply wrong for this account.\"",
                         "\"There's no randomness involved. A login either matches or it doesn't.\""
                       ]
@@ -531,9 +512,7 @@ const adultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator smiles slightly.",
-                        "\"A good firewall wouldn't have mattered here at all.\""
-                      ],
-                      explanation: [
+                        "\"A good firewall wouldn't have mattered here at all.\"",                      
                         "\"This wasn't an attack on the bank's infrastructure. It was someone trying to log in with a specific password.\"",
                         "\"Firewalls defend against a different kind of threat. What stopped this one was simply that the password didn't match.\""
                       ]
@@ -543,9 +522,7 @@ const adultPasswordCase = {
                       correct: true,
                       investigatorResponse: [
                         "The investigator pulls up your account creation record.",
-                        "\"Exactly right.\""
-                      ],
-                      explanation: [
+                        "\"Exactly right.\"",                      
                         "\"That password was tied to an old retailer account, not your bank.\"",
                         "\"Because you generated a completely different, unique password when you set up this account, the leaked one simply had nothing to unlock.\""
                       ]
@@ -566,9 +543,7 @@ const adultPasswordCase = {
                       correct: true,
                       investigatorResponse: [
                         "The investigator nods.",
-                        "\"That's exactly it.\""
-                      ],
-                      explanation: [
+                        "\"That's exactly it.\"",                      
                         "\"Once inside your email, the attacker could see who you bank with almost immediately.\"",
                         "\"But seeing an account and accessing it are two different problems. The password that worked on your email had nothing to do with the one protecting your bank.\""
                       ]
@@ -578,9 +553,7 @@ const adultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator reviews the automated tooling used.",
-                        "\"These tools don't pick and choose. They try everything they can.\""
-                      ],
-                      explanation: [
+                        "\"These tools don't pick and choose. They try everything they can.\"",                      
                         "\"Automated attack tools typically test every account they can find for a match, without any preference.\"",
                         "\"The attempt stopped because it failed, not because of a lack of interest.\""
                       ]
@@ -590,9 +563,7 @@ const adultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks your bank account's security settings.",
-                        "\"Worth checking, but that's not actually what happened.\""
-                      ],
-                      explanation: [
+                        "\"Worth checking, but that's not actually what happened.\"",                      
                         "\"You don't currently have two-factor authentication enabled on that account.\"",
                         "\"It wasn't needed here, because the password itself was already wrong. Turning it on would still be a good idea, as an extra layer for the future.\""
                       ]
@@ -613,9 +584,7 @@ const adultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator gestures at the volume of attempts logged across the bank's systems that week.",
-                        "\"Luck isn't really part of this picture.\""
-                      ],
-                      explanation: [
+                        "\"Luck isn't really part of this picture.\"",                      
                         "\"Thousands of accounts are tested by tools like this every single day, yours included. You were targeted. The attempt simply failed.\""
                       ]
                     },
@@ -624,9 +593,7 @@ const adultPasswordCase = {
                       correct: true,
                       investigatorResponse: [
                         "The investigator closes the report.",
-                        "\"That's the whole case, really.\""
-                      ],
-                      explanation: [
+                        "\"That's the whole case, really.\"",                      
                         "\"A strong password matters, but uniqueness is what actually mattered in this case.\"",
                         "\"Even a very strong password becomes worthless the moment it's leaked from somewhere else and reused. A unique one simply has nowhere else to be leaked from.\""
                       ]
@@ -636,12 +603,10 @@ const adultPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator points to the order of events.",
-                        "\"Close, but the order matters here.\""
-                      ],
-                      explanation: [
+                        "\"Close, but the order matters here.\"",
                         "\"The bank's system logged the attempt only because it failed. It wasn't a case of catching something already in progress.\"",
                         "\"The real protection happened earlier, the moment you chose not to reuse that password in the first place.\""
-                      ]
+                      ],
                     }
                   ]
                 }
@@ -722,13 +687,14 @@ const adultPasswordCase = {
                 },
               ],
               chainSummary: [
-                "Old Website Breached",
-                "Credentials Leaked",
-                "Attackers Attempt Credential Stuffing",
-                "Email Account Compromised",
-                "Bank Password Does Not Match",
-                "Attack Stops",
-                "Damage Does Not Spread"
+                "Unique password chosen",
+                "Old website breached",
+                "Credentials leaked",
+                "Attackers attempt credential stuffing",
+                "Email account compromised",
+                "Bank password does not match",
+                "Attack stops",
+                "Damage does not spread"
               ],
               finalWords: [
                 "The investigator closes the laptop.",
