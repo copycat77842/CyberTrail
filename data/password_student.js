@@ -4,7 +4,8 @@ const studentPasswordCase = {
     title: "Password Breach",
     description: "Can you choose a secure password and stop a single data breach from spreading to your gaming account and the rest of your online life?",
     difficulty: "Easy",
-    ageGroup: "student"
+    ageGroup: "student",
+    style: "Case Files"
   },
   intro: [
     "It's finally Friday afternoon.",
