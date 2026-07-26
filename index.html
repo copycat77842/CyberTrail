@@ -13,25 +13,31 @@
         <p class="eyebrow">Interactive cybersecurity learning</p>
         <h1>CyberTrail</h1>
         <p class="hero-text">
-          Explore realistic online safety stories where every choice can lead to a safer or riskier outcome.
+          Learn cybersecurity by experiencing realistic attacks, uncovering digital evidence, and seeing how everyday decisions shape the outcome.
         </p>
         <div class="hero-actions">
           <a class="primary-btn" href="#scenario-list">Explore scenarios</a>
           <a class="secondary-btn" href="#why-this-matters">Why this matters</a>
           <a class="secondary-btn" href="#why-cybertrail">Why CyberTrail</a>
         </div>
+
+        <div class="hero-focus" aria-label="Security focus">
+          <p class="hero-focus-title">🛡 Security Focus</p>
+          <blockquote>“Attackers don’t hack people. They manipulate them.”</blockquote>
+        </div>
       </div>
 
       <div class="hero-panel">
-        <p class="hero-pill" id="scenario-count">Loading scenarios…</p>
+        <p class="hero-pill" id="scenario-count">Loading cyber cases...</p>
         <p class="hero-pill hero-pill--subtle" id="age-group-summary">Choose your age group to personalise the experience.</p>
         <button type="button" class="secondary-btn age-reopen-btn" id="age-group-trigger">Change age group</button>
-        <h2>What you’ll practice</h2>
-        <ul>
-          <li>Recognise phishing and social engineering</li>
-          <li>Build safer password habits</li>
-          <li>Understand how one weak decision can spread across accounts</li>
-          <li>Learn through branching outcomes and digital forensics</li>
+        <h2>In each CyberTrail case you’ll</h2>
+        <ul class="check-list">
+          <li>Read an interactive story</li>
+          <li>Make realistic decisions</li>
+          <li>Watch the attack unfold</li>
+          <li>Investigate digital evidence</li>
+          <li>Learn how to stop it happening again</li>
         </ul>
       </div>
     </header>
@@ -40,49 +46,67 @@
       <section id="why-this-matters" class="info-section">
         <div class="section-heading">
           <h2>Why this matters</h2>
-          <p>Cybersecurity is not only about technology. It is about helping everyday people understand how phishing, social engineering, and credential theft can target them directly in ordinary online life.</p>
+          <p>Cyber attacks often begin not with code, but with a person making a small decision at the wrong moment.</p>
         </div>
         <div class="info-grid">
           <article class="info-card">
-            <h3>People are often the target</h3>
-            <p>Many successful attacks focus on individuals rather than systems, using tricks and pressure to exploit weak habits.</p>
+            <h3>Cyber attacks usually begin with people</h3>
+            <p>When a major cyber attack appears on the news, it is easy to imagine expert hackers breaking through sophisticated computer systems. In reality, many attacks begin by exploiting people through phishing, password reuse, and social engineering.</p>
           </article>
           <article class="info-card">
-            <h3>Safer habits protect more than one account</h3>
-            <p>When people use better online habits, they reduce the risk of losing money, privacy, identity, and access to important services.</p>
+            <h3>One mistake can spread surprisingly far</h3>
+            <p>Reusing a password or trusting the wrong email can affect your bank account, workplace, friends, and personal information. Small decisions often have much larger consequences.</p>
           </article>
           <article class="info-card">
-            <h3>Education makes a real difference</h3>
-            <p>Learning practical cyber safety helps people build long-lasting habits that contribute to a safer digital community for everyone.</p>
+            <h3>Understanding attacks is the best defence</h3>
+            <p>CyberTrail does not just tell you what happened—it lets you experience how attacks unfold, investigate the evidence, and understand how they could have been prevented.</p>
           </article>
         </div>
       </section>
 
       <section id="why-cybertrail" class="dashboard-section">
         <div class="section-heading">
-          <h2>What makes CyberTrail stand out?</h2>
+          <h2>Why learn with CyberTrail?</h2>
           <p>These are the features that make each case feel interactive, practical, and memorable.</p>
         </div>
         <div class="info-grid">
           <article class="info-card">
-            <h3>Interactive simulations</h3>
-            <p>Users make decisions throughout each scenario and experience the consequences in a safe, guided environment.</p>
+            <h3>🎮 Interactive Simulations</h3>
+            <p>Every decision changes what happens next. Explore both secure and insecure choices to understand how cyber attacks succeed—or fail.</p>
           </article>
           <article class="info-card">
-            <h3>Branching stories</h3>
-            <p>Different choices lead to different outcomes, helping learners see how small decisions can matter.</p>
+            <h3>🧩 Branching Stories</h3>
+            <p>Different choices lead to different outcomes, helping learners see how small decisions can change the result of a case.</p>
           </article>
           <article class="info-card">
-            <h3>Digital forensics</h3>
-            <p>Each story includes an investigation section where learners examine evidence and uncover how an attack occurred.</p>
+            <h3>🔍 Digital Investigation</h3>
+            <p>Examine login records, timestamps, emails, and evidence to reconstruct exactly how an attacker operated.</p>
           </article>
+        </div>
+      </section>
+
+      <section class="process-section" aria-labelledby="process-title">
+        <div class="section-heading">
+          <h2 id="process-title">How CyberTrail works</h2>
+          <p>Each case guides you through a realistic attack from the first warning signs to the final lesson.</p>
+        </div>
+        <div class="process-steps">
+          <div class="process-step"><span class="step-number">1</span><div>Experience the story</div></div>
+          <div class="process-arrow">↓</div>
+          <div class="process-step"><span class="step-number">2</span><div>Make important decisions</div></div>
+          <div class="process-arrow">↓</div>
+          <div class="process-step"><span class="step-number">3</span><div>Watch the consequences unfold</div></div>
+          <div class="process-arrow">↓</div>
+          <div class="process-step"><span class="step-number">4</span><div>Investigate the attack</div></div>
+          <div class="process-arrow">↓</div>
+          <div class="process-step"><span class="step-number">5</span><div>Learn practical security habits</div></div>
         </div>
       </section>
 
       <section id="scenario-list" class="dashboard-section">
         <div class="section-heading">
           <h2>Choose a scenario</h2>
-          <p>Every case helps you build safer habits in a safe, interactive environment.</p>
+          <p>Every case helps you build safer habits in a safe, interactive environment. Each card highlights the main learning focus so you can quickly choose what to explore.</p>
         </div>
         <div id="dashboard" class="dashboard-grid"></div>
       </section>
@@ -102,6 +126,13 @@
       <p class="modal-help">You can change this later if you want to explore a different perspective.</p>
     </div>
   </div>
+
+  <footer class="footer">
+    <div class="footer-line"></div>
+    <h2>CyberTrail</h2>
+    <p>Interactive cybersecurity education through realistic stories, investigations, and practical learning.</p>
+    <p>Built for Young ICT Explorers 2026.</p>
+  </footer>
 
   <script src="data/manifest.js"></script>
   <script src="js/scenario-loader.js"></script>
