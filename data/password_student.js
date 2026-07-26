@@ -208,9 +208,7 @@ const studentPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator looks at the login history.",
-                        "\"If someone was guessing, we would normally see many failed attempts first.\""
-                      ],
-                      explanation: [
+                        "\"If someone was guessing, we would normally see many failed attempts first.\"",                      
                         "\"Besides, your password was not something that could easily be guessed.\"",
                         "\"The evidence suggests the attacker already had the correct password before attempting to log in.\""
                       ]
@@ -221,9 +219,7 @@ const studentPasswordCase = {
                       investigatorResponse: [
                         "The investigator highlights the first successful login.",
                         "\"Exactly. The attacker didn't need to break the lock.\"",
-                        "\"They already had the key.\""
-                      ],
-                      explanation: [
+                        "\"They already had the key.\"",                      
                         "\"The login succeeded immediately because the attacker was using valid credentials.\"",
                         "\"The attacker likely already knew your password from a data breach on a website where you had used the same password.\""
                       ]
@@ -233,9 +229,7 @@ const studentPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks the game's security report.",
-                        "\"Let's see if there is any evidence of a server breach.\""
-                      ],
-                      explanation: [
+                        "\"Let's see if there is any evidence of a server breach.\"",                      
                         "\"There are no signs that the game's servers were compromised.\"",
                         "\"If attackers had broken into the servers, they would not need your personal password.\"",
                         "\"This appears to be an account-level attack, not a server attack.\""
@@ -257,9 +251,7 @@ const studentPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks the login attempt count.",
-                        "\"Brute-forcing usually leaves a trail behind.\""
-                      ],
-                      explanation: [
+                        "\"Brute-forcing usually leaves a trail behind.\"",                      
                         "\"There's only one login attempt on record, and it succeeded immediately.\"",
                         "\"A brute-force attack against a password this strong would take far too long, and would show up as hundreds or thousands of failed attempts first. There's no trace of that here.\""
                       ]
@@ -269,9 +261,7 @@ const studentPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator smiles slightly.",
-                        "\"Passwords don't expire just because they have existed for a long time.\""
-                      ],
-                      explanation: [
+                        "\"Passwords don't expire just because they have existed for a long time.\"",                      
                         "\"An old password can still be secure if nobody else knows it.\"",
                         "\"The danger comes when attackers discover it and can reuse it elsewhere.\""
                       ]
@@ -281,9 +271,7 @@ const studentPasswordCase = {
                       correct: true,
                       investigatorResponse: [
                         "The investigator circles several accounts on the screen.",
-                        "\"This is where everything connects.\""
-                      ],
-                      explanation: [
+                        "\"This is where everything connects.\"",                      
                         "\"A strong password is only useful if it stays private.\"",
                         "\"By using the same password across different websites, one breach could expose every account using that password.\"",
                         "\"The attacker didn't defeat your password. They found another place where it had already been exposed.\""
@@ -306,9 +294,7 @@ const studentPasswordCase = {
                       investigatorResponse: [
                         "The investigator places the final piece of evidence onto the board.",
                         "\"Exactly.\"",
-                        "\"Now the entire chain begins to make sense.\""
-                      ],
-                      explanation: [
+                        "\"Now the entire chain begins to make sense.\"",                      
                         "\"Only one of your old leaked accounts had this specific password attached to it, and that leak became public right before the attacks on your gaming account started.\"",
                         "\"That match, both in the password itself and the timing, is what confirms it as the source rather than the other two old accounts.\"",
                         "\"This is called credential stuffing: attackers take leaked username and password combinations from one breach and automatically test them on other websites.\""
@@ -319,9 +305,7 @@ const studentPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator shakes their head.",
-                        "\"Age alone doesn't tell us anything.\""
-                      ],
-                      explanation: [
+                        "\"Age alone doesn't tell us anything.\"",                      
                         "\"An old account isn't automatically the guilty one. Plenty of old accounts never get breached at all.\"",
                         "\"What actually matters is whether the leaked password and the breach timing line up with the attack, and here they clearly do.\""
                       ]
@@ -331,9 +315,7 @@ const studentPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator taps the matching timestamps on the screen.",
-                        "\"It's not a guess. It's a match.\""
-                      ],
-                      explanation: [
+                        "\"It's not a guess. It's a match.\"",                      
                         "\"Investigators don't rely on hunches. They rely on evidence that lines up.\"",
                         "\"An exact password match combined with a breach date that fits the timeline isn't a coincidence. It's proof.\""
                       ]
@@ -601,9 +583,7 @@ const studentPasswordCase = {
                       correct: true,
                       investigatorResponse: [
                         "The investigator pulls up the old breach report.",
-                        "\"That's exactly it.\""
-                      ],
-                      explanation: [
+                        "\"That's exactly it.\"",                      
                         "\"Your email password was exposed years ago in a breach that had nothing to do with your email provider.\"",
                         "\"Because you'd used that same password for your email too, the old leak became a working key to your inbox.\""
                       ]
@@ -613,9 +593,7 @@ const studentPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks the login history.",
-                        "\"There's exactly one attempt on record, and it succeeded immediately.\""
-                      ],
-                      explanation: [
+                        "\"There's exactly one attempt on record, and it succeeded immediately.\"",                      
                         "\"Guessing a real password through trial and error takes many attempts and leaves a trail of failures.\"",
                         "\"There's no such trail here.\""
                       ]
@@ -625,9 +603,7 @@ const studentPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks the provider's status page and incident history.",
-                        "\"Worth ruling out, but that's not what happened here.\""
-                      ],
-                      explanation: [
+                        "\"Worth ruling out, but that's not what happened here.\"",                      
                         "\"There's no record of any breach on your email provider's systems.\"",
                         "\"This was specific to your account, not a wider problem with the provider.\""
                       ]
@@ -648,9 +624,7 @@ const studentPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator shakes their head.",
-                        "\"They didn't give up. They simply didn't have what they needed.\""
-                      ],
-                      explanation: [
+                        "\"They didn't give up. They simply didn't have what they needed.\"",                      
                         "\"The attackers' scripts tried the exact password that had just worked on your email. Not a guess. The real thing.\"",
                         "\"Because you never reused that password on your gaming account, it just didn't match.\""
                       ]
@@ -660,9 +634,7 @@ const studentPasswordCase = {
                       correct: true,
                       investigatorResponse: [
                         "The investigator highlights the failed login.",
-                        "\"Exactly that.\""
-                      ],
-                      explanation: [
+                        "\"Exactly that.\"",                      
                         "\"Once inside your email, the attacker could see your gaming account almost immediately.\"",
                         "\"But seeing an account and unlocking it are two different problems.\"",
                         "\"The password that worked on your email had nothing to do with the one protecting your gaming account.\""
@@ -673,9 +645,7 @@ const studentPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator considers the answer.",
-                        "\"Length helps, but that isn't the main reason.\""
-                      ],
-                      explanation: [
+                        "\"Length helps, but that isn't the main reason.\"",                      
                         "\"A long password is useful, but a unique password is what protected you here.\"",
                         "\"Strong, complex passwords like yours can take even the best computers years or even decades to crack, but if attackers already knew the password from another data leak, then all that protection would have been for nothing!\""
                       ]
@@ -696,9 +666,7 @@ const studentPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator points to the failed login records.",
-                        "\"The security system helped, but it wasn't the only reason.\""
-                      ],
-                      explanation: [
+                        "\"The security system helped, but it wasn't the only reason.\"",                      
                         "\"The game's security blocks repeated automated attempts to guess your password, but if an attacker already has your password, then these security measures wouldn't have been able to stop them.\"",
                         "\"The fact that they didn't have your gaming account password despite the other website's data breach was the main thing that protected the account.\""
                       ]
@@ -708,9 +676,7 @@ const studentPasswordCase = {
                       correct: false,
                       investigatorResponse: [
                         "The investigator checks your account's security settings.",
-                        "\"Actually, no extra protections were switched on here.\""
-                      ],
-                      explanation: [
+                        "\"Actually, no extra protections were switched on here.\"",                      
                         "\"You didn't have two-factor authentication enabled on this account.\"",
                         "\"What stopped the attackers wasn't an extra layer of security. It was simply that the password itself never matched.\"",
                         "\"That said, turning on two-factor authentication is still worth doing. It would protect you even in cases where a password does leak.\""
@@ -721,9 +687,7 @@ const studentPasswordCase = {
                       correct: true,
                       investigatorResponse: [
                         "The investigator smiles.",
-                        "\"That was the most important decision you made.\""
-                      ],
-                      explanation: [
+                        "\"That was the most important decision you made.\"",                      
                         "\"Even though attackers obtained leaked passwords from other websites, they could not use them to access this account.\"",
                         "\"Your password was completely separate from those breaches.\""
                       ]
@@ -809,13 +773,14 @@ const studentPasswordCase = {
                 },
               ],
               chainSummary: [
-                "Old Website Breached",
-                "Credentials Leaked",
-                "Attackers Attempt Credential Stuffing",
-                "Email Account Compromised",
-                "Gaming Password Does Not Match",
-                "Attack Stops",
-                "Damage Does Not Spread"
+                "Unique password chosen",
+                "Old website breached",
+                "Credentials leaked",
+                "Attackers attempt credential stuffing",
+                "Email account compromised",
+                "Gaming password does not match",
+                "Attack stops",
+                "Damage does not spread"
               ],
               finalWords: [
                 "The investigator reviews the evidence one last time.",
