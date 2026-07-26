@@ -101,9 +101,18 @@ async function showInvestigation(data) {
     // Investigation introduction
     await playSection(data.intro);
 
+    // Artifact analysis
+    if (data.artifact) {
+        await playSection(data.artifact.description);
+        await startArtifactAnalysis(data.artifact, data);
+        await playSection(data.artifactComplete);
+    }
+
     // Case files
-    for (const clue of data.clues) {
-        await showCaseFile(clue);
+    if (data.clues) {
+        for (const clue of data.clues) {
+            await showCaseFile(clue);
+        }
     }
 
     // Timeline reconstruction
@@ -119,17 +128,29 @@ async function showInvestigation(data) {
         await showChainSummary(data.chainSummary);
         await continuePrompt();
     }
+
     // Final lesson
     await typeHeading("CASE CONCLUSION");
-    await playLines(data.finalWords);
+
+    if (data.finalWords) {
+        await playLines(data.finalWords);
+    }
+
     await continuePrompt();
-    await showInvestigatorAdvice(data.investigatorAdvice);
+
+    if (data.investigatorAdvice) {
+        await showInvestigatorAdvice(data.investigatorAdvice);
+    }
 
     await typeHeading("EPILOGUE");
+
     if (data.epilogue) {
         await showTimelineEvent(data.epilogue, textBox);
     }
-    await showLesson(data.lesson);
+
+    if (data.lesson) {
+        await showLesson(data.lesson);
+    }
 }
 
 function scrollDown() {
@@ -343,9 +364,10 @@ async function showStoryTimeline(events) {
     }
 }
 
-async function continuePrompt() {
+async function continuePrompt(onContinue = null) {
 
     return new Promise(resolve => {
+
         const wrapper = document.createElement("div");
         wrapper.className = "choice-container";
 
@@ -355,8 +377,14 @@ async function continuePrompt() {
 
         btn.onclick = () => {
             skipRequested = false;
-            scrollDown();
+
             wrapper.remove();
+
+            if (onContinue) {
+                onContinue();
+            }
+
+            scrollDown();
             resolve();
         };
 
@@ -366,7 +394,6 @@ async function continuePrompt() {
         scrollDown();
 
     });
-
 }
 
 async function askInvestigationQuestion(clue) {
@@ -399,7 +426,6 @@ async function askInvestigationQuestion(clue) {
                     wrapper.appendChild(result);
 
                     await playLines(option.investigatorResponse);
-                    await playLines(option.explanation);
 
                     resolve();
 
@@ -414,7 +440,6 @@ async function askInvestigationQuestion(clue) {
                     wrapper.appendChild(feedback);
 
                     await playLines(option.investigatorResponse, feedback);
-                    await playLines(option.explanation, feedback);
 
                     const retry = document.createElement("button");
                     retry.className = "choice-button retry-button";
@@ -469,6 +494,137 @@ async function showCaseFile(clue) {
     await askInvestigationQuestion(clue);
     await continuePrompt();
 }
+
+let artifactCluesFound = [];
+let currentArtifact = null;
+let artifactCompleteResolve = null;
+
+function startArtifactAnalysis(artifact, investigationData) {
+    currentArtifact = artifact;
+    artifactCluesFound = [];
+    return new Promise(resolve => {
+        artifactCompleteResolve = resolve;
+        showEmailComparison(artifact);
+    });
+}
+
+function showEmailComparison(artifact) {
+
+    const artifactWrapper = document.createElement("div");
+    artifactWrapper.id = "artifact-wrapper";
+
+    const comparison = document.createElement("div");
+    comparison.id = "email-comparison";
+
+    const fakeColumn = createEmailColumn(
+        artifact.fakeEmail,
+        true
+    );
+
+    const realColumn = createEmailColumn(
+        artifact.realEmail,
+        false
+    );
+
+    comparison.appendChild(fakeColumn);
+    comparison.appendChild(realColumn);
+
+    artifactWrapper.appendChild(comparison);
+
+    const counter = document.createElement("p");
+    counter.id = "artifact-counter";
+    counter.textContent =
+        `Suspicious elements found: 0/${artifact.requiredClues.length}`;
+
+    artifactWrapper.appendChild(counter);
+
+    textBox.appendChild(artifactWrapper);
+
+    scrollDown();
+}
+
+function createEmailColumn(email, clickable) {
+
+    const column = document.createElement("div");
+    column.className = "email-column";
+
+    const heading = document.createElement("h3");
+    heading.textContent = email.label;
+
+    column.appendChild(heading);
+
+    email.blocks.forEach(block => {
+
+        const element = document.createElement("div");
+        element.className = "email-block";
+
+        element.textContent = block.text;
+
+        if (clickable) {
+
+            element.classList.add("clickable-email-block");
+
+            element.onclick = () => {
+                checkArtifactBlock(block, element);
+            };
+
+        } else {
+
+            element.classList.add("real-email-block");
+
+        }
+
+        column.appendChild(element);
+
+    });
+
+    return column;
+}
+
+function checkArtifactBlock(block, element) {
+    if (element.classList.contains("checked")) {
+        return;
+    }
+
+    element.classList.add("checked");
+
+    const feedback = document.createElement("div");
+    feedback.className = "artifact-feedback";
+    feedback.textContent = block.explanation;
+
+    element.appendChild(feedback);
+
+    if (block.type === "suspicious") {
+        element.classList.add("suspicious-found");
+
+        if (!artifactCluesFound.includes(block.id)) {
+            artifactCluesFound.push(block.id);
+        }
+    } else {
+        element.classList.add("safe-found");
+    }
+
+    updateArtifactCounter();
+
+    if (artifactCluesFound.length === currentArtifact.requiredClues.length) {
+        continuePrompt(() => {
+            if (artifactCompleteResolve) {
+                artifactCompleteResolve();
+                artifactCompleteResolve = null;
+            }
+        });
+    }
+}
+
+function updateArtifactCounter() {
+    const counter = document.getElementById("artifact-counter");
+
+    if (counter) {
+        counter.textContent =
+            `Suspicious elements found: ${artifactCluesFound.length}/${currentArtifact.requiredClues.length}`;
+    }
+}
+
 async function showInvestigationTimeline(events) {
     await typeHeading("ATTACK TIMELINE - HOW IT HAPPENED");
     const timeline = document.createElement("div");
