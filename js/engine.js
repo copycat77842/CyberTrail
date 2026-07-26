@@ -6,6 +6,7 @@ const controlsBox = document.getElementById("controls");
 
 let scenario = null;
 let skipRequested = false;
+let skipAnimations = false;
 let scenarioRunning = true;
 
 async function init() {
@@ -38,13 +39,13 @@ async function start() {
 
     await playLines(scenario.intro);
 
-    await wait(1000);
+    await wait(700);
     
     await continuePrompt();
 
     await playLines(scenario.setup);
 
-    await wait(1000);
+    await wait(700);
 
     showChoices(scenario.choice);
 }
@@ -114,12 +115,20 @@ async function showInvestigation(data) {
         await showInvestigationTimeline(data.timeline);
     }
 
+    if (data.chainSummary) {
+        await showChainSummary(data.chainSummary);
+        await continuePrompt();
+    }
     // Final lesson
     await typeHeading("CASE CONCLUSION");
     await playLines(data.finalWords);
     await continuePrompt();
     await showInvestigatorAdvice(data.investigatorAdvice);
 
+    await typeHeading("EPILOGUE");
+    if (data.epilogue) {
+        await showTimelineEvent(data.epilogue, textBox);
+    }
     await showLesson(data.lesson);
 }
 
@@ -160,7 +169,7 @@ async function typeText(text, isTimestamp = false, container = textBox) {
         }
 
         function typeNext() {
-            if (skipRequested) {
+            if (skipRequested || skipAnimations) {
                 finish();
                 return;
             }
@@ -206,7 +215,7 @@ async function typeHeading(text, container = textBox) {
 
         function typeNext() {
 
-            if (skipRequested) {
+            if (skipRequested || skipAnimations) {
                 finish();
                 return;
             }
@@ -248,7 +257,7 @@ async function playLines(lines, container = textBox) {
         await typeText(lines[i], false, container);
 
         // User pressed Skip while this line was typing
-        if (skipRequested) {
+        if (skipRequested || skipAnimations) {
             // Show remaining lines instantly
             for (i = i + 1; i < lines.length; i++) {
                 const line = document.createElement("div");
@@ -258,7 +267,9 @@ async function playLines(lines, container = textBox) {
                 container.appendChild(line);
             }
             scrollDown();
-            skipRequested = false;
+            if (skipRequested){
+                skipRequested = false;
+            }
             return;
         }
         await wait(700);
@@ -300,49 +311,34 @@ function showChoices(scene) {
 
 }
 
-async function showStoryTimeline(events) {
+async function showTimelineEvent(event, container) {
+    const eventBox = document.createElement("div");
+    eventBox.className = "timeline-event";
 
+    const heading = document.createElement("div");
+    heading.className = "story-timeline-heading";
+    eventBox.appendChild(heading);
+
+    container.appendChild(eventBox);
+
+    await typeHeading(`--- ${event.time.toUpperCase()} ---`, heading);
+
+    const story = document.createElement("div");
+    story.className = "timeline-story";
+    eventBox.appendChild(story);
+
+    await typeTimelineLines(event.story, story);
+
+    await wait(700);
+}
+
+async function showStoryTimeline(events) {
     const timeline = document.createElement("div");
     timeline.className = "timeline-container";
-
     textBox.appendChild(timeline);
 
-
     for (const event of events) {
-
-        const eventBox = document.createElement("div");
-        eventBox.className = "timeline-event";
-
-
-        // Create heading container
-        const heading = document.createElement("div");
-        heading.className = "story-timeline-heading";
-
-        eventBox.appendChild(heading);
-
-
-        timeline.appendChild(eventBox);
-
-
-        await typeHeading(
-            `--- ${event.time.toUpperCase()} ---`,
-            heading
-        );
-
-
-        const story = document.createElement("div");
-        story.className = "timeline-story";
-
-        eventBox.appendChild(story);
-
-
-        await typeTimelineLines(
-            event.story,
-            story
-        );
-
-
-        await wait(700);
+        await showTimelineEvent(event, timeline);
         await continuePrompt();
     }
 }
@@ -467,14 +463,14 @@ async function showCaseFile(clue) {
 
     textBox.appendChild(box);
     scrollDown();
-    await wait(1000);
+    await wait(600);
     await typeText(clue.question);
     await wait(500);
     await askInvestigationQuestion(clue);
     await continuePrompt();
 }
 async function showInvestigationTimeline(events) {
-    await typeHeading("ATTACK TIMELINE");
+    await typeHeading("ATTACK TIMELINE - HOW IT HAPPENED");
     const timeline = document.createElement("div");
     timeline.className = "timeline-container";
     textBox.appendChild(timeline);
@@ -518,7 +514,208 @@ async function showInvestigationTimeline(events) {
             `;
             timeline.appendChild(arrow);
         }
-        await wait(700);
+        await wait(350);
+    }
+}
+
+async function revealChainRow(rowDiv) {
+
+    const elements = rowDiv.querySelectorAll(
+        ".chain-card, .chain-horizontal-arrow"
+    );
+
+    elements.forEach((el, index) => {
+        setTimeout(() => {
+            el.classList.add("reveal");
+        }, index * 100);
+    });
+
+    await wait(600);
+}
+
+
+async function showChainSummary(chain) {
+    if (!Array.isArray(chain) || chain.length === 0)
+        return;
+    await typeHeading("THE ATTACK CHAIN");
+    await wait(500);
+    const container = document.createElement("div");
+    container.className = "chain-summary";
+    textBox.appendChild(container);
+    const perRow = 3;
+    const totalRows = Math.ceil(chain.length / perRow);
+    for (let row = 0; row < totalRows; row++) {
+        const rowDiv = document.createElement("div");
+        rowDiv.className = "chain-row";
+        const start = row * perRow;
+        const end = Math.min(start + perRow, chain.length);
+        let items = [];
+        for (let i = start; i < end; i++) {
+
+            items.push({
+                index: i,
+                text: chain[i]
+            });
+
+        }
+        // Snake direction
+        if (row % 2 === 1) {
+            items.reverse();
+        }
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            const step = document.createElement("div");
+            step.className = "chain-card";
+            step.innerHTML = `
+
+                <div class="chain-number">
+                    ${item.index + 1}
+                </div>
+
+                <div class="chain-text">
+                    ${item.text}
+                </div>
+
+            `;
+            rowDiv.appendChild(step);
+            if (i < items.length - 1) {
+                const arrow = document.createElement("div");
+                arrow.className = "chain-horizontal-arrow";
+                arrow.innerHTML =
+                    row % 2 === 0
+                    ?
+                    `
+                    <svg width="50" height="24">
+
+                        <line
+                            x1="5"
+                            y1="12"
+                            x2="38"
+                            y2="12"
+                            stroke="currentColor"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                        />
+
+                        <polyline
+                            points="32,5 42,12 32,19"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+
+                    </svg>
+                    `
+                    :
+                    `
+                    <svg width="50" height="24">
+
+                        <line
+                            x1="45"
+                            y1="12"
+                            x2="12"
+                            y2="12"
+                            stroke="currentColor"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                        />
+
+                        <polyline
+                            points="18,5 8,12 18,19"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+
+                    </svg>
+
+                    `;
+                rowDiv.appendChild(arrow);
+            }
+        }
+        container.appendChild(rowDiv);
+        await revealChainRow(rowDiv);
+        /*
+            Add vertical connector
+            after row is visible
+        */
+
+        if (row < totalRows - 1) {
+
+            const connector = document.createElement("div");
+            connector.className = "chain-vertical";
+
+            connector.innerHTML = `
+                <svg width="40" height="45">
+                    <line
+                        x1="20"
+                        y1="0"
+                        x2="20"
+                        y2="30"
+                        stroke="currentColor"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                    />
+
+                    <polyline
+                        points="12,25 20,35 28,25"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            `;
+
+
+            /*
+                Put arrow underneath the exiting card
+
+                Even row:
+                    exits right side
+
+                Odd row:
+                    exits left side
+            */
+
+            const cards = rowDiv.querySelectorAll(".chain-card");
+
+            const edgeCard =
+                row % 2 === 0
+                ? cards[cards.length - 1]
+                : cards[0];
+
+
+            rowDiv.after(connector);
+
+
+            if (edgeCard) {
+
+                const rowRect = rowDiv.getBoundingClientRect();
+                const cardRect = edgeCard.getBoundingClientRect();
+
+                const offset =
+                    cardRect.left -
+                    rowRect.left +
+                    cardRect.width / 2 -
+                    20;
+
+                connector.style.marginLeft = `${offset}px`;
+            }
+
+
+            requestAnimationFrame(() => {
+                connector.classList.add("reveal");
+            });
+
+            await wait(300);
+        }
+        scrollDown();
     }
 }
 
@@ -528,7 +725,7 @@ async function typeTimelineLines(lines, container) {
 
         await typeTimelineLine(lines[i], container);
 
-        if (skipRequested) {
+        if (skipRequested || skipAnimations) {
 
             for (let j = i + 1; j < lines.length; j++) {
 
@@ -540,7 +737,9 @@ async function typeTimelineLines(lines, container) {
             }
 
             scrollDown();
-            skipRequested = false;
+            if (skipRequested) {
+                skipRequested = false;
+            }
             return;
         }
 
@@ -563,7 +762,7 @@ async function typeTimelineLine(text, container) {
         let i = 0;
         const speed = 35;
         function typeNext(){
-            if(skipRequested){
+            if(skipRequested || skipAnimations){
                 p.textContent = text;
                 scrollDown();
                 resolve();
@@ -641,13 +840,12 @@ async function showInvestigatorAdvice(adviceData) {
         textBox.appendChild(card);
         // Type text into the card
         await typeAdviceTitle(item.title, title);
-        await wait(300);
         await typeText(
             item.text,
             false,
             text
         );
-        await wait(800);
+        await wait(400);
         scrollDown();
         await continuePrompt();
     }
@@ -677,7 +875,7 @@ async function typeAdviceTitle(text, container) {
 
         function typeNext() {
 
-            if (skipRequested) {
+            if (skipRequested || skipAnimations) {
                 finish();
                 return;
             }
@@ -713,6 +911,7 @@ async function typeAdviceTitle(text, container) {
     });
 
 }
+
 async function showLesson(text) {
 
   const box = document.createElement("div");
@@ -746,7 +945,23 @@ function showControls() {
       window.location.href = "index.html";
     };
 
-    controlsBox.appendChild(skipBtn);
+    const animationBtn = document.createElement("button");
+    animationBtn.className = "primary-button";
+
+    animationBtn.textContent =
+        skipAnimations
+            ? "Enable Typewriter"
+            : "Disable Typewriter";
+
+    animationBtn.onclick = () => {
+        skipAnimations = !skipAnimations;
+        showControls();
+    };
+
+    controlsBox.appendChild(animationBtn);
+    if (!skipAnimations){
+        controlsBox.appendChild(skipBtn);
+    }
     controlsBox.appendChild(backBtn);
 
   } else {
