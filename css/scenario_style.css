@@ -460,3 +460,108 @@ header {
 .advice-text {
     line-height: 1.5;
 }
+
+.chain-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    margin-top: 30px;
+}
+
+.chain-row {
+    display: flex;
+    gap: 15px;
+    position: relative;
+}
+
+
+.chain-card {
+    width: 220px;
+    min-height: 100px;
+    padding: 18px;
+    border-radius: 12px;
+    background: #111827;
+    border: 2px solid #3b82f6;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    box-sizing: border-box;
+
+    opacity: 0;
+    transform: translateY(20px);
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+}
+
+
+.chain-card.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.chain-number {
+    font-size: 22px;
+    font-weight: bold;
+    color: #60a5fa;
+    margin-bottom: 10px;
+}
+
+
+.chain-text {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+
+.chain-horizontal-arrow {
+
+    color: #60a5fa;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+
+    transform: scale(0.8);
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
+}
+
+
+.chain-horizontal-arrow.reveal {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.chain-vertical {
+    height:45px;
+    width:40px;
+    position:relative;
+    opacity:0;
+    transform:translateY(-10px);
+    transition:opacity .4s ease,transform .4s ease;
+    margin: 20px 0px 10px 0px;
+}
+
+.chain-vertical.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.chain-vertical svg {
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    color:#60a5fa;
+}
