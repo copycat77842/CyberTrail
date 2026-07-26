@@ -2,9 +2,10 @@ const adultPasswordCase = {
   id: "password_adult",
   meta: {
     title: "Password Breach",
-    description: "How one reused password can turn a single old leak into a banking, email, and workplace crisis.",
+    description: "Can you choose a secure password and prevent a single old leak from turning into a banking, email, and workplace crisis?",
     difficulty: "Easy",
-    ageGroup: "working-adult"
+    ageGroup: "working-adult",
+    style: "Case Files"
   },
   intro: [
     "It's a Tuesday evening, and you've finally sat down after a long day at work.",
