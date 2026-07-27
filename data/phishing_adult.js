@@ -1,10 +1,202 @@
+const corporatePhishingArtifact = {
+  title: "Email Comparison",
+
+  description: [
+    "The investigator places two emails side by side.",
+    "One is a legitimate message from your company's IT department.",
+    "The other is the phishing email involved in the incident.",
+    "\"Your goal is to examine the fake email and identify the suspicious elements.\"",
+    "\"Business phishing emails are designed to look routine, so the warning signs are usually hidden in small details.\""
+  ],
+
+  fakeEmail: {
+    label: "Suspicious Email (Fake)",
+
+    blocks: [
+
+      {
+        id: "fake_sender",
+        compareWith: "real_sender",
+        text:
+          "From: IT Security Team <security@company-it-support.com>",
+
+        type: "suspicious",
+
+        explanation:
+          "Suspicious element found.\n\n" +
+          "The display name looks like it belongs to your company's IT department, but the email address uses a completely different domain.\n\n" +
+          "Attackers can make an email appear to come from almost anyone by changing the display name. Always check the actual address behind it."
+      },
+
+
+      {
+        id: "fake_subject",
+        compareWith: "real_subject",
+        text:
+          "Subject: Unusual Sign-In Activity Detected. Action Required.",
+
+        type: "safe",
+
+        explanation:
+          "Not quite. Security alerts like this can be completely legitimate.\n\n" +
+          "Many organisations really do notify staff about unusual sign-in activity, so the subject line alone is not enough to tell whether an email is genuine."
+      },
+
+
+      {
+        id: "fake_greeting",
+        compareWith: "real_greeting",
+        text:
+          "Hello,\n\n" +
+          "We detected an unusual sign-in attempt on your company account.",
+
+        type: "safe",
+
+        explanation:
+          "Not quite. This wording is common in both genuine security alerts and phishing emails.\n\n" +
+          "Professional language does not guarantee that an email is safe."
+      },
+
+
+      {
+        id: "fake_message",
+        compareWith: "real_message",
+        text:
+          "To keep your account secure, please verify your identity before continuing to use company services.",
+
+        type: "safe",
+
+        explanation:
+          "Not quite. On its own, this request sounds reasonable.\n\n" +
+          "The important question is how the email wants you to verify your identity."
+      },
+
+
+      {
+        id: "fake_urgency",
+        compareWith: "real_urgency",
+        text:
+          "This verification link expires in 60 minutes. Failure to verify may result in temporary account restrictions.",
+
+        type: "suspicious",
+
+        explanation:
+          "Suspicious element found.\n\n" +
+          "The email creates pressure by giving you a very short deadline.\n\n" +
+          "Attackers use urgency to make people act before they stop to question whether the message is genuine.\n\n" +
+          "Real IT departments rarely expect staff to solve security issues within an hour through an email link."
+      },
+
+
+      {
+        id: "fake_button",
+        compareWith: "real_button",
+        text:
+          "[ Verify My Identity ]",
+
+        type: "suspicious",
+
+        explanation:
+          "Suspicious element found.\n\n" +
+          "The email asks you to sign in through a link inside the message.\n\n" +
+          "The button itself looks normal, but it actually leads to:\n\n" +
+          "https://company-it-support.com/verify\n\n" +
+          "This address does not belong to your company's real sign-on portal.\n\n" +
+          "Attackers often create convincing domains by adding words like 'login', 'support', 'security', 'verify', or 'account'.\n\n" +
+          "The safest approach is to open your company's sign-on portal yourself instead of signing in through an email link."
+      },
+
+
+      {
+        id: "fake_closing",
+        compareWith: "real_closing",
+        text:
+          "If you require assistance, please contact the IT Service Desk.",
+
+        type: "safe",
+
+        explanation:
+          "Not quite. A professional closing can appear in both real and fake emails.\n\n" +
+          "Focus on details that are harder for attackers to copy, such as the sender's address and where links actually lead."
+      }
+
+    ]
+  },
+
+
+  realEmail: {
+
+    label: "Legitimate Email (Real)",
+
+    blocks: [
+
+      {
+        id: "real_sender",
+        text:
+          "From: IT Security Team <security@company.com>"
+      },
+
+
+      {
+        id: "real_subject",
+        text:
+          "Subject: Unusual Sign-In Activity Detected"
+      },
+
+
+      {
+        id: "real_greeting",
+        text:
+          "Hello,\n\n" +
+          "We detected a recent sign-in attempt on your company account."
+      },
+
+
+      {
+        id: "real_message",
+        text:
+          "If you believe this activity was not you, please open the company sign-on portal directly or contact the IT Service Desk.\n\n" +
+          "We will never ask you to verify your password through a link in an email."
+      },
+
+      {
+        id: "real_urgency",
+        text:
+          "For your security, please review this as soon as possible."
+      },
+
+      {
+        id: "real_button",
+        text:
+          "[ Open Company Sign-On Portal ]"
+      },
+
+
+      {
+        id: "real_closing",
+        text:
+          "If you need assistance, please contact the IT Service Desk using the number listed on the company intranet."
+      }
+
+    ]
+  },
+
+
+  requiredClues: [
+    "fake_sender",
+    "fake_urgency",
+    "fake_button"
+  ]
+};
+
 const adultPhishingCase = {
   id: "phishing_adult",
   meta: {
     title: "Phishing Email",
     description: "One convincing IT email is all it takes to hand over the keys to your inbox, and everything connected to it.",
     difficulty: "Medium",
-    ageGroup: "working-adult"
+    ageGroup: "working-adult",
+    style: "Artifact Analysis"
   },
   intro: [
     "It's 6:40 PM, and you're wrapping up the last of today's emails before logging off.",
@@ -95,150 +287,15 @@ const adultPhishingCase = {
                 "\"Nobody breached our network. Somebody built a very convincing fake login page, and it worked.\"",
                 "\"Let's go through exactly what should have stood out.\""
               ],
-              clues: [
-                {
-                  title: "Case File #1 - The Sender",
-                  evidence: [
-                    "The email's display name read \"IT Security Team\"",
-                    "The actual sender address was it-alerts@company-secure-verify.com",
-                    "The company's real IT department only ever emails from @yourcompany.com"
-                  ],
-                  question: "The display name looked completely normal. What should have been checked instead?",
-                  options: [
-                    {
-                      text: "The email's formatting and logo.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator holds the two emails up side by side.",
-                        "\"They're nearly identical.\""
-                      ],
-                      explanation: [
-                        "\"Copying a company's branding takes minutes and tells you nothing about who really sent it.\"",
-                        "\"Convincing design is exactly what makes these emails effective. It isn't something you can rule out by.\""
-                      ]
-                    },
-                    {
-                      text: "Whether the email contained spelling or grammar mistakes.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator rereads the email's wording carefully.",
-                        "\"That's usually a good instinct, but not this time.\""
-                      ],
-                      explanation: [
-                        "\"There isn't a single typo in this email. It reads just as professionally as anything real IT would send.\"",
-                        "\"Spelling mistakes can sometimes be a clue, but plenty of convincing scams read perfectly. It's not something you can rely on.\""
-                      ]
-                    },
-                    {
-                      text: "The actual email address behind the display name.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator zooms into the real address.",
-                        "\"That's the part that's much harder to fake convincingly.\""
-                      ],
-                      explanation: [
-                        "\"Company IT only ever sends mail from one exact domain.\"",
-                        "\"This email came from a completely different domain, dressed up with a familiar-sounding name.\"",
-                        "\"Checking the actual address is the fastest way to catch this kind of email.\""
-                      ]
-                    }
-                  ]
-                },
-                {
-                  title: "Case File #2 - The Link",
-                  evidence: [
-                    "The button was labeled \"Verify My Identity\"",
-                    "Hovering over the button would have shown a preview of the real destination",
-                    "That destination was a domain with no connection to the company's real IT infrastructure"
-                  ],
-                  question: "Without clicking, how could you have checked where that button actually led?",
-                  options: [
-                    {
-                      text: "Hovering over the link before clicking would have shown the real destination.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator switches over to their own monitor to show you.",
-                        "\"Exactly. This one habit catches most fake links.\""
-                      ],
-                      explanation: [
-                        "\"A quick hover would have shown an address entirely unrelated to the company.\"",
-                        "\"Button text can say anything. The actual link underneath is much harder to disguise well.\""
-                      ]
-                    },
-                    {
-                      text: "There's no way to know until you click it.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator opens a browser to demonstrate.",
-                        "\"There actually is, and it takes about two seconds.\""
-                      ],
-                      explanation: [
-                        "\"Hovering your cursor over a link, without clicking, shows the real destination, usually in the corner of the screen.\"",
-                        "\"You never have to click something to find out where it actually leads.\""
-                      ]
-                    },
-                    {
-                      text: "Since the page matched our real single sign-on portal exactly, the link had to be safe.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator shakes their head.",
-                        "\"That's actually backwards.\""
-                      ],
-                      explanation: [
-                        "\"A convincing copy of a login page tells you the attacker put in effort. It doesn't tell you the link is legitimate.\"",
-                        "\"Appearance and actual destination are two completely separate things.\""
-                      ]
-                    }
-                  ]
-                },
-                {
-                  title: "Case File #3 - The Urgency",
-                  evidence: [
-                    "The email gave a 60-minute expiration window",
-                    "It implied the account was already at risk from an active sign-in attempt",
-                    "The company's real IT alerts have never included an expiring countdown"
-                  ],
-                  question: "Why do emails like this almost always include a tight deadline?",
-                  options: [
-                    {
-                      text: "Because security alerts genuinely need to be resolved that quickly.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator checks the company's actual incident response policy.",
-                        "\"Nothing in our real process works like that.\""
-                      ],
-                      explanation: [
-                        "\"A genuine security concern can be verified by logging in directly, on your own time, through channels you already trust.\"",
-                        "\"A countdown timer isn't a standard part of any legitimate account security process.\""
-                      ]
-                    },
-                    {
-                      text: "To make you act quickly, before you have time to stop and verify it.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator nods.",
-                        "\"That's the entire purpose of it.\""
-                      ],
-                      explanation: [
-                        "\"This is a manipulation technique called urgency pressure. It's one of the most reliable tools in phishing and business email compromise, and it's designed to short-circuit careful thinking.\"",
-                        "\"You opened this at the end of a long day, with a deadline of your own the next morning. That timing wasn't accidental.\"",
-                        "\"Any message pressuring you to act immediately is worth slowing down for, not speeding up for.\""
-                      ]
-                    },
-                    {
-                      text: "That's just the standard subject line format for IT security alerts.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator pulls up several past IT alerts for comparison.",
-                        "\"Let's see if that actually holds up.\""
-                      ],
-                      explanation: [
-                        "\"None of the company's real security alerts have ever used an expiring countdown like this.\"",
-                        "\"That phrasing is chosen deliberately to create pressure. It isn't a standard format at all.\""
-                      ]
-                    }
-                  ]
-                }
+              artifact: corporatePhishingArtifact,
+              artifactComplete: [
+                  "The investigator closes the two emails and places them beside the account activity records.",
+                  "\"Now we know what made this email suspicious,\" the investigator explains.",
+                  "\"The attacker copied the appearance of a genuine IT security message, but the small details revealed what was really happening.\"",
+                  "The investigator points to the fake sender address, the countdown timer, and the verification button.",
+                  "\"The email succeeded because it looked familiar enough that nobody stopped to question it.\"",
+                  "\"But, if we knew where to look, it would have been clear that it was fake.\"",
+                  "\"Now that we understand the warning signs, let's zoom out and look at how one stolen password nearly became a fraudulent client payment.\""
               ],
               timelineIntro: [
                 "The investigator lines up the email, the fake login page, and your account's activity log in order.",
@@ -287,6 +344,16 @@ const adultPhishingCase = {
                   ]
                 }
               ],
+              chainSummary: [
+                "Fake IT email",
+                "Urgent deadline",
+                "Fake login page",
+                "Password stolen",
+                "Email accessed",
+                "Client impersonated",
+                "Payment redirected",
+                "Accounts secured"
+              ],
               finalWords: [
                 "The investigator closes the laptop.",
                 "\"This almost cost a real client real money, and it started with a single email.\"",
@@ -319,6 +386,16 @@ const adultPhishingCase = {
                     text: "A request to change payment details, even from a trusted contact, is worth a quick phone call to confirm, especially if it arrived by email alone."
                   }
                 ]
+              },
+              epilogue: {
+                  time: "Four months later",
+                  story: [
+                      "The incident changed the way you treat unexpected requests at work.",
+                      "You no longer sign in through links in emails, even when the message appears to come from IT.",
+                      "Whenever something involves passwords, invoices, or account access, you verify it through the official company portal or with a quick phone call.",
+                      "The experience also made you more willing to question unusual requests, even if they appear to come from trusted colleagues or clients.",
+                      "One stressful week became a habit of slowing down before clicking."
+                  ]
               },
               lesson: [
                 "A convincing fake page only needs one thing from you: your password, typed in willingly.",
@@ -395,150 +472,14 @@ const adultPhishingCase = {
                 "\"A significant number of you got this exact email,\" the investigator says, pulling it up on the screen.",
                 "\"Some of you clicked it. Some of you didn't. Let's figure out what actually made the difference.\""
               ],
-              clues: [
-                {
-                  title: "Case File #1 - The Sender",
-                  evidence: [
-                    "The email's display name read \"IT Security Team\"",
-                    "The actual sender address was it-alerts@company-secure-verify.com",
-                    "The company's real IT department only ever emails from @yourcompany.com"
-                  ],
-                  question: "The display name looked completely normal. What actually gave this one away?",
-                  options: [
-                    {
-                      text: "Spelling or grammar mistakes in the email.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator rereads the wording again.",
-                        "\"There weren't any, actually.\""
-                      ],
-                      explanation: [
-                        "\"This one was written cleanly, with no typos at all.\"",
-                        "\"That's common. Spelling mistakes aren't a reliable test anymore, since plenty of convincing scams read perfectly.\""
-                      ]
-                    },
-                    {
-                      text: "The actual email address behind the display name.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator points out the real address instead.",
-                        "\"That's exactly the part worth checking.\""
-                      ],
-                      explanation: [
-                        "\"Company IT only ever sends mail from one exact domain.\"",
-                        "\"This email came from a completely different domain, dressed up with a familiar-sounding name.\"",
-                        "\"That mismatch is usually the fastest way to catch something like this.\""
-                      ]
-                    },
-                    {
-                      text: "The email's formatting and logo.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator holds up a side-by-side comparison.",
-                        "\"Those were copied almost perfectly.\""
-                      ],
-                      explanation: [
-                        "\"Copying a company's branding takes minutes and tells you nothing about who really sent it.\"",
-                        "\"Convincing design is exactly what makes phishing effective. It's not something you can rule out by.\""
-                      ]
-                    }
-                  ]
-                },
-                {
-                  title: "Case File #2 - The Link",
-                  evidence: [
-                    "The button was labeled \"Verify My Identity\"",
-                    "Hovering over the button would have shown a preview of the real destination",
-                    "That destination had no connection to the company's real infrastructure"
-                  ],
-                  question: "Without clicking, how could an employee check where that button actually led?",
-                  options: [
-                    {
-                      text: "There's no way to know until you click it.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator pulls up a browser to check.",
-                        "\"Actually, there's a two-second way to check.\""
-                      ],
-                      explanation: [
-                        "\"Hovering your cursor over a link, without clicking, shows the real destination.\"",
-                        "\"You never have to click something to see where it goes.\""
-                      ]
-                    },
-                    {
-                      text: "Since the page matched the real sign-on portal exactly, it was probably fine.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator looks unconvinced.",
-                        "\"That's actually backwards.\""
-                      ],
-                      explanation: [
-                        "\"A convincing copy of a login page shows the attacker's effort. It doesn't show that the link is legitimate.\"",
-                        "\"Appearance and destination are two separate things entirely.\""
-                      ]
-                    },
-                    {
-                      text: "Hovering over the link before clicking shows the real destination.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator opens their own laptop to demonstrate.",
-                        "\"Exactly right. This habit alone catches most fake links.\""
-                      ],
-                      explanation: [
-                        "\"A quick hover here would have shown an address with no connection to the company at all.\"",
-                        "\"Button text can say anything. The link underneath is much harder to disguise convincingly.\""
-                      ]
-                    }
-                  ]
-                },
-                {
-                  title: "Case File #3 - The Urgency",
-                  evidence: [
-                    "The email gave a 60-minute expiration window",
-                    "It implied the account was already at risk from an active sign-in attempt",
-                    "The company's real IT alerts have never included an expiring countdown"
-                  ],
-                  question: "Why did this email include such a tight deadline?",
-                  options: [
-                    {
-                      text: "To rush people into acting before they stop and verify it.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator nods.",
-                        "\"That's the entire purpose of a deadline like this.\""
-                      ],
-                      explanation: [
-                        "\"This is the same manipulation technique called urgency pressure. It's one of the most reliable tools in phishing and business email compromise.\"",
-                        "\"These campaigns are frequently timed for end of day, exactly when people want to close their laptop and stop thinking about work.\"",
-                        "\"Any message pushing you to act immediately is worth slowing down for instead.\""
-                      ]
-                    },
-                    {
-                      text: "Because real security alerts genuinely need to be resolved that quickly.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator checks the company's actual incident response policy.",
-                        "\"Nothing in our real process works like that.\""
-                      ],
-                      explanation: [
-                        "\"A genuine concern can be verified by logging in directly, through channels you already trust, on your own time.\"",
-                        "\"A countdown timer isn't part of any legitimate account security process here.\""
-                      ]
-                    },
-                    {
-                      text: "That's just the standard subject line format for IT security alerts.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator pulls up several past IT alerts for comparison.",
-                        "\"Let's see if that actually holds up.\""
-                      ],
-                      explanation: [
-                        "\"None of the company's real security alerts have ever used an expiring countdown like this.\"",
-                        "\"That phrasing is chosen deliberately to create pressure. It isn't a standard format at all.\""
-                      ]
-                    }
-                  ]
-                }
+              artifact: corporatePhishingArtifact,
+              artifactComplete: [
+                "The investigator closes the two emails and places them beside the incident reports.",
+                "\"Now we know what made this email suspicious,\" the investigator explains.",
+                "\"Every employee received the same phishing email, but the warning signs were hidden in exactly the same places.\"",
+                "The investigator points to the fake sender address, the countdown timer, and the verification button.",
+                "\"The difference wasn't the email itself. The difference was what happened after it was opened.\"",
+                "\"Now that we understand the clues, let's step back and look at how this phishing campaign unfolded across the company.\""
               ],
               timelineIntro: [
                 "The investigator lines up the email, the fake page, and the company-wide notice in order.",
@@ -588,6 +529,15 @@ const adultPhishingCase = {
                   ]
                 }
               ],
+              chainSummary: [
+                "Fake IT email",
+                "Urgency noticed",
+                "Portal opened",
+                "Link avoided",
+                "Account protected",
+                "Scam reported",
+                "Team warned"
+              ],
               finalWords: [
                 "The investigator closes the laptop.",
                 "\"You didn't need to be a security expert to catch this. You just paused for a few seconds before typing your password anywhere.\"",
@@ -620,6 +570,16 @@ const adultPhishingCase = {
                     text: "Forwarding a phishing attempt to your security team can help get a warning out before more people click it."
                   }
                 ]
+              },
+              epilogue: {
+                  time: "Four months later",
+                  story: [
+                      "That suspicious email is long forgotten, but the habits you built have stayed with you.",
+                      "You now open internal tools directly instead of following links in emails, even when they appear genuine.",
+                      "You also double-check unusual payment requests and encourage newer coworkers to do the same.",
+                      "Those small habits take only a few seconds, but they have become part of your everyday routine.",
+                      "One careful decision helped prevent what could have become a much larger incident."
+                  ]
               },
               lesson: [
                 "You didn't need to be an expert. You just needed a few seconds of doubt before typing your password.",
