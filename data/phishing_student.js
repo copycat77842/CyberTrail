@@ -1,10 +1,204 @@
+const schoolPhishingArtifact = {
+  title: "Email Comparison",
+
+  description: [
+    "The investigator places two emails side by side.",
+    "One is a legitimate message from your school's learning platform.",
+    "The other is the phishing email involved in the incident.",
+    "\"Your goal is to examine the fake email and identify the suspicious elements.\"",
+    "\"Attackers often copy real emails closely, so the clues are usually hidden in small details.\""
+  ],
+
+  fakeEmail: {
+    label: "Suspicious Email (Fake)",
+
+    blocks: [
+
+      {
+        id: "fake_sender",
+        compareWith: "real_sender",
+        text:
+          "From: Learning Platform Support <support@learnportal-verify.com>",
+
+        type: "suspicious",
+
+        explanation:
+          "Suspicious element found.\n\n" +
+          "The display name looks legitimate, but the actual email address does not match the school's real platform.\n\n" +
+          "Attackers can choose almost any display name they want. The address after it is what you should check."
+      },
+
+
+      {
+        id: "fake_subject",
+        compareWith: "real_subject",
+        text:
+          "Subject: Action Required: Verify Your Account",
+
+        type: "safe",
+
+        explanation:
+          "Not quite. The subject line alone is not enough evidence.\n\n" +
+          "Attackers often copy real subject lines because familiar wording makes their emails look more trustworthy."
+      },
+
+
+      {
+        id: "fake_greeting",
+        compareWith: "real_greeting",
+        text:
+          "Hello Sam,\n\n" +
+          "We hope you are having a good day. We are contacting you regarding your school learning platform account.",
+
+        type: "safe",
+
+        explanation:
+          "Not quite. This type of greeting is common in both real emails and phishing emails.\n\n" +
+          "A professional tone does not automatically mean an email is safe."
+      },
+
+
+      {
+        id: "fake_message",
+        compareWith: "real_message",
+        text:
+          "We have detected unusual sign-in activity on your account.",
+
+        type: "safe",
+
+        explanation:
+          "Not quite. Real services sometimes send alerts about unusual sign-ins.\n\n" +
+          "The important question is what the email asks you to do afterwards."
+      },
+
+
+      {
+        id: "fake_urgency",
+        compareWith: "real_urgency",
+        text:
+          "Please verify your details within the next 2 hours or your account access may be temporarily suspended.",
+
+        type: "suspicious",
+
+        explanation:
+          "Suspicious element found.\n\n" +
+          "This message creates pressure by giving you a very short deadline.\n\n" +
+          "Phishing attacks often use urgency to stop people from checking whether the message is genuine."
+      },
+
+      {
+        id: "fake_button",
+        compareWith: "real_button",
+        text:
+          "[ Verify My Account ]",
+
+        type: "suspicious",
+
+        explanation:
+          "Suspicious element found.\n\n" +
+          "The email is asking you to sign in through a link inside the message.\n\n" +
+          "The button itself looks normal, but it actually leads to:\n\n" +
+          "https://learnportal-security-check.com/login\n\n" +
+          "This address does not belong to your school's real learning platform.\n\n" +
+          "Attackers often create convincing website addresses by adding words like 'security', 'verify', or 'check'.\n\n" +
+          "The safest approach is to open your school's learning platform yourself or type the website address manually instead of signing in through an email link.",
+
+        hiddenData: { // could be used as a hover preview
+          destination:
+            "https://learnportal-security-check.com/login"
+        }
+      },
+
+
+      {
+        id: "fake_closing",
+        compareWith: "real_closing",
+        text:
+          "If you have any questions, please contact our support team.",
+
+        type: "safe",
+
+        explanation:
+          "Not quite. A professional closing can appear in both real and fake emails.\n\n" +
+          "You need to look at the details that are harder for attackers to fake."
+      }
+
+    ]
+  },
+
+
+  realEmail: {
+
+    label: "Legitimate Email (Real)",
+
+    blocks: [
+
+      {
+        id: "real_sender",
+        text:
+          "From: Learning Platform Support <support@yourschoolplatform.edu>"
+      },
+
+
+      {
+        id: "real_subject",
+        text:
+          "Subject: Action Required: Verify Your Account"
+      },
+
+
+      {
+        id: "real_greeting",
+        text:
+          "Hello Sam,\n\n" +
+          "We hope you are having a good day. We are contacting you regarding your school learning platform account."
+      },
+
+
+      {
+        id: "real_message",
+        text:
+          "We have detected a recent sign-in attempt on your account."
+      },
+
+      {
+        id: "real_urgency",
+        text:
+          "For your security, please review your account details within the next few weeks to ensure your information is up to date."
+      },
+
+      {
+        id: "real_button",
+        text:
+          "[ Verify My Account ]"
+      },
+
+
+      {
+        id: "real_closing",
+        text:
+          "If you have any questions, please contact your school's IT department."
+      }
+
+    ]
+  },
+
+
+  requiredClues: [
+    "fake_sender",
+    "fake_urgency",
+    "fake_button"
+  ]
+};
+
 const studentPhishingCase = {
   id: "phishing_student",
   meta: {
     title: "Phishing Email",
     description: "Can you spot a fake login page before it costs you your school account and your friends' trust?",
     difficulty: "Easy",
-    ageGroup: "student"
+    ageGroup: "student",
+    style: "Artifact Analysis"
   },
   intro: [
     "It's a Thursday night, and you're finally sitting down to finish tomorrow's assignment.",
@@ -92,158 +286,21 @@ const studentPhishingCase = {
           {
             type: "investigation",
             data: {
-              intro: [
-                "A few days later, the school's IT department sits down with you and your parents to explain what actually happened.",
-                "A digital forensics investigator working with the school pulls up the original email next to a real one from the platform.",
-                "\"This wasn't a hack in the way people usually picture it,\" the investigator explains.",
-                "\"Nobody broke into the school's systems. Someone just built a convincing fake page, and it worked.\"",
-                "\"Let's go through exactly what gave it away, because something always does.\""
+              intro:[
+              "A few days later, the school's IT department asks you to help investigate what happened.",
+              "A digital forensics investigator places the original email on screen beside a genuine message from the school's platform.",
+              "\"The attacker didn't break into the school's systems,\" the investigator explains.",
+              "\"They created something that looked trustworthy enough that someone would willingly hand over their password.\"",
+              "\"Before we look at the damage, let's examine the email itself.\"",
+              "\"Every phishing message contains clues. Your job is to find them.\""
               ],
-              clues: [
-                {
-                  title: "Case File #1 - The Sender",
-                  evidence: [
-                    "The email's display name read \"Learning Platform Support\"",
-                    "The actual sender address was support@learnportal-verify.com",
-                    "The school's real platform only ever emails from @yourschoolplatform.edu"
-                  ],
-                  question: "The display name looked completely normal. What should have been checked instead?",
-                  options: [
-                    {
-                      text: "Whether the email contained spelling or grammar mistakes.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator rereads the email's wording carefully.",
-                        "\"That's usually a good instinct, but not this time.\""
-                      ],
-                      explanation: [
-                        "\"There isn't a single typo in this email. It's written just as cleanly as the real thing.\"",
-                        "\"Spelling mistakes can sometimes be a clue, but plenty of convincing scams read perfectly. It's not something you can rely on.\""
-                      ]
-                    },
-                    {
-                      text: "The actual email address behind the display name.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator highlights the real address.",
-                        "\"That's the part that can't be faked as easily.\""
-                      ],
-                      explanation: [
-                        "\"The real platform only ever sends mail from one exact domain.\"",
-                        "\"This email came from a completely different address, dressed up with a familiar-looking name.\"",
-                        "\"Checking the actual address, not just the name, is the single fastest way to catch this.\""
-                      ]
-                    },
-                    {
-                      text: "The email's formatting and logo.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator holds the two emails up together.",
-                        "\"Honestly, they're almost identical.\""
-                      ],
-                      explanation: [
-                        "\"Copying a logo and color scheme takes minutes. It tells you nothing about who really sent it.\"",
-                        "\"Convincing design is what makes phishing emails work in the first place. It isn't a red flag by itself.\""
-                      ]
-                    }
-                  ]
-                },
-                {
-                  title: "Case File #2 - The Link",
-                  evidence: [
-                    "The button was labeled \"Verify My Account\"",
-                    "Hovering over the button, without clicking, would have shown a preview of the real destination",
-                    "That destination was a domain unrelated to the school entirely"
-                  ],
-                  question: "The button text looked completely normal. How could you have checked where it actually led, before clicking?",
-                  options: [
-                    {
-                      text: "There's no way to know where a link goes until you click it.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator opens a browser to demonstrate.",
-                        "\"Actually, there is, and it takes about two seconds.\""
-                      ],
-                      explanation: [
-                        "\"On a computer, hovering your mouse over a link shows the real destination, usually in the bottom corner of the screen.\"",
-                        "\"On a phone, holding down on the link does the same thing.\"",
-                        "\"You never have to click something to find out where it actually leads.\""
-                      ]
-                    },
-                    {
-                      text: "The page looked so convincing that the link had to be safe.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator points back at the fake page's design.",
-                        "\"That's actually backwards.\""
-                      ],
-                      explanation: [
-                        "\"A convincing copy of a page shows the attacker put in effort. It doesn't tell you where the link underneath actually goes.\"",
-                        "\"Looks and destination are two completely separate things.\""
-                      ]
-                    },
-                    {
-                      text: "Hovering over the link before clicking would have shown the real destination.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator demonstrates on their own screen.",
-                        "\"Exactly. This one habit catches most fake links.\""
-                      ],
-                      explanation: [
-                        "\"A quick hover would have shown a web address with nothing to do with your school.\"",
-                        "\"Button text can say anything. The actual link underneath is much harder to disguise well.\""
-                      ]
-                    }
-                  ]
-                },
-                {
-                  title: "Case File #3 - The Urgency",
-                  evidence: [
-                    "The email gave a 2-hour deadline to verify the account",
-                    "It threatened suspended access if you didn't act in time",
-                    "The real platform has never sent an email with a countdown like this"
-                  ],
-                  question: "Why do phishing emails almost always include a tight deadline like this one?",
-                  options: [
-                    {
-                      text: "To make you act quickly, before you have time to stop and check if it's real.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator nods slowly.",
-                        "\"That's the entire purpose of it.\""
-                      ],
-                      explanation: [
-                        "\"This is a manipulation technique called urgency pressure. It works by rushing you past the moment where you'd normally stop and think.\"",
-                        "\"You clicked at 9:47 PM with an assignment due at 8:30 AM. That timing wasn't an accident on the attacker's part.\"",
-                        "\"Any message that pressures you to act immediately is worth slowing down for, not speeding up for.\""
-                      ]
-                    },
-                    {
-                      text: "Because school platforms often have real security deadlines.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator checks the platform's actual policies.",
-                        "\"Nothing like this exists in their real security process.\""
-                      ],
-                      explanation: [
-                        "\"Legitimate account issues almost never come with a countdown measured in hours.\"",
-                        "\"If something is genuinely wrong with an account, you can usually verify it by logging in directly, on your own time.\""
-                      ]
-                    },
-                    {
-                      text: "That's just the standard subject line format official emails use.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator pulls up a few real emails from the platform for comparison.",
-                        "\"Let's see if that actually holds up.\""
-                      ],
-                      explanation: [
-                        "\"None of the platform's real emails use countdown language like this, not once in its history.\"",
-                        "\"That phrasing is chosen deliberately to create pressure. It isn't a standard format at all.\""
-                      ]
-                    }
-                  ]
-                }
+              artifact: schoolPhishingArtifact,
+              artifactComplete: [
+                "The investigator closes the two emails and places them beside the account activity records.",
+                "\"Now we know what made this email suspicious,\" the investigator explains.",
+                "\"The attacker copied the appearance of a real message, but the small details revealed what was really happening.\"",
+                "The investigator looks back at the evidence collected from the incident.",
+                "\"Now that we understand the clues, let's zoom out and look at the entire timeline of what happened after this email was opened.\""
               ],
               timelineIntro: [
                 "The investigator lines up the email, the fake login page, and your account's activity log in order.",
@@ -294,6 +351,14 @@ const studentPhishingCase = {
                   ]
                 }
               ],
+              chainSummary: [
+                "Phishing email sent to students",
+                "Student clicks fake verification button",
+                "Credentials entered into fake login page",
+                "Attacker gains access to account",
+                "Account used to spread more phishing emails",
+                "Student locked out and begins recovery process"
+              ],
               finalWords: [
                 "The investigator closes the laptop.",
                 "\"This wasn't about you being careless. This page was built to be convincing.\"",
@@ -325,6 +390,17 @@ const studentPhishingCase = {
                     title: "Tell someone if you're not sure",
                     text: "A teacher, IT department, or parent can check something in seconds. Asking first is always faster than recovering an account afterward."
                   }
+                ]
+              },
+              epilogue: {
+                time: "Three months later",
+                story: [
+                  "Three months have passed since the phishing incident.",
+                  "You notice that you approach emails differently now.",
+                  "Before clicking anything, you check the sender address instead of trusting the name at the top.",
+                  "When an email says something is urgent, you stop and ask yourself why it needs to happen so quickly.",
+                  "You also started opening important websites yourself instead of using links from unexpected messages.",
+                  "The mistake was frustrating, but it taught you habits that protect your accounts every day."
                 ]
               },
               lesson: [
@@ -399,156 +475,20 @@ const studentPhishingCase = {
           {
             type: "investigation",
             data: {
-              intro: [
-                "A few days after the school-wide notice, an IT staff member walks your class through exactly what happened, with a digital forensics investigator brought in to help explain it.",
-                "\"A good number of you got this exact email,\" the investigator says, pulling it up on the screen.",
-                "\"Some of you clicked it. Some of you didn't. Let's figure out what actually made the difference.\""
+              intro:[
+                "A few days after the school-wide warning, your class takes part in a phishing investigation exercise.",
+                "A digital forensics investigator displays the same email that was sent to students across the school.",
+                "\"Some students clicked this message. Others stopped and checked first.\"",
+                "\"The difference was not technical knowledge. It was noticing the warning signs before trusting the email.\"",
+                "\"Let's examine the message and see what clues were hidden inside.\""
               ],
-              clues: [
-                {
-                  title: "Case File #1 - The Sender",
-                  evidence: [
-                    "The email's display name read \"Learning Platform Support\"",
-                    "The actual sender address was support@learnportal-verify.com",
-                    "The school's real platform only ever emails from @yourschoolplatform.edu"
-                  ],
-                  question: "The display name looked completely normal. What actually gave this one away?",
-                  options: [
-                    {
-                      text: "The actual email address behind the display name.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator points out the mismatched address instead.",
-                        "\"That's exactly the part worth checking.\""
-                      ],
-                      explanation: [
-                        "\"The real platform only ever sends mail from one exact domain.\"",
-                        "\"This email came from a completely different address, dressed up with a familiar-looking name.\"",
-                        "\"That mismatch is usually the fastest way to catch something like this.\""
-                      ]
-                    },
-                    {
-                      text: "Spelling or grammar mistakes in the email.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator rereads the email's wording again.",
-                        "\"There weren't any, actually.\""
-                      ],
-                      explanation: [
-                        "\"This one was written cleanly, with no typos at all.\"",
-                        "\"That surprises people. Spelling mistakes aren't a reliable test anymore, since plenty of convincing scams read perfectly.\""
-                      ]
-                    },
-                    {
-                      text: "The email's formatting and logo.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator holds up a side-by-side comparison.",
-                        "\"Those were copied almost perfectly.\""
-                      ],
-                      explanation: [
-                        "\"Copying a logo and color scheme takes minutes and tells you nothing about who really sent it.\"",
-                        "\"Convincing design is exactly what makes phishing work. It's not something you can rule out by.\""
-                      ]
-                    }
-                  ]
-                },
-                {
-                  title: "Case File #2 - The Link",
-                  evidence: [
-                    "The button was labeled \"Verify My Account\"",
-                    "Hovering over the button would have shown a preview of the real destination",
-                    "That destination was a domain unrelated to the school entirely"
-                  ],
-                  question: "Without clicking, how could a student check where that button actually led?",
-                  options: [
-                    {
-                      text: "There's no way to know until you click it.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator opens a browser to demonstrate.",
-                        "\"Actually, there's a two-second way to check.\""
-                      ],
-                      explanation: [
-                        "\"On a computer, hovering the mouse over a link shows the real destination, usually in the corner of the screen.\"",
-                        "\"On a phone, pressing and holding does the same thing.\"",
-                        "\"You never have to click something to see where it goes.\""
-                      ]
-                    },
-                    {
-                      text: "Hovering over the link before clicking shows the real destination.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator pulls up their own browser to show you.",
-                        "\"Exactly right. This habit alone catches most fake links.\""
-                      ],
-                      explanation: [
-                        "\"A quick hover here would have shown an address with nothing to do with the school at all.\"",
-                        "\"Button text can say anything. The link underneath is much harder to disguise convincingly.\""
-                      ]
-                    },
-                    {
-                      text: "If the page looks identical to the real one, the link is safe.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator shakes their head.",
-                        "\"That's actually the opposite of true here.\""
-                      ],
-                      explanation: [
-                        "\"A convincing copy of a page tells you the attacker put in effort, not that the link is safe.\"",
-                        "\"Appearance and destination are two completely separate things.\""
-                      ]
-                    }
-                  ]
-                },
-                {
-                  title: "Case File #3 - The Urgency",
-                  evidence: [
-                    "The email gave a 2-hour deadline to verify the account",
-                    "It threatened suspended access if students didn't act in time",
-                    "The real platform has never sent an email with a countdown like this"
-                  ],
-                  question: "Why did this email include such a tight deadline?",
-                  options: [
-                    {
-                      text: "Because the school's real security process works that way.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator checks the platform's actual policy.",
-                        "\"Nothing like this exists in their real process.\""
-                      ],
-                      explanation: [
-                        "\"Legitimate account issues almost never come with a countdown measured in hours.\"",
-                        "\"If something is genuinely wrong, you can normally check it by logging in directly, whenever you want.\""
-                      ]
-                    },
-                    {
-                      text: "That's just the standard subject line format official emails use.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator pulls up a few real emails from the platform to compare.",
-                        "\"Let's see if that actually holds up.\""
-                      ],
-                      explanation: [
-                        "\"None of the platform's real emails use countdown language like this.\"",
-                        "\"That phrasing is chosen deliberately to create pressure. It isn't a standard format at all.\""
-                      ]
-                    },
-                    {
-                      text: "To rush people into acting before they stop and check if it's real.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator nods.",
-                        "\"That's the entire purpose of a deadline like this.\""
-                      ],
-                      explanation: [
-                        "\"This is a manipulation technique called urgency pressure. It's built to short-circuit careful thinking.\"",
-                        "\"These emails often go out at night, right when homework is due, exactly when people are least likely to slow down.\"",
-                        "\"Any message pushing you to act immediately is worth slowing down for instead.\""
-                      ]
-                    }
-                  ]
-                }
+              artifact: schoolPhishingArtifact,
+              artifactComplete: [
+                "The investigator closes the two emails and places them beside the account activity records.",
+                "\"Now we know what made this email suspicious,\" the investigator explains.",
+                "\"The email was designed to look convincing, but the warning signs were there if you knew where to look.\"",
+                "The investigator looks back at the evidence collected from the incident.",
+                "\"Now that we understand the clues, let's zoom out and look at the entire timeline of what happened after students received this email.\""
               ],
               timelineIntro: [
                 "The investigator lines up the email, the fake page, and the school's notice in order.",
@@ -592,6 +532,14 @@ const studentPhishingCase = {
                   ]
                 }
               ],
+              chainSummary: [
+                "Phishing email sent to students",
+                "Student notices unusual warning signs",
+                "Student visits platform independently",
+                "No credentials given to attacker",
+                "Attack continues against other students",
+                "School identifies campaign and warns users"
+              ],
               finalWords: [
                 "The investigator closes the laptop.",
                 "\"You didn't need to be an expert to catch this. You just paused for a second before typing your password anywhere.\"",
@@ -623,6 +571,17 @@ const studentPhishingCase = {
                     title: "Report suspicious emails instead of just deleting them",
                     text: "Forwarding a phishing email to a teacher or IT department can help get a warning out before more people click it."
                   }
+                ]
+              },
+              epilogue: {
+                time: "Four months later",
+                story: [
+                  "Four months have passed since the phishing campaign at your school.",
+                  "You still remember how convincing the fake email looked when you first opened it.",
+                  "Now, checking the sender address and hovering over links has become automatic.",
+                  "Whenever a message tries to rush you into making a decision, you take a moment to verify it first.",
+                  "You have even helped friends and classmates recognise suspicious messages before they click.",
+                  "A few seconds of caution has become one of your strongest cybersecurity habits."
                 ]
               },
               lesson: [
