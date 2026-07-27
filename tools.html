@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Toolkit — CyberTrail</title>
+  <link rel="stylesheet" href="css/dashboard_style.css">
+  <link rel="stylesheet" href="css/tools_style.css">
+</head>
+<body>
+  <div class="dashboard-shell">
+    <header class="tools-header">
+      <p class="eyebrow">Cyber Toolkit</p>
+      <h1>Two instruments, not two stories</h1>
+      <p class="tools-intro">
+        Every CyberTrail case ends with advice like "use a unique password" or "check before you click."
+        These are the actual tools behind that advice; the same kind of thinking an attacker's automated tools use, run in reverse, in your browser.
+      </p>
+      <a class="secondary-btn" href="index.html">← Back to dashboard</a>
+    </header>
+
+    <main>
+      <!-- ===================== PASSWORD TOOL ===================== -->
+      <section class="tool-section" id="password-tool" aria-labelledby="password-tool-title">
+        <div class="section-heading">
+          <p class="eyebrow">Instrument 01</p>
+          <h2 id="password-tool-title">Password Strength Meter</h2>
+          <p>
+            This estimates how hard a password would be to guess, based on its length and character variety.
+            It cannot tell you if you've reused it somewhere else, which matters more than strength alone.
+            A strong password that's been leaked in a breach is still unsafe.
+          </p>
+        </div>
+
+        <div class="tool-panel">
+          <label class="tool-label" for="pw-input">Type a password to test it</label>
+          <div class="pw-input-row">
+            <input type="password" id="pw-input" class="pw-input" placeholder="Try a simple password like 'password123'" autocomplete="off" spellcheck="false">
+            <button type="button" class="secondary-btn" id="pw-toggle">Show</button>
+          </div>
+
+          <div class="pw-meter">
+            <div class="pw-meter-track">
+              <div class="pw-meter-fill" id="pw-meter-fill" data-level="none"></div>
+            </div>
+            <div class="pw-meter-readout">
+              <span class="pw-label" id="pw-label">—</span>
+              <span class="pw-bits" id="pw-bits"></span>
+            </div>
+            <div class="pw-crack-time" id="pw-crack-time"></div>
+          </div>
+
+          <ul class="pw-issues" id="pw-issues"></ul>
+
+          <p class="tool-footnote">Nothing you type here ever leaves this page. There's no server involved since the whole check runs locally in your browser.</p>
+        </div>
+      </section>
+
+      <!-- ===================== GENERATOR TOOL ===================== -->
+      <section class="tool-section" id="generator-tool" aria-labelledby="generator-tool-title">
+        <div class="section-heading">
+          <p class="eyebrow">Instrument 02</p>
+          <h2 id="generator-tool-title">Password Generator</h2>
+          <p>
+            Built on <code>crypto.getRandomValues()</code>, not <code>Math.random()</code>, which isn't
+            cryptographically secure and shouldn't be used for anything security-related. It's a common real-world mistake.
+          </p>
+        </div>
+
+        <div class="tool-panel">
+          <div class="gen-mode-switch">
+            <button type="button" class="gen-mode-btn active" data-mode="random">Random string</button>
+            <button type="button" class="gen-mode-btn" data-mode="passphrase">Passphrase</button>
+          </div>
+
+          <div class="gen-options" id="gen-random-options">
+            <label class="tool-label" for="gen-length">Length: <span id="gen-length-value">16</span> characters</label>
+            <input type="range" id="gen-length" min="8" max="32" value="16">
+
+            <div class="gen-checkboxes">
+              <label><input type="checkbox" id="gen-lower" checked> lowercase</label>
+              <label><input type="checkbox" id="gen-upper" checked> UPPERCASE</label>
+              <label><input type="checkbox" id="gen-digits" checked> digits</label>
+              <label><input type="checkbox" id="gen-symbols" checked> symbols</label>
+            </div>
+          </div>
+
+          <div class="gen-options is-hidden" id="gen-passphrase-options">
+            <label class="tool-label" for="gen-word-count">Length: <span id="gen-word-count-value">4</span> words</label>
+            <input type="range" id="gen-word-count" min="3" max="7" value="4">
+            <p class="tool-footnote">A passphrase like this can be both stronger and easier to remember than a short random string; length matters more than complexity.</p>
+          </div>
+
+          <div class="gen-output-row">
+            <div class="gen-output" id="gen-output">Click Generate to create a password</div>
+            <button type="button" class="primary-btn" id="gen-button">Generate</button>
+            <button type="button" class="secondary-btn" id="gen-copy-button">Copy</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SCAM SCANNER TOOL ===================== -->
+      <section class="tool-section" id="scanner-tool" aria-labelledby="scanner-tool-title">
+        <div class="section-heading">
+          <p class="eyebrow">Instrument 03</p>
+          <h2 id="scanner-tool-title">Scam Message Scanner</h2>
+          <p>
+            Paste in a suspicious email or text. This checks it against six independent warning signs and shows
+            exactly what got flagged and why. However, it's a simple pattern scanner, not a trained spam filter, so treat
+            a clean result as a starting point, not a guarantee.
+          </p>
+        </div>
+
+        <div class="tool-panel">
+          <label class="tool-label" for="scan-input">Paste the message text</label>
+          <textarea id="scan-input" class="scan-input" rows="6" placeholder="e.g. Dear Customer, your account will be suspended within 24 hours unless you verify your details..."></textarea>
+          <button type="button" class="primary-btn" id="scan-button">Scan message</button>
+
+          <div class="scan-result is-hidden" id="scan-result">
+            <div class="scan-gauge">
+              <div class="scan-gauge-track">
+                <div class="scan-gauge-fill" id="scan-gauge-fill" data-verdict="low"></div>
+              </div>
+              <p class="scan-label" id="scan-label"></p>
+            </div>
+            <ul class="scan-hits" id="scan-hits"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-line"></div>
+    <h2>CyberTrail</h2>
+    <p>Interactive cybersecurity education through realistic stories, investigations, and practical learning.</p>
+    <p>Built for Young ICT Explorers 2026.</p>
+  </footer>
+
+  <script src="js/tools.js"></script>
+</body>
+</html>
