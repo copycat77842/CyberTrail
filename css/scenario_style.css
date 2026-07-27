@@ -230,6 +230,16 @@ header {
     background:#4298ff;
 }
 
+.used-choice {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.choice-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
 .retry-button{
     width:120px;
     display:flex;
@@ -612,9 +622,14 @@ header {
     border: 2px solid transparent;
 }
 
-.email-block:hover {
+.email-block:hover,
+.email-block.paired-hover {
     background: #374151;
     transform: translateY(-2px);
+}
+
+.email-block.paired-hover {
+    border-color: #60a5fa;
 }
 
 .email-block.checked {
@@ -657,4 +672,38 @@ header {
 
 .real-email-block {
     cursor: default;
+}
+
+.speed-panel {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 1000;
+    background: rgba(17, 24, 39, 0.92);
+    border: 1px solid #374151;
+    border-radius: 14px;
+    padding: 12px 14px;
+    min-width: 170px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(8px);
+}
+
+.speed-panel-title {
+    margin: 0 0 10px 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: #e5e7eb;
+    letter-spacing: 0.02em;
+}
+
+.speed-panel-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.speed-panel-buttons button {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 14px;
 }
