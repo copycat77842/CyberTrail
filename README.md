@@ -215,6 +215,68 @@ The design focuses on human-centred learning rather than technical complexity.
 
 The reading-speed controls are placed in the top-right corner for quick access, and the comparison experience is strengthened by linked highlighting between fake and real evidence.
 
+
+### 4.8 Cyber Toolkit
+CyberTrail also includes a set of standalone browser-based learning tools that support the main scenarios and reinforce the same security lessons in a more hands-on format.
+
+#### Password Strength Estimation
+The password checker estimates how hard a password is to guess based on entropy rather than simple checkbox rules.
+
+It was designed this way because a password can look complex but still be unsafe if it is reused or commonly leaked. The tool also checks for obvious weak patterns such as:
+- Common leaked passwords
+- Sequential runs
+- Keyboard walks
+- Repeated character patterns
+
+The result shows:
+- An estimated entropy score
+- A strength label
+- A rough guess-time estimate
+- Explanations for why the password was flagged
+
+This makes the tool educational rather than purely diagnostic, because it teaches *why* a password is weak.
+
+#### Password and Passphrase Generation
+CyberTrail includes a secure password generator that uses `crypto.getRandomValues()` instead of `Math.random()`.
+
+This distinction matters because `Math.random()` is not cryptographically secure and should not be used for security-related randomness.
+
+The generator supports:
+- Random password generation
+- Passphrase generation
+- Adjustable length
+- Character set options
+- Copy-to-clipboard support
+
+The passphrase mode helps demonstrate that longer memorable phrases can be stronger than short complex passwords.
+
+#### Scam / Urgency Message Scanner
+CyberTrail also includes a message scanner for suspicious emails and text messages.
+
+Rather than acting like a black-box classifier, it uses weighted heuristic signals so the user can see *why* a message was flagged. The scanner checks for patterns such as:
+- Urgency pressure
+- Threats of lost access
+- Generic greetings
+- Requests for sensitive information
+- Reward or prize bait
+- Suspicious link patterns
+
+The tool outputs:
+- A risk label
+- A score
+- The matched warning signs
+- A short explanation for each signal
+
+This reinforces the phishing and social engineering lessons used throughout the scenarios.
+
+#### How These Tools Support the Project
+These tools extend CyberTrail beyond story-based learning by giving users practical security instruments they can use directly in the browser. Together, they reinforce:
+- Password hygiene
+- Safe randomness
+- Phishing awareness
+- Social engineering detection
+- Defensive security thinking
+
 ## 5. Technical Merit
 
 ### Technologies Used
@@ -258,6 +320,15 @@ Handles:
 - Reading speed
 - Story pacing
 - Persistent speed settings
+
+
+**Cyber Toolkit**  
+Handles:
+- Password strength estimation
+- Secure password generation
+- Passphrase generation
+- Scam message scanning
+- Browser-only security analysis
 
 ## 6. Level of Difficulty
 
@@ -355,6 +426,16 @@ Possible additions:
 - Difficulty levels
 - Adaptive scenarios
 - Personal learning recommendations
+
+### Secure backend and user accounts
+CyberTrail was hosted on GitHub Pages, which only supports static hosting and does not allow a backend. If more resources were available, we would have built a secure backend to support:
+- User accounts
+- Saved progress
+- Personalised scenario tracking
+- Teacher or admin dashboards
+- Safer data handling and authentication
+
+This would have made the platform much more powerful and scalable, especially for classroom use and long-term learning.
 
 ## 10. Conclusion
 
