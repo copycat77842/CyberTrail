@@ -160,6 +160,21 @@ function scrollDown() {
     });
 }
 
+let typingSpeed = Number(localStorage.getItem("typingSpeed"));
+if (!Number.isFinite(typingSpeed)) typingspeed = typingSpeed;
+
+function setTypingSpeed(speed) {
+    typingSpeed = speed;
+    localStorage.setItem("typingSpeed", String(speed));
+    showControls();
+}
+
+function getTypingSpeedLabel() {
+    if (typingSpeed >= 60) return "Slow";
+    if (typingSpeed <= 15) return "Fast";
+    return "Normal";
+}
+
 async function typeText(text, isTimestamp = false, container = textBox) {
 
     return new Promise(resolve => {
@@ -180,7 +195,7 @@ async function typeText(text, isTimestamp = false, container = textBox) {
         container.appendChild(line);
 
         let i = 0;
-        const speed = 35;
+        const speed = typingSpeed;
 
         function finish() {
             line.textContent = text;
@@ -204,7 +219,7 @@ async function typeText(text, isTimestamp = false, container = textBox) {
             line.insertBefore(document.createTextNode(char), cursor);
             let delay = speed;
             if (char === "." || char === "!" || char === "?")
-                delay = 300;
+                delay = Math.max(speed * 6, 150);
             setTimeout(typeNext, delay);
         }
         typeNext();
@@ -227,7 +242,7 @@ async function typeHeading(text, container = textBox) {
         container.appendChild(line);
 
         let i = 0;
-        const speed = 35;
+        const speed = typingSpeed;
 
         function finish() {
             line.textContent = text;
@@ -409,7 +424,17 @@ async function askInvestigationQuestion(clue) {
             btn.className = "choice-button";
             btn.textContent = option.text;
 
+            if (option.used) {
+                btn.classList.add("used-choice");
+                btn.disabled = true;
+            }
+
             btn.onclick = async () => {
+
+                if (option.used){
+                    return;
+                }
+
                 skipRequested = false;
                 wrapper.innerHTML = `
                     <div class="selected-choice">
@@ -435,7 +460,7 @@ async function askInvestigationQuestion(clue) {
                     result.className = "incorrect-answer";
                     result.textContent = "[ INCORRECT ]";
                     wrapper.appendChild(result);
-
+                    option.used = true;
                     const feedback = document.createElement("div");
                     wrapper.appendChild(feedback);
 
@@ -509,21 +534,25 @@ function startArtifactAnalysis(artifact, investigationData) {
 }
 
 function showEmailComparison(artifact) {
-
     const artifactWrapper = document.createElement("div");
     artifactWrapper.id = "artifact-wrapper";
 
     const comparison = document.createElement("div");
     comparison.id = "email-comparison";
 
+    // Shared map so fake blocks can find their matching real blocks
+    const blockMap = new Map();
+
     const fakeColumn = createEmailColumn(
         artifact.fakeEmail,
-        true
+        true,
+        blockMap
     );
 
     const realColumn = createEmailColumn(
         artifact.realEmail,
-        false
+        false,
+        blockMap
     );
 
     comparison.appendChild(fakeColumn);
@@ -539,43 +568,46 @@ function showEmailComparison(artifact) {
     artifactWrapper.appendChild(counter);
 
     textBox.appendChild(artifactWrapper);
-
     scrollDown();
 }
 
-function createEmailColumn(email, clickable) {
-
+function createEmailColumn(email, clickable, blockMap) {
     const column = document.createElement("div");
     column.className = "email-column";
 
     const heading = document.createElement("h3");
     heading.textContent = email.label;
-
     column.appendChild(heading);
 
     email.blocks.forEach(block => {
-
         const element = document.createElement("div");
         element.className = "email-block";
-
         element.textContent = block.text;
 
-        if (clickable) {
+        // Store every block by id so its pair can be found later
+        blockMap.set(block.id, element);
 
+        if (clickable) {
             element.classList.add("clickable-email-block");
+
+            element.addEventListener("mouseenter", () => {
+                const match = blockMap.get(block.compareWith);
+                if (match) match.classList.add("paired-hover");
+            });
+
+            element.addEventListener("mouseleave", () => {
+                const match = blockMap.get(block.compareWith);
+                if (match) match.classList.remove("paired-hover");
+            });
 
             element.onclick = () => {
                 checkArtifactBlock(block, element);
             };
-
         } else {
-
             element.classList.add("real-email-block");
-
         }
 
         column.appendChild(element);
-
     });
 
     return column;
@@ -916,7 +948,7 @@ async function typeTimelineLine(text, container) {
         p.appendChild(cursor);
         container.appendChild(p);
         let i = 0;
-        const speed = 35;
+        const speed = typingSpeed;
         function typeNext(){
             if(skipRequested || skipAnimations){
                 p.textContent = text;
@@ -1021,7 +1053,7 @@ async function typeAdviceTitle(text, container) {
         container.appendChild(title);
 
         let i = 0;
-        const speed = 35;
+        const speed = typingSpeed;
 
         function finish() {
             title.textContent = text;
@@ -1114,8 +1146,42 @@ function showControls() {
         showControls();
     };
 
+    const speedPanel = document.createElement("div");
+    speedPanel.id = "speed-panel";
+    speedPanel.className = "speed-panel";
+
+    const speedTitle = document.createElement("div");
+    speedTitle.className = "speed-panel-title";
+    speedTitle.textContent = `Reading Speed: ${getTypingSpeedLabel()}`;
+
+    const speedButtons = document.createElement("div");
+    speedButtons.className = "speed-panel-buttons";
+
+    const slowBtn = document.createElement("button");
+    slowBtn.className = "primary-button";
+    slowBtn.textContent = "Slow";
+    slowBtn.onclick = () => setTypingSpeed(70);
+
+    const normalBtn = document.createElement("button");
+    normalBtn.className = "primary-button";
+    normalBtn.textContent = "Normal";
+    normalBtn.onclick = () => setTypingSpeed(35);
+
+    const fastBtn = document.createElement("button");
+    fastBtn.className = "primary-button";
+    fastBtn.textContent = "Fast";
+    fastBtn.onclick = () => setTypingSpeed(10);
+
+    speedButtons.appendChild(slowBtn);
+    speedButtons.appendChild(normalBtn);
+    speedButtons.appendChild(fastBtn);
+
+    speedPanel.appendChild(speedTitle);
+    speedPanel.appendChild(speedButtons);
+    document.body.appendChild(speedPanel);
+
     controlsBox.appendChild(animationBtn);
-    if (!skipAnimations){
+    if (!skipAnimations && !skipRequested){
         controlsBox.appendChild(skipBtn);
     }
     controlsBox.appendChild(backBtn);
