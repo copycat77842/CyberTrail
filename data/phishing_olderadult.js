@@ -1,10 +1,204 @@
+const bankPhishingArtifact = {
+  title: "Email Comparison",
+
+  description: [
+    "The investigator places two emails side by side.",
+    "One is a legitimate message from your bank.",
+    "The other is the phishing email involved in the incident.",
+    "\"Your goal is to examine the fake email and identify the suspicious elements.\"",
+    "\"Scammers often copy real banking emails closely, so the warning signs are usually hidden in small details.\""
+  ],
+
+  fakeEmail: {
+    label: "Suspicious Email (Fake)",
+
+    blocks: [
+
+      {
+        id: "fake_sender",
+        compareWith: "real_sender",
+        text:
+          "From: Bank Security Team <security@secure-bank-alert.com>",
+
+        type: "suspicious",
+
+        explanation:
+          "Suspicious element found.\n\n" +
+          "The sender name looks like it belongs to your bank, but the actual email address does not match the bank's official domain.\n\n" +
+          "Scammers can make an email appear to come from almost anyone by changing the display name. The address behind it is what you should check."
+      },
+
+
+      {
+        id: "fake_subject",
+        compareWith: "real_subject",
+        text:
+          "Subject: Important: Unusual Activity On Your Account",
+
+        type: "safe",
+
+        explanation:
+          "Not quite. The subject line alone is not enough evidence.\n\n" +
+          "Banks really do send security alerts about unusual activity, so this wording can appear in both genuine and fake messages.\n\n" +
+          "The important clues are usually found in what the email asks you to do next."
+      },
+
+
+      {
+        id: "fake_greeting",
+        compareWith: "real_greeting",
+        text:
+          "Dear Valued Customer,\n\n" +
+          "We have detected unusual activity on your account and need you to confirm your identity.",
+
+        type: "safe",
+
+        explanation:
+          "Not quite. A generic greeting can be suspicious, but it is not always proof of a scam.\n\n" +
+          "Some real companies use general greetings in automated emails.\n\n" +
+          "You should look for stronger signs, such as unusual requests or links."
+      },
+
+
+      {
+        id: "fake_message",
+        compareWith: "real_message",
+        text:
+          "For your security, please verify your account details immediately to prevent unauthorised access.",
+
+        type: "safe",
+
+        explanation:
+          "Not quite. Banks often remind customers to protect their accounts.\n\n" +
+          "The message sounds reasonable on its own.\n\n" +
+          "The problem is what happens next: the email tries to move you to a login page through a link."
+      },
+
+
+      {
+        id: "fake_urgency",
+        compareWith: "real_urgency",
+        text:
+          "Your account will be temporarily restricted unless you verify your identity within the next 2 hours.",
+
+        type: "suspicious",
+
+        explanation:
+          "Suspicious element found.\n\n" +
+          "This message creates panic by giving you a very short deadline.\n\n" +
+          "Scammers use urgency to make people act quickly instead of stopping to check whether the message is genuine.\n\n" +
+          "A real bank will rarely force you to fix an account problem through a link within only a couple of hours."
+      },
+
+
+      {
+        id: "fake_button",
+        compareWith: "real_button",
+        text:
+          "[ Verify My Account Now ]",
+
+        type: "suspicious",
+
+        explanation:
+          "Suspicious element found.\n\n" +
+          "The email is asking you to sign in through a link inside the message.\n\n" +
+          "The button itself looks normal, but it actually leads to:\n\n" +
+          "https://secure-bank-account-check.com/login\n\n" +
+          "This address does not belong to your bank. Scammers often create convincing domains by adding words like 'security', 'verify', or 'account'.\n\n" +
+          "The safest approach is to open your banking app yourself or type the bank's website address manually."
+      },
+
+      {
+        id: "fake_closing",
+        compareWith: "real_closing",
+        text:
+          "If you have any questions, please contact our support team.",
+
+        type: "safe",
+
+        explanation:
+          "Not quite. A professional closing can appear in both real and fake emails.\n\n" +
+          "You need to focus on the details that are harder for scammers to copy."
+      }
+
+    ]
+  },
+
+
+  realEmail: {
+
+    label: "Legitimate Email (Real)",
+
+    blocks: [
+
+      {
+        id: "real_sender",
+        text:
+          "From: Your Bank Security Team <security@yourbank.com>"
+      },
+
+
+      {
+        id: "real_subject",
+        text:
+          "Subject: Important: Unusual Activity On Your Account"
+      },
+
+
+      {
+        id: "real_greeting",
+        text:
+          "Hello Sam,\n\n" +
+          "We noticed a recent sign-in attempt on your account and wanted to let you know."
+      },
+
+
+      {
+        id: "real_message",
+        text:
+          "If you believe this activity was not you, please open your banking app or visit our official website directly.\n\n" +
+          "We will never ask you to confirm your password through a link in an email."
+      },
+
+      {
+        id: "real_urgency",
+        text:
+          "For your security, please review this as soon as possible."
+      },
+
+
+      {
+        id: "real_button",
+        text:
+          "[ Open Banking App ]"
+      },
+
+
+      {
+        id: "real_closing",
+        text:
+          "If you need assistance, please contact us using the phone number on the back of your bank card."
+      }
+
+    ]
+  },
+
+
+  requiredClues: [
+    "fake_sender",
+    "fake_urgency",
+    "fake_button"
+  ]
+};
+
 const olderAdultPhishingCase = {
   id: "phishing_olderadult",
   meta: {
     title: "Phishing Email",
     description: "A convincing bank email, a two-hour deadline, and one click that decides whether this stays a quiet evening or becomes a very stressful week.",
     difficulty: "Medium",
-    ageGroup: "older-adult"
+    ageGroup: "older-adult",
+    style: "Artifact Analysis"
   },
   intro: [
     "It's a Wednesday evening, and you're settling in with a cup of tea after dinner.",
@@ -95,151 +289,14 @@ const olderAdultPhishingCase = {
                 "\"Nobody broke into the bank's systems. Somebody built a very convincing fake page, and it worked.\"",
                 "\"Let's go through exactly what should have stood out.\""
               ],
-              clues: [
-                {
-                  title: "Case File #1 - The Sender",
-                  evidence: [
-                    "The email's display name read \"Bank Security Team\"",
-                    "The actual sender address was security@yourbank-verify-online.com",
-                    "The real bank only ever emails from @yourbank.com"
-                  ],
-                  question: "The display name looked completely normal. What should have been checked instead?",
-                  options: [
-                    {
-                      text: "The actual email address behind the display name.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator draws attention to the real address.",
-                        "\"That's the part that can't be faked as easily.\""
-                      ],
-                      explanation: [
-                        "\"Your real bank only ever sends mail from one exact address.\"",
-                        "\"This email came from a completely different address, dressed up with a familiar-looking name.\"",
-                        "\"Checking the actual address is the fastest way to catch this kind of email.\""
-                      ]
-                    },
-                    {
-                      text: "Whether the email contained any spelling or grammar mistakes.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator rereads the email's wording carefully.",
-                        "\"That's usually a good instinct, but not this time.\""
-                      ],
-                      explanation: [
-                        "\"There isn't a single mistake in this email. It's written just as cleanly as the real thing.\"",
-                        "\"Spelling mistakes can sometimes be a clue, but plenty of convincing scams read perfectly. It's not something you can rely on.\""
-                      ]
-                    },
-                    {
-                      text: "The email's formatting and logo.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator holds the two emails up together.",
-                        "\"They're almost identical.\""
-                      ],
-                      explanation: [
-                        "\"Copying a logo and colour scheme takes only minutes and tells you nothing about who sent it.\"",
-                        "\"Looking convincing is exactly what makes these emails work. It's not something you can rule out by.\""
-                      ]
-                    }
-                  ]
-                },
-                {
-                  title: "Case File #2 - The Link",
-                  evidence: [
-                    "The button was labeled \"Verify My Account Now\"",
-                    "Hovering over the button (without clicking) would have shown a preview of the real destination",
-                    "That destination was a website entirely unrelated to the bank"
-                  ],
-                  question: "Without clicking, how could you have checked where that button actually led?",
-                  options: [
-                    {
-                      text: "There's no way to know where a link goes until you click it.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator opens the email again to demonstrate.",
-                        "\"Actually, there is, and it only takes a moment.\""
-                      ],
-                      explanation: [
-                        "\"On a tablet or phone, pressing and holding a link shows a preview of where it actually goes, without opening it.\"",
-                        "\"On a computer, hovering the mouse over it does the same thing.\"",
-                        "\"You never have to click something to find out where it leads.\""
-                      ]
-                    },
-                    {
-                      text: "Pressing and holding the link would have shown the real destination.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator demonstrates on their own tablet.",
-                        "\"Exactly right. This one habit catches most fake links.\""
-                      ],
-                      explanation: [
-                        "\"That preview would have shown an address with nothing to do with your bank at all.\"",
-                        "\"Button text can say anything. The actual link underneath is much harder to disguise convincingly.\""
-                      ]
-                    },
-                    {
-                      text: "Since the page looked exactly like the real banking site, the link had to be safe.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator shakes their head gently.",
-                        "\"That's actually the opposite of true here.\""
-                      ],
-                      explanation: [
-                        "\"A convincing copy of a website shows the attacker put in effort. It doesn't tell you the link is legitimate.\"",
-                        "\"Appearance and actual destination are two completely different things.\""
-                      ]
-                    }
-                  ]
-                },
-                {
-                  title: "Case File #3 - The Urgency",
-                  evidence: [
-                    "The email gave a 2-hour deadline to \"verify\" the account",
-                    "It warned the account could be restricted if you didn't act in time",
-                    "The real bank has never sent an email with a countdown like this"
-                  ],
-                  question: "Why do emails like this almost always include a tight deadline?",
-                  options: [
-                    {
-                      text: "Because banks really do need account issues resolved that quickly.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator checks with the bank's actual policy.",
-                        "\"Nothing like this exists in their real process.\""
-                      ],
-                      explanation: [
-                        "\"A genuine concern with your account can usually be checked by calling the bank directly, or logging in yourself, in your own time.\"",
-                        "\"A countdown measured in hours isn't part of any real bank's normal process.\""
-                      ]
-                    },
-                    {
-                      text: "It's just how banks normally write these kinds of emails.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator pulls up a real email from the bank for comparison.",
-                        "\"Take a look. It reads nothing like this.\""
-                      ],
-                      explanation: [
-                        "\"Real bank communications tend to be calmer and don't threaten to restrict your account within hours.\"",
-                        "\"That pressure and tight deadline is a strong sign something isn't right.\""
-                      ]
-                    },
-                    {
-                      text: "To make you act quickly, before you have time to stop and think it through.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator nods slowly.",
-                        "\"That's the entire purpose of it.\""
-                      ],
-                      explanation: [
-                        "\"This is a manipulation technique called urgency pressure. It's one of the most common tools people who send these emails rely on, designed to stop you from pausing to check.\"",
-                        "\"You saw this at the end of a quiet evening, exactly when you'd want to just get it sorted quickly.\"",
-                        "\"Any message that pressures you to act immediately is worth slowing down for, not speeding up for.\""
-                      ]
-                    }
-                  ]
-                }
+              artifact: bankPhishingArtifact,
+              artifactComplete: [
+                "The investigator closes the two emails and places them beside the account activity records.",
+                "\"Now we know what made this email suspicious,\" the investigator explains.",
+                "\"The attacker copied the appearance of a real bank message, but the small details revealed what was actually happening.\"",
+                "The investigator points to the fake sender address, the rushed deadline, and the login button.",
+                "\"The email was not dangerous because it looked fake. It was dangerous because it looked real enough to make someone stop checking.\"",
+                "\"Now that we understand the warning signs, let's zoom out and look at the full timeline of how this attack unfolded.\""
               ],
               timelineIntro: [
                 "The investigator lines up the email, the fake page, and your account's activity log in order.",
@@ -288,6 +345,17 @@ const olderAdultPhishingCase = {
                   ]
                 }
               ],
+              chainSummary: [
+                "Fake bank email",
+                "Urgent deadline",
+                "Fake login page",
+                "Password stolen",
+                "Bank account accessed",
+                "Email account compromised",
+                "Family targeted",
+                "Damage contained",
+                "Accounts recovered"
+              ],
               finalWords: [
                 "The investigator closes the folder.",
                 "\"This wasn't about you being careless. This page was built specifically to be convincing.\"",
@@ -319,6 +387,16 @@ const olderAdultPhishingCase = {
                     title: "Call someone before you click, if anything feels off",
                     text: "A quick call to your bank, using the number on your card rather than the one in the email, or to a family member, can settle it in minutes."
                   }
+                ]
+              },
+              epilogue: {
+                time: "Five months later",
+                story: [
+                  "Since the incident, you have changed how you handle unexpected emails.",
+                  "You no longer click links that claim your account has a problem. Instead, you open your bank's app directly or call the number on your card.",
+                  "You also started using different passwords for important accounts and enabled extra security checks where possible.",
+                  "When a friend mentions receiving a suspicious message, you share what happened to you and remind them to slow down before clicking.",
+                  "The scam was stressful, but it changed the way you protect yourself online."
                 ]
               },
               lesson: [
@@ -396,150 +474,14 @@ const olderAdultPhishingCase = {
                 "\"A great many people received this exact email,\" the investigator says.",
                 "\"Some clicked it. Some didn't. Let's look at what actually made the difference.\""
               ],
-              clues: [
-                {
-                  title: "Case File #1 - The Sender",
-                  evidence: [
-                    "The email's display name read \"Bank Security Team\"",
-                    "The actual sender address was security@yourbank-verify-online.com",
-                    "The real bank only ever emails from @yourbank.com"
-                  ],
-                  question: "The display name looked completely normal. What actually gave this one away?",
-                  options: [
-                    {
-                      text: "Whether the email contained spelling or grammar mistakes.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator rereads the wording again.",
-                        "\"There weren't any, actually.\""
-                      ],
-                      explanation: [
-                        "\"This one was written cleanly, with no mistakes at all.\"",
-                        "\"That surprises people. Spelling mistakes aren't a reliable test anymore, since plenty of convincing scams read perfectly.\""
-                      ]
-                    },
-                    {
-                      text: "The email's formatting and logo.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator holds up a side-by-side comparison.",
-                        "\"Those were copied almost perfectly.\""
-                      ],
-                      explanation: [
-                        "\"Copying a logo and colour scheme takes minutes and tells you nothing about who really sent it.\"",
-                        "\"Looking convincing is exactly what makes these emails effective.\""
-                      ]
-                    },
-                    {
-                      text: "The actual email address behind the display name.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator circles the real address for you.",
-                        "\"That's exactly the part worth checking.\""
-                      ],
-                      explanation: [
-                        "\"Your real bank only ever sends mail from one exact address.\"",
-                        "\"This email came from a completely different one, dressed up with a familiar-sounding name.\"",
-                        "\"That mismatch is usually the fastest way to catch something like this.\""
-                      ]
-                    }
-                  ]
-                },
-                {
-                  title: "Case File #2 - The Link",
-                  evidence: [
-                    "The button was labeled \"Verify My Account Now\"",
-                    "Pressing and holding the button would have shown a preview of the real destination",
-                    "That destination was a website entirely unrelated to the bank"
-                  ],
-                  question: "Without tapping it, how could someone check where that button actually led?",
-                  options: [
-                    {
-                      text: "Pressing and holding the link shows the real destination.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator shows you again, this time on your own device.",
-                        "\"Exactly right. This habit alone catches most fake links.\""
-                      ],
-                      explanation: [
-                        "\"That preview would have shown an address with nothing to do with the bank at all.\"",
-                        "\"Button text can say anything. The link underneath is much harder to disguise convincingly.\""
-                      ]
-                    },
-                    {
-                      text: "There's no way to know until you tap it.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator picks up a tablet to demonstrate.",
-                        "\"Actually, there's a simple way to check first.\""
-                      ],
-                      explanation: [
-                        "\"Pressing and holding a link, rather than tapping it, shows a preview of where it really goes.\"",
-                        "\"You never have to open something to see where it leads.\""
-                      ]
-                    },
-                    {
-                      text: "If the page looks exactly like the real banking site, it's safe to assume the link is too.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator shakes their head, unconvinced.",
-                        "\"That's actually the opposite of true.\""
-                      ],
-                      explanation: [
-                        "\"A convincing copy of a website shows effort on the attacker's part. It doesn't show that the link is legitimate.\"",
-                        "\"Appearance and destination are two separate things entirely.\""
-                      ]
-                    }
-                  ]
-                },
-                {
-                  title: "Case File #3 - The Urgency",
-                  evidence: [
-                    "The email gave a 2-hour deadline to \"verify\" the account",
-                    "It warned the account could be restricted if action wasn't taken in time",
-                    "The real bank has never sent an email with a countdown like this"
-                  ],
-                  question: "Why did this email include such a tight deadline?",
-                  options: [
-                    {
-                      text: "Because banks genuinely need issues resolved that quickly.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator checks with the bank's real policy.",
-                        "\"Nothing like this exists in their actual process.\""
-                      ],
-                      explanation: [
-                        "\"A genuine concern can normally be checked by calling the bank directly, using the number on your card, at your own pace.\"",
-                        "\"A countdown measured in hours isn't part of any real bank's process.\""
-                      ]
-                    },
-                    {
-                      text: "To rush people into acting before they stop and think it through.",
-                      correct: true,
-                      investigatorResponse: [
-                        "The investigator nods.",
-                        "\"That's the entire purpose of a deadline like this.\""
-                      ],
-                      explanation: [
-                        "\"This is the same manipulation technique called urgency pressure. It's one of the most common tools relied on in scams like this.\"",
-                        "\"These emails are often sent in the evening, exactly when people want to relax and deal with things quickly.\"",
-                        "\"Any message pushing you to act immediately is worth slowing down for instead.\""
-                      ]
-                    },
-                    {
-                      text: "That's just the standard subject line format banks use.",
-                      correct: false,
-                      investigatorResponse: [
-                        "The investigator pulls up a real email from the bank for comparison.",
-                        "\"Let's see if that actually holds up.\""
-                      ],
-                      explanation: [
-                        "\"None of the bank's real emails have ever used a countdown like this.\"",
-                        "\"That phrasing is chosen deliberately to create pressure. It isn't a standard format at all.\""
-                      ]
-                    }
-                  ]
-                }
+              artifact: bankPhishingArtifact,
+              artifactComplete: [
+                "The investigator closes the two emails and places them beside the scam reports collected by the bank.",
+                "\"Now we know what made this email suspicious,\" the investigator explains.",
+                "\"The same warning signs were hidden inside every copy of this message that was sent out.\"",
+                "The investigator points to the fake sender address, the urgent deadline, and the fake verification button.",
+                "\"The difference was not the email itself. The difference was what happened after it was opened.\"",
+                "\"Now that we understand the clues, let's zoom out and look at the wider timeline of this phishing campaign.\""
               ],
               timelineIntro: [
                 "The investigator lines up the email, the fake page, and the wider pattern of similar reports in order.",
@@ -583,6 +525,15 @@ const olderAdultPhishingCase = {
                   ]
                 }
               ],
+              chainSummary: [
+                "Fake bank email",
+                "Urgency noticed",
+                "Bank app opened",
+                "Link avoided",
+                "Account protected",
+                "Scam reported",
+                "Habits changed"
+              ],
               finalWords: [
                 "The investigator closes the folder.",
                 "\"You didn't need to be an expert to catch this. You just paused for a moment before typing your password anywhere.\"",
@@ -614,6 +565,16 @@ const olderAdultPhishingCase = {
                     title: "Call someone before you click, if anything feels off",
                     text: "A quick call to your bank, using the number on your card, or to a family member, can settle it in minutes, and it's always worth doing."
                   }
+                ]
+              },
+              epilogue: {
+                time: "Three months later",
+                story: [
+                  "The experience changed the way you look at online messages.",
+                  "You still receive emails that appear urgent, but now you take a moment before reacting.",
+                  "You check the sender, avoid unexpected links, and contact organisations directly when something feels unusual.",
+                  "You have even helped friends and family recognise similar scams before they fall for them.",
+                  "A few seconds of caution became one of your strongest online safety habits."
                 ]
               },
               lesson: [
