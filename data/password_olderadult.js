@@ -407,7 +407,12 @@ const olderAdultPasswordCase = {
               lesson: [
                   "Reusing passwords allows attackers to move from one account to another.",
                   "Protect your email, banking, and important services with unique passwords."
-              ]
+              ],
+              toolPromo: {
+                text: "Now that you've seen how much a reused password can cost, try our password strength checker and generator to build safer habits going forward.",
+                linkText: "Open the Password Toolkit \u2192",
+                href: "tools.html#generator-tool"
+              }
             }
           }
         ]
@@ -771,7 +776,12 @@ const olderAdultPasswordCase = {
               lesson: [
                 "One strong security choice can stop a small problem from becoming a crisis.",
                 "Unique passwords, two-factor authentication, and careful habits create stronger protection online."
-              ]
+              ],
+              toolPromo: {
+                text: "Now that you've seen how much a reused password can cost, try our password strength checker and generator to build safer habits going forward.",
+                linkText: "Open the Password Toolkit \u2192",
+                href: "tools.html#generator-tool"
+              }
             }
           }
         ]
