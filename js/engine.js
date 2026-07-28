@@ -104,7 +104,7 @@ async function showInvestigation(data) {
     // Artifact analysis
     if (data.artifact) {
         await playSection(data.artifact.description);
-        await startArtifactAnalysis(data.artifact, data);
+        await startArtifactAnalysis(data.artifact);
         await playSection(data.artifactComplete);
     }
 
@@ -165,11 +165,21 @@ function scrollDown() {
 }
 
 let typingSpeed = Number(localStorage.getItem("typingSpeed"));
-if (!Number.isFinite(typingSpeed)) typingspeed = typingSpeed;
+
+if (!Number.isFinite(typingSpeed)) {
+    typingSpeed = 35;
+    localStorage.setItem("typingSpeed", "35");
+}
 
 function setTypingSpeed(speed) {
+
+    if (![10, 35, 70].includes(speed)) {
+        speed = 35;
+    }
+
     typingSpeed = speed;
     localStorage.setItem("typingSpeed", String(speed));
+
     showControls();
 }
 
@@ -204,7 +214,7 @@ async function typeText(text, isTimestamp = false, container = textBox) {
         function finish() {
             line.textContent = text;
             cursor.remove();
-            scrollDown(line);
+            scrollDown();
             resolve();
         }
 
@@ -215,7 +225,7 @@ async function typeText(text, isTimestamp = false, container = textBox) {
             }
             if (i >= text.length) {
                 cursor.remove();
-                scrollDown(line);
+                scrollDown();
                 resolve();
                 return;
             }
@@ -528,7 +538,7 @@ let artifactCluesFound = [];
 let currentArtifact = null;
 let artifactCompleteResolve = null;
 
-function startArtifactAnalysis(artifact, investigationData) {
+function startArtifactAnalysis(artifact) {
     currentArtifact = artifact;
     artifactCluesFound = [];
     return new Promise(resolve => {
@@ -1137,102 +1147,105 @@ async function showToolPromo(promo) {
 }
 
 function showControls() {
+    controlsBox.innerHTML = "";
+    document.getElementById("speed-panel")?.remove();
+    if (scenarioRunning) {
 
-  controlsBox.innerHTML = "";
+        // SKIP BUTTON
+        const skipBtn = document.createElement("button");
+        skipBtn.className = "primary-button";
+        skipBtn.textContent = "Skip";
+        skipBtn.onclick = () => {
+        skipRequested = true;
+        };
+        
+        // BACK BUTTON
+        const backBtn = document.createElement("button");
+        backBtn.className = "primary-button";
+        backBtn.textContent = "Back to Dashboard";
+        backBtn.onclick = () => {
+        window.location.href = "index.html";
+        };
 
-  if (scenarioRunning) {
+        const animationBtn = document.createElement("button");
+        animationBtn.className = "primary-button";
 
-    // SKIP BUTTON
-    const skipBtn = document.createElement("button");
-    skipBtn.className = "primary-button";
-    skipBtn.textContent = "Skip";
-    skipBtn.onclick = () => {
-      skipRequested = true;
-    };
-    
-    // BACK BUTTON
-    const backBtn = document.createElement("button");
-    backBtn.className = "primary-button";
-    backBtn.textContent = "Back to Dashboard";
-    backBtn.onclick = () => {
-      window.location.href = "index.html";
-    };
+        animationBtn.textContent =
+            skipAnimations
+                ? "Enable Typewriter"
+                : "Disable Typewriter";
 
-    const animationBtn = document.createElement("button");
-    animationBtn.className = "primary-button";
+        animationBtn.onclick = () => {
+            skipAnimations = !skipAnimations;
+            showControls();
+        };
 
-    animationBtn.textContent =
-        skipAnimations
-            ? "Enable Typewriter"
-            : "Disable Typewriter";
+        const speedPanel = document.createElement("div");
+        speedPanel.id = "speed-panel";
+        speedPanel.className = "speed-panel";
 
-    animationBtn.onclick = () => {
-        skipAnimations = !skipAnimations;
-        showControls();
-    };
+        const speedTitle = document.createElement("div");
+        speedTitle.className = "speed-panel-title";
+        speedTitle.textContent = `Reading Speed: ${getTypingSpeedLabel()}`;
 
-    const speedPanel = document.createElement("div");
-    speedPanel.id = "speed-panel";
-    speedPanel.className = "speed-panel";
+        const speedButtons = document.createElement("div");
+        speedButtons.className = "speed-panel-buttons";
 
-    const speedTitle = document.createElement("div");
-    speedTitle.className = "speed-panel-title";
-    speedTitle.textContent = `Reading Speed: ${getTypingSpeedLabel()}`;
+        const slowBtn = document.createElement("button");
+        slowBtn.className = "primary-button";
+        slowBtn.textContent = "Slow";
+        slowBtn.onclick = () => setTypingSpeed(70);
 
-    const speedButtons = document.createElement("div");
-    speedButtons.className = "speed-panel-buttons";
+        const normalBtn = document.createElement("button");
+        normalBtn.className = "primary-button";
+        normalBtn.textContent = "Normal";
+        normalBtn.onclick = () => setTypingSpeed(35);
 
-    const slowBtn = document.createElement("button");
-    slowBtn.className = "primary-button";
-    slowBtn.textContent = "Slow";
-    slowBtn.onclick = () => setTypingSpeed(70);
+        const fastBtn = document.createElement("button");
+        fastBtn.className = "primary-button";
+        fastBtn.textContent = "Fast";
+        fastBtn.onclick = () => setTypingSpeed(10);
 
-    const normalBtn = document.createElement("button");
-    normalBtn.className = "primary-button";
-    normalBtn.textContent = "Normal";
-    normalBtn.onclick = () => setTypingSpeed(35);
+        if (!skipAnimations) { // only show speed when typewriter is enabled
+            speedButtons.appendChild(slowBtn);
+            speedButtons.appendChild(normalBtn);
+            speedButtons.appendChild(fastBtn);
 
-    const fastBtn = document.createElement("button");
-    fastBtn.className = "primary-button";
-    fastBtn.textContent = "Fast";
-    fastBtn.onclick = () => setTypingSpeed(10);
+            speedPanel.appendChild(speedTitle);
+            speedPanel.appendChild(speedButtons);
+            document.body.appendChild(speedPanel);
+        }
 
-    speedButtons.appendChild(slowBtn);
-    speedButtons.appendChild(normalBtn);
-    speedButtons.appendChild(fastBtn);
+        controlsBox.appendChild(animationBtn);
+        if (!skipAnimations && !skipRequested){
+            controlsBox.appendChild(skipBtn);
+        }
+        controlsBox.appendChild(backBtn);
 
-    speedPanel.appendChild(speedTitle);
-    speedPanel.appendChild(speedButtons);
-    document.body.appendChild(speedPanel);
+    } else {
+        document.getElementById("speed-panel")?.remove();
+        const text = document.createElement("p");
+        text.textContent =
+        "You have completed the scenario. Click 'Replay Scenario' to see what would have happened if you chose differently.";
 
-    controlsBox.appendChild(animationBtn);
-    if (!skipAnimations && !skipRequested){
-        controlsBox.appendChild(skipBtn);
+        const replayBtn = document.createElement("button");
+        replayBtn.className = "primary-button";
+        replayBtn.textContent = "Replay Scenario";
+        replayBtn.onclick = () => {
+            location.reload();
+        };
+
+        const backBtn = document.createElement("button");
+        backBtn.className = "primary-button";
+        backBtn.textContent = "Back to Dashboard";
+        backBtn.onclick = () => {
+        window.location.href = "index.html";
+        };
+
+        controlsBox.appendChild(text);
+        controlsBox.appendChild(replayBtn);
+        controlsBox.appendChild(backBtn);
     }
-    controlsBox.appendChild(backBtn);
-
-  } else {
-
-    const text = document.createElement("p");
-    text.textContent =
-      "You have completed the scenario. Click 'Replay Scenario' to see what would have happened if you chose differently.";
-
-    const replayBtn = document.createElement("button");
-    replayBtn.className = "primary-button";
-    replayBtn.textContent = "Replay Scenario";
-    replayBtn.onclick = () => location.reload();
-
-    const backBtn = document.createElement("button");
-    backBtn.className = "primary-button";
-    backBtn.textContent = "Back to Dashboard";
-    backBtn.onclick = () => {
-      window.location.href = "index.html";
-    };
-
-    controlsBox.appendChild(text);
-    controlsBox.appendChild(replayBtn);
-    controlsBox.appendChild(backBtn);
-  }
 }
 
 function wait(ms) {
