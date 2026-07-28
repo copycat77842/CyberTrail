@@ -400,7 +400,12 @@ const adultPhishingCase = {
               lesson: [
                 "A convincing fake page only needs one thing from you: your password, typed in willingly.",
                 "Ninety seconds of doubt is cheaper than a redirected payment and three days of cleanup."
-              ]
+              ],
+              toolPromo: {
+                text: "Now that you know what to look for, try pasting a suspicious message into our Scam Message Scanner to see the warning signs for yourself.",
+                linkText: "Open the Scam Scanner \u2192",
+                href: "tools.html#scanner-tool"
+              }
             }
           }
         ]
@@ -584,7 +589,12 @@ const adultPhishingCase = {
               lesson: [
                 "You didn't need to be an expert. You just needed a few seconds of doubt before typing your password.",
                 "The email had no power at all. Not until someone gave it their password."
-              ]
+              ],
+              toolPromo: {
+                text: "Now that you know what to look for, try pasting a suspicious message into our Scam Message Scanner to see the warning signs for yourself.",
+                linkText: "Open the Scam Scanner \u2192",
+                href: "tools.html#scanner-tool"
+              }
             }
           }
         ]
