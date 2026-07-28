@@ -406,7 +406,13 @@ const studentPhishingCase = {
               lesson: [
                 "A fake page only needs one thing from you: your password, typed in willingly.",
                 "Checking the address bar takes five seconds. Recovering an account takes days."
-              ]
+              ],
+
+              toolPromo: {
+                text: "Now that you know what to look for, try pasting a suspicious message into our Scam Message Scanner to see the warning signs for yourself.",
+                linkText: "Open the Scam Scanner \u2192",
+                href: "tools.html#scanner-tool"
+              }
             }
           }
         ]
@@ -587,7 +593,13 @@ const studentPhishingCase = {
               lesson: [
                 "You didn't need to be an expert. You just needed five seconds of doubt before typing your password.",
                 "The email had no power at all until someone gave it their password."
-              ]
+              ],
+
+              toolPromo: {
+                text: "Now that you know what to look for, try pasting a suspicious message into our Scam Message Scanner to see the warning signs for yourself.",
+                linkText: "Open the Scam Scanner \u2192",
+                href: "tools.html#scanner-tool"
+              }
             }
           }
         ]
