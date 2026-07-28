@@ -402,7 +402,12 @@ const olderAdultPhishingCase = {
               lesson: [
                 "A fake page only needs one thing from you: your password, typed in willingly.",
                 "A two-minute phone call to check is always cheaper than a week spent undoing the damage."
-              ]
+              ],
+              toolPromo: {
+                text: "Now that you know what to look for, try pasting a suspicious message into our Scam Message Scanner to see the warning signs for yourself.",
+                linkText: "Open the Scam Scanner \u2192",
+                href: "tools.html#scanner-tool"
+              }
             }
           }
         ]
@@ -580,7 +585,12 @@ const olderAdultPhishingCase = {
               lesson: [
                 "You didn't need to be an expert. You just needed a moment of doubt before typing your password.",
                 "The email had no power at all. Not until someone gave it their password."
-              ]
+              ],
+              toolPromo: {
+                text: "Now that you know what to look for, try pasting a suspicious message into our Scam Message Scanner to see the warning signs for yourself.",
+                linkText: "Open the Scam Scanner \u2192",
+                href: "tools.html#scanner-tool"
+              }
             }
           }
         ]
