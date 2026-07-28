@@ -151,6 +151,10 @@ async function showInvestigation(data) {
     if (data.lesson) {
         await showLesson(data.lesson);
     }
+
+    if (data.toolPromo) {
+        await showToolPromo(data.toolPromo);
+    }
 }
 
 function scrollDown() {
@@ -1110,6 +1114,27 @@ async function showLesson(text) {
   await playLines(text, box);
 }
 
+async function showToolPromo(promo) {
+ 
+    await wait(500);
+ 
+    const box = document.createElement("div");
+    box.className = "tool-promo";
+    textBox.appendChild(box);
+    scrollDown();
+ 
+    const text = document.createElement("div");
+    text.className = "tool-promo-text";
+    box.appendChild(text);
+    await typeText(promo.text, false, text);
+ 
+    const link = document.createElement("a");
+    link.className = "tool-promo-link primary-btn";
+    link.href = promo.href;
+    link.textContent = promo.linkText || "Open the Cyber Toolkit";
+    box.appendChild(link);
+    scrollDown();
+}
 
 function showControls() {
 
