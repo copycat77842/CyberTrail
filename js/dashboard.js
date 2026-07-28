@@ -153,10 +153,10 @@ if (initialAgeGroup) {
   `;
 }
 
-// Still asks every time a visitor lands on the dashboard, even if we already
-// have a saved preference — picking again (or confirming the same one) is
-// what actually triggers loading/showing that age group's scenarios above.
-window.setTimeout(showAgeGroupPrompt, 120);
+// Only show the age group prompt the first time someone visits.
+if (!getCurrentAgeGroup()) {
+  window.setTimeout(showAgeGroupPrompt, 120);
+}
 
 if (ageGroupModal) {
   ageGroupModal.querySelectorAll(".age-option").forEach((button) => {
