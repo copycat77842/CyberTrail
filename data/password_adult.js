@@ -398,7 +398,12 @@ const adultPasswordCase = {
               lesson: [
                 "A password can be strong and still be unsafe if it is reused.",
                 "Unique passwords and extra security layers stop one breach from becoming many."
-              ]
+              ],
+              toolPromo: {
+                text: "Now that you've seen how much a reused password can cost, try our password strength checker and generator to build safer habits going forward.",
+                linkText: "Open the Password Toolkit \u2192",
+                href: "tools.html#generator-tool"
+              }
             }
           }
         ]
@@ -754,7 +759,12 @@ const adultPasswordCase = {
               lesson: [
                 "A unique password protected your bank account. It didn't protect your email, because that one wasn't unique.",
                 "One good habit stops damage from spreading, but only on the account it's actually used on."
-              ]
+              ],
+              toolPromo: {
+                text: "Now that you've seen how much a reused password can cost, try our password strength checker and generator to build safer habits going forward.",
+                linkText: "Open the Password Toolkit \u2192",
+                href: "tools.html#generator-tool"
+              }
             }
           }
         ]
