@@ -122,6 +122,10 @@ This approach improves understanding because users see both:
 - The consequence
 - The prevention method
 
+**Stage 4 — Practical Reinforcement**
+
+After completing an investigation, learners are guided towards practical tools that reinforce the cybersecurity concepts introduced during the scenario.
+
 ### 4.3 Artifact Analysis System
 CyberTrail includes interactive evidence investigation.
 
@@ -217,7 +221,9 @@ The reading-speed controls are placed in the top-right corner for quick access, 
 
 
 ### 4.8 Cyber Toolkit
-CyberTrail also includes a set of standalone browser-based learning tools that support the main scenarios and reinforce the same security lessons in a more hands-on format.
+CyberTrail also includes a set of browser-based learning tools that support the main scenarios and reinforce the same security lessons in a more hands-on format. Rather than existing as completely separate utilities, these tools are integrated into the learning experience. At the end of every scenario, CyberTrail recommends the most relevant tools based on the attack the learner has just experienced, encouraging them to immediately practise safer cybersecurity habits.
+
+All toolkit features run entirely in the browser without sending user data to a server, ensuring passwords and messages remain on the user's device.
 
 #### Password Strength Estimation
 The password checker estimates how hard a password is to guess based on entropy rather than simple checkbox rules.
@@ -270,9 +276,20 @@ The tool outputs:
 This reinforces the phishing and social engineering lessons used throughout the scenarios.
 
 #### How These Tools Support the Project
-These tools extend CyberTrail beyond story-based learning by giving users practical security instruments they can use directly in the browser. Together, they reinforce:
+
+The Cyber Toolkit extends CyberTrail beyond story-based learning by allowing users to immediately apply the lessons they have just learned.
+
+Rather than ending each scenario with static advice, CyberTrail recommends the most relevant tools based on the attack that occurred. For example:
+
+- A phishing scenario recommends the Scam Message Scanner.
+- A password reuse scenario recommends the Password Strength Meter and Password Generator.
+- Future scenarios will recommend other tools that reinforce their specific lessons.
+
+This bridges the gap between understanding a cyber threat and practising safer online behaviour. Together, the tools reinforce:
+
 - Password hygiene
-- Safe randomness
+- Strong password generation
+- Passphrase best practices
 - Phishing awareness
 - Social engineering detection
 - Defensive security thinking
@@ -379,8 +396,12 @@ It does not teach harmful activities.
 CyberTrail is a functional prototype demonstrating a complete cybersecurity education platform.
 
 Implemented features:
+- Integrated Cyber Toolkit
+- Password strength estimation
+- Secure password and passphrase generation
+- Scam message scanner
 - Interactive scenarios
-- Multiple age groups
+- Age-specific scenarios for students, working adults, and older adults
 - Choice-based outcomes
 - Investigation system
 - Artifact analysis
@@ -389,6 +410,7 @@ Implemented features:
 - Replay functionality
 - Custom user interface
 - Adjustable reading speed
+- Automatic scrolling
 - Persistent speed preference
 - Paired fake/real hover highlighting
 
@@ -396,7 +418,7 @@ The project successfully demonstrates the core concept and provides a foundation
 
 ## 9. Future Improvements
 
-If more time was available, we would expand CyberTrail with:
+If more time was available, I would expand CyberTrail with:
 
 ### More scenarios
 Examples:
@@ -428,7 +450,7 @@ Possible additions:
 - Personal learning recommendations
 
 ### Secure backend and user accounts
-CyberTrail was hosted on GitHub Pages, which only supports static hosting and does not allow a backend. If more resources were available, we would have built a secure backend to support:
+CyberTrail is currently hosted using GitHub Pages, which provides reliable static hosting but does not support a backend. With additional resources, a secure backend could be developed to support:
 - User accounts
 - Saved progress
 - Personalised scenario tracking
@@ -447,4 +469,4 @@ By combining technical implementation, cybersecurity principles, and human-centr
 - What evidence attackers leave behind
 - How safer decisions prevent damage
 
-Rather than simply telling users to be careful online, CyberTrail teaches them why cybersecurity habits matter.
+Rather than simply telling users to be careful online, CyberTrail enables them to experience cyber attacks, investigate the evidence, practise defensive techniques using integrated security tools, and build lasting cybersecurity habits. By combining interactive storytelling with practical reinforcement, the platform helps learners understand not only what to do, but why those actions matter.
