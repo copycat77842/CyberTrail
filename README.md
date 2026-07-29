@@ -156,8 +156,13 @@ Cybersecurity principles demonstrated:
 - Authentication awareness
 - Social engineering detection
 
-#### Paired hover highlighting
-When the fake email is hovered, the matching real email block is highlighted too. This makes it easier to compare the suspicious element with the legitimate version side by side.
+#### Technical implementation
+
+The artifact system dynamically links fake and legitimate evidence using unique identifiers.
+
+When a user selects or hovers over an element in the fake email, JavaScript automatically locates the matching legitimate component and highlights both simultaneously.
+
+This required synchronising two independent sets of evidence while keeping user interactions responsive and reusable across different scenarios.
 
 ### 4.4 Attack Timeline Reconstruction
 After investigating evidence, users see the complete attack timeline.
@@ -221,18 +226,25 @@ The reading-speed controls are placed in the top-right corner for quick access, 
 
 
 ### 4.8 Cyber Toolkit
-CyberTrail also includes a set of browser-based learning tools that support the main scenarios and reinforce the same security lessons in a more hands-on format. Rather than existing as completely separate utilities, these tools are integrated into the learning experience. At the end of every scenario, CyberTrail recommends the most relevant tools based on the attack the learner has just experienced, encouraging them to immediately practise safer cybersecurity habits.
+
+The Cyber Toolkit extends CyberTrail beyond story-based learning by allowing users to immediately apply the lessons they have just learned.
+
+Where the interactive scenarios explain **why** good cybersecurity habits matter through realistic stories, the toolkit allows users to immediately practise those habits using browser-based tools. Rather than existing as separate utilities, the tools are integrated into the learning experience and are recommended at the end of relevant scenarios.
 
 All toolkit features run entirely in the browser without sending user data to a server, ensuring passwords and messages remain on the user's device.
 
 #### Password Strength Estimation
+
 The password checker estimates how hard a password is to guess based on entropy rather than simple checkbox rules.
 
-It was designed this way because a password can look complex but still be unsafe if it is reused or commonly leaked. The tool also checks for obvious weak patterns such as:
-- Common leaked passwords
+It was designed this way because a password can look complex but still be unsafe if it is reused or commonly leaked. The tool also checks for common weak patterns that a pure entropy calculation would otherwise miss, including:
+
+- Matches against a small curated sample of frequently leaked passwords (including common variations with digits appended, so **"password123"** is still flagged even though it is not an exact match to **"password"**)
 - Sequential runs
 - Keyboard walks
 - Repeated character patterns
+
+This list is intentionally small and illustrative rather than a complete breach-database lookup, since that would require server-side infrastructure that CyberTrail deliberately avoids.
 
 The result shows:
 - An estimated entropy score
@@ -349,21 +361,133 @@ Handles:
 
 ## 6. Level of Difficulty
 
-CyberTrail was challenging because it required combining programming, cybersecurity knowledge, and user experience design.
+CyberTrail required solving several technical and design challenges while keeping the experience engaging and accessible for users with little cybersecurity knowledge.
 
-### Challenges included
+### Designing a reusable scenario engine
 
-**Designing a flexible scenario system**  
-Problem: each scenario needed different stories and outcomes while using the same code.  
-Solution: created reusable scenario structures that allow new incidents to be added without rewriting the system.
+Every scenario contains different stories, investigations, timelines and outcomes, but they all use the same underlying engine.
 
-**Creating realistic cyber scenarios**  
-Problem: scenarios needed to be realistic while remaining safe.  
-Solution: used fictional examples based on real attack patterns without interacting with real systems.
+Instead of writing separate JavaScript for every scenario, a reusable scenario structure was created. The engine automatically handles:
 
-**Balancing technical accuracy and accessibility**  
-Problem: cybersecurity concepts can be complicated.  
-Solution: converted technical concepts into relatable stories understandable by different age groups.
+- Story progression
+- User choices
+- Different outcomes
+- Artifact investigations
+- Timeline reconstruction
+- Lessons and replay functionality
+
+This means entirely new cyber incidents can be added simply by creating a new scenario object rather than rewriting application logic.
+
+---
+
+### Building an interactive artifact investigation system
+
+Unlike a traditional quiz, CyberTrail allows users to investigate realistic evidence.
+
+The artifact system needed to:
+
+- Track which clues had already been found
+- Prevent duplicate selections
+- Display different explanations for correct and incorrect choices
+- Unlock the investigation only after all required clues were identified
+- Synchronise fake and legitimate evidence
+
+A paired highlighting system was also developed so that hovering over a suspicious element automatically highlights the corresponding section in the legitimate email, making comparisons much easier.
+
+---
+
+### Interactive Attack Chain Visualisation
+
+One unexpected technical challenge was designing a clear way to display how cyber attacks progress from one event to the next.
+
+Early versions displayed the attack as a simple vertical list, but this made longer attacks difficult to follow and didn't clearly show how each event led to the next.
+
+To solve this, we developed a custom snake-style attack chain visualisation.
+
+The system automatically:
+
+- Arranges attack stages into alternating rows
+- Reverses the direction of every second row
+- Draws connecting arrows between rows
+- Adapts to different chain lengths without requiring manual positioning
+
+This required dynamically calculating the layout of every stage and connector instead of using a fixed design.
+
+The final result is both more compact and easier to follow, helping users understand that cyber attacks are chains of connected events rather than isolated mistakes.
+
+---
+
+### Building a meaningful password strength estimator
+
+Designing the password strength checker was more challenging than simply checking whether a password contained uppercase letters, numbers, or symbols.
+
+A simple checklist approach would have been easier to implement, but it would also have contradicted CyberTrail's own lessons. A password can satisfy every checklist requirement while still being weak if it is based on a commonly leaked password.
+
+Instead, the password checker estimates entropy from password length and character variety, then adjusts the result when it detects predictable patterns that reduce real-world security, including:
+
+- Common leaked passwords
+- Sequential character runs
+- Keyboard walks
+- Repeated characters
+
+During testing, an early version correctly detected **"password"** as weak but incorrectly rated **"password123"** as reasonably strong because the added digits increased the entropy calculation.
+
+To solve this, the checker was extended to remove common trailing numbers and symbols before comparing against the leaked-password list, allowing common variations to be detected while still remaining entirely client-side.
+
+This refinement improved the educational value of the tool by reducing situations where users might receive false confidence from a password that still follows a well-known attack pattern.
+
+---
+
+### Designing an educational scam message scanner
+
+The scam message scanner was designed to teach users *why* a message appears suspicious rather than simply telling them whether it is safe.
+
+Instead of acting like a black-box classifier, the scanner analyses each message using multiple independent categories, including:
+
+- Urgency pressure
+- Threats of lost access
+- Generic greetings
+- Requests for sensitive information
+- Reward or prize bait
+- Suspicious link patterns
+
+Each category contributes a weighted score, and the tool explains exactly which phrases triggered each warning.
+
+Choosing appropriate weights and detection patterns required balancing realism with false positives. If the patterns were too broad, ordinary emails would be incorrectly flagged. If they were too narrow, many phishing messages would be missed.
+
+This approach supports CyberTrail's educational goals by encouraging users to recognise suspicious behaviour themselves instead of relying on an automated verdict.
+
+---
+
+### Creating realistic but safe cyber scenarios
+
+Every scenario is based on real phishing and social engineering techniques while using entirely fictional organisations, accounts and websites.
+
+Balancing realism with responsible cybersecurity education was challenging because the scenarios needed to feel authentic without teaching offensive techniques.
+
+---
+
+### Building an immersive storytelling engine
+
+The custom typewriter engine was designed to make scenarios feel like interactive investigations rather than static pages.
+
+The engine includes:
+
+- Character-by-character typing
+- Adjustable reading speed
+- Automatic scrolling
+- Punctuation pauses
+- Persistent user preferences using localStorage
+
+Multiple iterations were required to balance immersion with readability so users could control the pace without disrupting the experience.
+
+---
+
+### Balancing technical accuracy with accessibility
+
+Cybersecurity concepts such as credential theft, phishing, business email compromise and incident response can be difficult for non-technical audiences.
+
+The scenarios were repeatedly refined to explain these concepts using realistic stories rather than technical jargon, making them understandable for students, working adults and older users alike.
 
 ## 7. Ethical Considerations
 
@@ -458,6 +582,19 @@ CyberTrail is currently hosted using GitHub Pages, which provides reliable stati
 - Safer data handling and authentication
 
 This would have made the platform much more powerful and scalable, especially for classroom use and long-term learning.
+
+### Expanding the Cyber Toolkit
+
+The Cyber Toolkit currently uses lightweight browser-based analysis so that all processing remains on the user's device.
+
+Future versions could extend the toolkit by introducing:
+
+- Machine-learning-assisted scam detection to compare against the current heuristic approach
+- Larger password breach datasets through secure server-side lookups
+- Additional security tools such as URL reputation checking and attachment analysis
+- Personalised recommendations based on a user's previous scenario performance
+
+These additions would further reinforce the practical cybersecurity skills introduced throughout CyberTrail.
 
 ## 10. Conclusion
 
