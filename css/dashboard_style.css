@@ -404,6 +404,10 @@ body {
   margin: 4px 0;
 }
 
+.footer a {
+  color: var(--muted);
+}
+
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
